@@ -12,15 +12,25 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*Se pueden agregar rutas a necesidad*/
 Route::get('/', function () {
      return view('login');
 });
 
-Auth::routes();
+Route::get('/tipoCuentas',function (){
+   return view('tipoCuentas'); 
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/blog',function(){
+    return view('blog');
+});
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/*Parte del sistema AdminLTE No tocar*/
+ Auth::routes();
+
+ Route::get('/home', 'HomeController@index')->name('home');
+
+ Auth::routes();
+
+ Route::get('/home', 'HomeController@index')->name('home');

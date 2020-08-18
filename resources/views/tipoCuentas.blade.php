@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Inicio')
+@section('title', 'TipoCuentas')
 
 @section('content_header')
     <h1>Escritorio</h1>
@@ -12,7 +12,7 @@
             <h1 class="card-title">Bienvenido</h1>
         </div>
         <div class="card-body">
-            <p>Este es el panel administrativo para las operaciones contables</p>
+            <p>Aqui estoy cargando tipo Cuentas</p>
         </div>
     </div>
 @stop
