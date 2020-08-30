@@ -19,23 +19,19 @@
                              <th>N</th>
                              <th>Descripción</th>
                              <th>Vida útil</th>
-                             <th>Editar / Eliminar</th>
+                             {{-- <th>Editar / Eliminar</th> --}}
                          </tr>
                      </thead>
-                     <tbody>
-                         {{-- 
-                            $verU = new UsersList();
-                            $verU->verUsuarioC();
-
-                            $item = null;
-                            $valor = null;
-
-                            $UdtUser = UpdateUserC::UpdateInfoUserC($item,$valor);
-                         --}}
-                    </tbody>
-           </table>
-        </div>
-    </div> 
+                        @foreach ($ActivoFijoC as $ActivoFijo)
+                            <tbody>
+                                <td>{{$ActivoFijo -> idActivofijo }}</th>
+                                <td>{{$ActivoFijo -> descripcionActivoFjo }}</th>
+                                <td>{{$ActivoFijo -> vidaUtilActivoFijo }}</th>
+                            </tbody>
+                        @endforeach
+                </table>
+                </div>
+            </div> 
 
 {{--Modal de crear Cuentas de activo Fijo--}}
 

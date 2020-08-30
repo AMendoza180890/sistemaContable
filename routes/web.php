@@ -17,9 +17,7 @@ Route::get('/', function () {
      return view('login');
 });
 
-Route::get('/tipoCuentas',function (){
-   return view('tipoCuentas'); 
-});
+Route::resource('/tipoCuentas', 'CatActivoFijoController');
 
 Route::get('/computadoras',function(){
     return view('computadora');
