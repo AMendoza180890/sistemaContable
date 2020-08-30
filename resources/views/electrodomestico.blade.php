@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Blog')
+@section('title', 'TipoCuentas')
 
 @section('content_header')
-    <h1>Blog</h1>
+    <h1>Escritorio</h1>
 @stop
 
 @section('content')
@@ -12,7 +12,7 @@
             <h1 class="card-title">Bienvenido</h1>
         </div>
         <div class="card-body">
-            <p>Aqui estoy cargando Blog</p>
+            <p>Aqui estoy cargando tipo Cuentas</p>
         </div>
     </div>
 @stop

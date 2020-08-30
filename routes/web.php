@@ -21,8 +21,24 @@ Route::get('/tipoCuentas',function (){
    return view('tipoCuentas'); 
 });
 
-Route::get('/blog',function(){
-    return view('blog');
+Route::get('/computadoras',function(){
+    return view('computadora');
+});
+
+Route::get('/electrodomesticos', function () {
+    return view('electrodomestico');
+});
+
+Route::get('/impresoras', function () {
+    return view('impresora');
+});
+
+Route::get('/terrenos', function () {
+    return view('terreno');
+});
+
+Route::get('/vehiculos', function () {
+    return view('vehiculo');
 });
 
 
@@ -31,6 +47,6 @@ Route::get('/blog',function(){
 
  Route::get('/home', 'HomeController@index')->name('home');
 
- Auth::routes();
+//  Auth::routes();
 
- Route::get('/home', 'HomeController@index')->name('home');
+//  Route::get('/home', 'HomeController@index')->name('home');

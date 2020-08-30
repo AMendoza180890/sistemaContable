@@ -237,21 +237,41 @@ return [
             'topnav' => false,
         ],
         [
-            'text' => 'dashboard',
+            'text' => 'Inicio',
             'url'  => '/home',
-            'icon'=>'far fa-fw fa-home',
+            'icon'=>'far fa-fw fa fa-home',
         ],
         [
             'text' => 'Tipo Cuentas',
             'url'  => '/tipoCuentas',
-            'icon' => 'far fa-fw fa-money',
+            'icon' => 'far fa-fw  fa fa-table',
         ],
         [
-            'text'        => 'Blog',
-            'url'         => '/blog',
-            'icon'        => 'far fa-fw fa-file',
+            'text' => 'Computadora',
+            'url'  => '/computadoras',
+            'icon' => 'far fa-fw fa fa-tv',
             //'label'       => 4,
             //'label_color' => 'success',
+        ],
+        [
+            'text' => 'Impresora',
+            'url'  => '/impresoras',
+            'icon' => 'far fa-fw  fa fa-print',
+        ],
+        [
+            'text' => 'Electrodomestico',
+            'url'  => '/electrodomesticos',
+            'icon' => 'far fa-fw  fa fa-tty',
+        ],
+        [
+            'text' => 'Vehiculo',
+            'url'  => '/vehiculos',
+            'icon' => 'far fa-fw  fa fa-car',
+        ],
+        [
+            'text' => 'Terreno',
+            'url'  => '/terrenos',
+            'icon' => 'far fa-fw  fa fa-map',
         ],
         ['header' => 'account_settings'],
         // [
