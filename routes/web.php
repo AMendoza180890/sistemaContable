@@ -17,11 +17,11 @@ Route::get('/', function () {
      return view('login');
 });
 
-Route::resource('/tipoCuentas', 'CatActivoFijoController');
+Route::get('/tipoCuentas', 'CatActivoFijoController@index');
 
-Route::get('/computadoras',function(){
-    return view('computadora');
-});
+Route::get('/computadoras', 'catequipocomputoController@index');
+
+Route::get('/terrenos', 'catterrenoC@index');
 
 Route::get('/electrodomesticos', function () {
     return view('electrodomestico');
@@ -31,7 +31,6 @@ Route::get('/impresoras', function () {
     return view('impresora');
 });
 
-Route::resource('/terrenos', 'catterrenoC');
 
 Route::get('/vehiculos', function () {
     return view('vehiculo');
