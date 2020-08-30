@@ -31,9 +31,7 @@ Route::get('/impresoras', function () {
     return view('impresora');
 });
 
-Route::get('/terrenos', function () {
-    return view('terreno');
-});
+Route::resource('/terrenos', 'catterrenoC');
 
 Route::get('/vehiculos', function () {
     return view('vehiculo');
