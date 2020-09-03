@@ -54,26 +54,22 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" role="form" enctype="multipart/form-data">
+      <form method="post" role="form" enctype="multipart/form-data" action='{{url('cattipocuentaactivofijo')}}'>
                 <div class="modal-body">
                     <div class="box-body">
                         <div class="form-group">
                             <h4>Descripción:</h4>
-                            <input type="text" class="form-control input-lg" name="activoDescripcionN" require>
+                            <input type="text" class="form-control input-lg" name="activoDescripcionN" value={{old('activoDescripcionN')}} require>
                         </div>
                         <div class="form-group">
                             <h4>Vida Util:</h4>
-                            <input type="text" class="form-control input-lg" name="activoVidaUtilN" require>
+                        <input type="text" class="form-control input-lg" name="activoVidaUtilN" value={{old('activoVidaUtilN')}} require>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Crear</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </div>
-                {{-- 
-                $CUsuarios = new UsuarioCrearC();
-                $CUsuarios->CreateUsers();
-                --}}
             </form>
       </div>
     </div>
@@ -129,7 +125,25 @@
                 {name: 'mobilel', width: 480},
                 {name: 'mobilep', width: 320}
                 ]
-            }
+            },
+            language: {
+                    processing:     "Procesando",
+                    search:         "Buscar:",
+                    lengthMenu:    "Lista de Equipos",
+                    info:           "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
+                    infoEmpty:      "No se ha encontrado ningun elemento en lista",
+                    infoFiltered:   "Filtro de _MAX_ Cantidad total de elementos",
+                    infoPostFix:    "",
+                    loadingRecords: "Espere un momento",
+                    zeroRecords:    "No se ha encontrado ningun elemento en lista",
+                    emptyTable:     "Aún no hay ningun elemento en lista",
+                    paginate: {
+                        first:      "Primer",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    }
+                }
         });
     </script>
 @stop

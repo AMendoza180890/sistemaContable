@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/tipoCuentas', 'CatActivoFijoController@index');
+Route::POST('/registrartipoCuentas', 'CatActivoFijoController@create');
 
 Route::get('/computadoras', 'catequipocomputoController@index');
 
@@ -25,13 +26,10 @@ Route::get('/terrenos', 'catterrenoC@index');
 
 Route::get('/impresoras', 'catImpresorasController@index');
 
-Route::get('/electrodomesticos', function () {
-    return view('electrodomestico');
-});
+Route::get('/vehiculos', 'catvehiculoController@index');
 
-Route::get('/vehiculos', function () {
-    return view('vehiculo');
-});
+Route::get('/electrodomesticos', 'catelectrodomesticoController@index');
+
 
 
 /*Parte del sistema AdminLTE No tocar*/

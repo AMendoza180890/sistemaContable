@@ -72,7 +72,25 @@
                 {name: 'mobilel', width: 480},
                 {name: 'mobilep', width: 320}
                 ]
-            }
+            },
+            language: {
+                    processing:     "Procesando",
+                    search:         "Buscar:",
+                    lengthMenu:    "Lista de Equipos",
+                    info:           "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
+                    infoEmpty:      "No se ha encontrado ningun elemento en lista",
+                    infoFiltered:   "Filtro de _MAX_ Cantidad total de elementos",
+                    infoPostFix:    "",
+                    loadingRecords: "Espere un momento",
+                    zeroRecords:    "No se ha encontrado ningun elemento en lista",
+                    emptyTable:     "Aún no hay ningun elemento en lista",
+                    paginate: {
+                        first:      "Primer",
+                        previous:   "Anterior",
+                        next:       "Siguiente",
+                        last:       "Ultimo"
+                    }
+                }
         });
     </script>
 @stop

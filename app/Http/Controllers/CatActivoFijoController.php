@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\cattipocuentaactivofijo;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
+use FFI\Exception;
 
 class CatActivoFijoController extends Controller
 {
@@ -15,7 +17,7 @@ class CatActivoFijoController extends Controller
     public function index()
     {
         $ActivoFijoC = cattipocuentaactivofijo::all();
-        return view('tipoCuentas', ['ActivoFijoC' => $ActivoFijoC]);
+        return view('tipoCuentas', compact('ActivoFijoC'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CatActivoFijoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipoCuentas');
     }
 
     /**
@@ -33,9 +35,29 @@ class CatActivoFijoController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        try {
+            $this->validate(request(),[
+                 'activoDescripcionN' => 'required',
+                 'activoVidaUtilN'=>'required'
+             ]);
+    
+            $tipoCuenta = new cattipocuentaactivofijo();
+            $tipoCuenta->descripcionActivoFjo = $request->get('activoDescripcionN');
+            $tipoCuenta->vidaUtilActivoFijo = $request->get('activoVidaUtilN');
+            $tipoCuenta->Save();
+
+            return redirect()->route('tipoCuentas')->with('Correcto','Se ha agregado el registro correctamente');
+    
+            // cattipocuentaactivofijo::insert([
+            //     'descripcionActivoFjo' => input('activoDescripcionN'),
+            //     'vidaUtilActivoFijo' => Input::('activoVidaUtilN')
+            // ]);
+    
+        } catch (Exception $ex) {
+            return 'faltal error - '. $ex->getMessage();
+        }
     }
 
     /**
