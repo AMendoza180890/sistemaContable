@@ -23,14 +23,11 @@ Route::get('/computadoras', 'catequipocomputoController@index');
 
 Route::get('/terrenos', 'catterrenoC@index');
 
+Route::get('/impresoras', 'catImpresorasController@index');
+
 Route::get('/electrodomesticos', function () {
     return view('electrodomestico');
 });
-
-Route::get('/impresoras', function () {
-    return view('impresora');
-});
-
 
 Route::get('/vehiculos', function () {
     return view('vehiculo');

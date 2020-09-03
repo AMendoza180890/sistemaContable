@@ -1,5 +1,12 @@
 @extends('adminlte::page')
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+@stop
+
 @section('title', 'TipoCuentas')
 
 @section('content_header')
@@ -13,7 +20,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
         </div>
         <div class="card-body">
-           <table class="table table-bordered table-hover table-striped TB">
+           <table class="table table-bordered table-hover table-striped TB" id="TipoCuenta">
                      <thead>
                          <tr>
                              <th>N</th>
@@ -22,13 +29,15 @@
                              {{-- <th>Editar / Eliminar</th> --}}
                          </tr>
                      </thead>
-                        @foreach ($ActivoFijoC as $ActivoFijo)
-                            <tbody>
-                                <td>{{$ActivoFijo -> idActivofijo }}</th>
-                                <td>{{$ActivoFijo -> descripcionActivoFjo }}</th>
-                                <td>{{$ActivoFijo -> vidaUtilActivoFijo }}</th>
-                            </tbody>
-                        @endforeach
+                        <tbody>
+                            @foreach ($ActivoFijoC as $ActivoFijo)
+                                <tr>
+                                    <td>{{$ActivoFijo -> idActivofijo }}</th>
+                                    <td>{{$ActivoFijo -> descripcionActivoFjo }}</th>
+                                    <td>{{$ActivoFijo -> vidaUtilActivoFijo }}</th>
+                                </tr>
+                            @endforeach 
+                        </tbody>         
                 </table>
                 </div>
             </div> 
@@ -101,10 +110,26 @@
 </div>  --}}
 @stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src=" https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+    <script>
+        $('#TipoCuenta').DataTable({
+            responsive: {
+                breakpoints: [
+                {name: 'bigdesktop', width: Infinity},
+                {name: 'meddesktop', width: 1480},
+                {name: 'smalldesktop', width: 1280},
+                {name: 'medium', width: 1188},
+                {name: 'tabletl', width: 1024},
+                {name: 'btwtabllandp', width: 848},
+                {name: 'tabletp', width: 768},
+                {name: 'mobilel', width: 480},
+                {name: 'mobilep', width: 320}
+                ]
+            }
+        });
+    </script>
 @stop
