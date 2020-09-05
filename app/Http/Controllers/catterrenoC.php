@@ -36,7 +36,23 @@ class catterrenoC extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate(request(), [
+            'TerrenoPropiedadN' => 'required',
+            'TerrenoAreaN' => 'required',
+            'TerrenofechaCompraN'=>'required',
+            'TerrenoCostoN'=>'required'
+        ]);
+
+        $terrenos = new catterreno();
+        $terrenos->catTerrenoPropietario = $request->TerrenoPropiedadN;
+        $terrenos->catTerrenoArea = $request->TerrenoAreaN;
+        $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
+        $terrenos->catterrenoCosto = $request->TerrenoCostoN;
+
+        $terrenos->save();
+
+        return back()->with('mensajeExitoso','Se ha insertado la informacion del terreno');
     }
 
     /**

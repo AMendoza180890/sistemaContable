@@ -18,10 +18,16 @@
         <div class="card-header">
             <h1 class="card-title">Lista de Terrenos</h1>
         </div>
+        @if (session('mensajeExitoso'))
+            <div class="alert alert-success">
+                {{session('mensajeExitoso')}}
+            </div>
+        @endif
+
         <div class="card-body">
            <div class="card">
         <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearTerreno">Crear</button>
         </div>
         <div class="card-body">
            <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
@@ -31,6 +37,9 @@
                              <th>Propietario</th>
                              <th>Area</th>
                              <th>Fecha de Compra</th>
+                             <th>Costo</th>
+                             <th>FechaActualizado</th>
+                             <th>FechaCreado</th>
                              {{-- <th>Editar / Eliminar</th> --}}
                          </tr>
                      </thead>
@@ -41,6 +50,9 @@
                                 <td>{{$terreno -> catTerrenoPropietario }}</th>
                                 <td>{{$terreno -> catTerrenoArea }}</th>
                                 <td>{{$terreno -> catTerrenoFechaCompra }}</th>
+                                <td>{{$terreno -> catterrenoCosto}}</td>
+                                <td>{{$terreno -> updated_at}}</td>
+                                <td>{{$terreno -> created_at}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -49,6 +61,7 @@
             </div> 
         </div>
     </div>
+    @include('Regterreno')
 @stop
 
 

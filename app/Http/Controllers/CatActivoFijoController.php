@@ -27,7 +27,7 @@ class CatActivoFijoController extends Controller
      */
     public function create()
     {
-        return view('tipoCuentas');
+
     }
 
     /**
@@ -38,23 +38,24 @@ class CatActivoFijoController extends Controller
     public function store(Request $request)
     {
         try {
-            $this->validate(request(),[
-                 'activoDescripcionN' => 'required',
-                 'activoVidaUtilN'=>'required'
-             ]);
+
+             $this->validate(request(),[
+                  'activoDescripcionN' => 'required',
+                  'activoVidaUtilN'=>'required'
+              ]);
     
             $tipoCuenta = new cattipocuentaactivofijo();
-            $tipoCuenta->descripcionActivoFjo = $request->get('activoDescripcionN');
-            $tipoCuenta->vidaUtilActivoFijo = $request->get('activoVidaUtilN');
+            $tipoCuenta->descripcionActivoFjo = $request ->activoDescripcionN;
+            $tipoCuenta->vidaUtilActivoFijo = $request ->activoVidaUtilN;
             $tipoCuenta->Save();
 
-            return redirect()->route('tipoCuentas')->with('Correcto','Se ha agregado el registro correctamente');
-    
             // cattipocuentaactivofijo::insert([
-            //     'descripcionActivoFjo' => input('activoDescripcionN'),
-            //     'vidaUtilActivoFijo' => Input::('activoVidaUtilN')
+            //     'descripcionActivoFjo' => ('activoDescripcionN'),
+            //     'vidaUtilActivoFijo' => ('activoVidaUtilN')
             // ]);
-    
+            return back();
+            //     echo '<script>console.log("finalizo en el redirect")<script>';
+                
         } catch (Exception $ex) {
             return 'faltal error - '. $ex->getMessage();
         }
