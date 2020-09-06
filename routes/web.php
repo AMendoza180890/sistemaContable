@@ -40,6 +40,7 @@ Route::post('/registrarImpresoras','catImpresorasController@store')->name('impre
 
 /*Ruta de Vehiculos */
 Route::get('/vehiculos', 'catvehiculoController@index');
+Route::post('/registrarVehiculo','catvehiculoController@store')->name('vehiculo.insertar');
 /*Hasta aqui finaliza Vehiculos */
 
 /*Ruta de electrodomesticos */

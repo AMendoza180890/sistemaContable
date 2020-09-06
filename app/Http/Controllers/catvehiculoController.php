@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\catvehiculoModel;
 use Illuminate\Http\Request;
+use FFI\Exception;
 
 class catvehiculoController extends Controller
 {
@@ -36,7 +37,53 @@ class catvehiculoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate(request(),[
+                'vehTipo'=>'required',
+                'vehModelo' => 'required',
+                'vehColor' => 'required',
+                'vehMotor' => 'required',
+                'vehCilindro' => 'required',
+                'vehcombustible' => 'required',
+                'vehChasis' => 'required',
+                'vehVIM' => 'required',
+                'vehUso' => 'required',
+                'vehAnio' => 'required',
+                'vehPasajeros' => 'required',
+                'vehServicio' => 'required',
+                'vehPropietario'=>'required',
+                'vehFecha' => 'required',
+                'vehCosto' => 'required',
+
+                
+            ]);
+            
+            $vehiculos = new catvehiculoModel();
+
+            $vehiculos->catVehiculoTipo = $request->vehTipo;
+            $vehiculos->catVehiculoModelo = $request->vehModelo;
+            $vehiculos->catVehiculoColor = $request->vehColor;
+            $vehiculos->catVehiculoMotor = $request->vehMotor;
+            $vehiculos->catVehiculoChasis = $request->vehChasis;
+            $vehiculos->catVehiculoVIM = $request->vehVIM;
+            $vehiculos->catVehiculoCantPasajeros = $request->vehPasajeros;
+            $vehiculos->catVehiculoCombustible = $request->vehcombustible;
+            $vehiculos->catVehiculoUso = $request->vehUso;
+            $vehiculos->catVehiculoAnio = $request->vehAnio;
+            $vehiculos->catVehiculoCilindro = $request->vehCilindro;
+            $vehiculos->catVehiculoServicio = $request->vehServicio;
+            $vehiculos->catVehiculoPropietario = $request->vehPropietario;
+            $vehiculos->catVehiculoFechaCompra = $request->vehFecha;
+            $vehiculos->catVehiculoCosto = $request->vehCosto;
+
+            $vehiculos->save();
+
+            return back()->with('ExitoVehiculos','Se ha agregado vehiculo correctamente!!');
+            
+            
+        } catch (Exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

@@ -18,10 +18,15 @@
         <div class="card-header">
             <h1 class="card-title">Lista de Vehiculos</h1>
         </div>
+        @if (session('ExitoVehiculos'))
+            <div class="alert alert-success">
+                {{session('ExitoVehiculos')}}
+            </div>
+        @endif
         <div class="card-body">
            <div class="card">
         <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearVehiculo">Crear</button>
         </div>
         <div class="card-body">
            <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
@@ -34,7 +39,7 @@
                              <th>Motor</th>
                              <th>Chasis</th>
                              <th>VIM</th>
-                             <th>Cantidad Pasajeros</th>
+                             <th>Pasajeros</th>
                              <th>Combustible</th>
                              <th>Uso</th>
                              <th>Año</th>
@@ -73,6 +78,7 @@
             </div> 
         </div>
     </div>
+    @include('Regvehiculo')
 @stop
 
 @section('js')
