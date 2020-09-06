@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\catequipocomputoModel;
+use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use SebastianBergmann\Environment\Console;
 
 class catequipocomputoController extends Controller
 {
@@ -15,7 +18,7 @@ class catequipocomputoController extends Controller
     public function index()
     {
         $listaComputadoras = catequipocomputoModel::all();
-        return view('computadora',['listaComputadoras' => $listaComputadoras]);
+        return view('computadora',compact('listaComputadoras'));
     }
 
     /**
@@ -36,7 +39,39 @@ class catequipocomputoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $this->validate(request(), [
+                'compModelo'       => 'required',
+                'compSerie'  => 'required',
+                'compMarca'        => 'required',
+                'compAlmacenamiento' => 'required',
+                'compTipoMemoriaRAM'        => 'required',
+                'compCantidadRAM'  => 'required',
+                'compTipoSO'       => 'required',
+                'compFechaCompra'  => 'required',
+                'compCosto'  => 'required'
+            ]);
+    
+               $Computadoras = new catequipocomputoModel();
+               $Computadoras->catEquipoModelo      = $request->compModelo;
+               $Computadoras->catEquipoNumeroSerie = $request->compSerie;
+               $Computadoras->catEquipoMarca       = $request->compMarca;
+               $Computadoras->catEquipoTamanioAlmacenamiento = $request->compAlmacenamiento;
+               $Computadoras->TipoMemoriaRAM       = $request->compTipoMemoriaRAM;
+               $Computadoras->catEquipoCantidadRAM = $request->compCantidadRAM;
+               $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
+               $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
+               $Computadoras->catEquipoCostoEquipo = $request->compCosto;
+
+              $Computadoras->save();
+                
+              return back()->with('mensajeExito','Se agregó correctamente la computadora!!');
+
+        } catch (Exception $ex) {
+            return 'Error'.$ex->getMessage();
+        }
+
     }
 
     /**

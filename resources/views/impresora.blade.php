@@ -19,10 +19,15 @@
         <div class="card-header">
             <h1 class="card-title">Listado de impresoras</h1>
         </div>
+        @if (session('Exito'))
+            <div class="alert alert-success">
+                {{session('Exito')}}
+            </div>
+        @endif
         <div class="card-body">
            <div class="card">
         <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearImpresora">Crear</button>
         </div>
         <div class="card-body">
            <table class="table table-bordered table-hover table-striped TB" id="Impresoras">
@@ -34,11 +39,12 @@
                              <th>TipoTonnner</th>
                              <th>Descripcion</th>
                              <th>FechaIngreso</th>
+                             <th>Costo</th>
                              {{-- <th>Editar / Eliminar</th> --}}
                          </tr>
                      </thead>
                      <tbody>
-                        @foreach ($listaImpresora as $impresoras)
+                        @foreach ($listaImpresoras as $impresoras)
                                 <tr>
                                     <td>{{$impresoras -> catImpresorasId  }}</td>
                                     <td>{{$impresoras -> catImpresorasMarca }}</td>
@@ -46,14 +52,16 @@
                                     <td>{{$impresoras -> catImpresoraTipoToner }}</td>
                                     <td>{{$impresoras -> catImpresoraDescripcion }}</td>
                                     <td>{{$impresoras -> catImpresoraFechaIngreso }}</td>
+                                    <td>{{$impresoras -> catImpresoraCosto}}</td>
                                 </tr>
                             @endforeach
                         </tbody>
-                </table>
+                    </table>
                 </div>
             </div> 
         </div>
     </div>
+    @include('Regimpresora')
 @stop
 
 

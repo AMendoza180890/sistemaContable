@@ -18,7 +18,7 @@ class CreateComputadoras extends Migration
             $table->text('catEquipoModelo');
             $table->text('catEquipoNumeroSerie');
             $table->text('catEquipoMarca');
-            $table->text('catEquipoTamañoAlmacenamiento');
+            $table->text('catEquipoTamanioAlmacenamiento');
             $table->text('TipoMemoriaRAM');
             $table->text('catEquipoCantidadRAM');
             $table->text('catEquipoTipoSO');

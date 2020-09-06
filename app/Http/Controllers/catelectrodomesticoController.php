@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\catelectrodomesticoModel;
 use Illuminate\Http\Request;
+use FFI\Exception;
 
 class catelectrodomesticoController extends Controller
 {
@@ -36,7 +37,30 @@ class catelectrodomesticoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate(request(),[
+                'electmarca'=>'required',
+                'electmodelo' => 'required',
+                'electFecha' => 'required',
+                'electcosto' => 'required',
+                'electdescripcion' => 'required'
+            ]);
+
+            $electrodomestico = new catelectrodomesticoModel();
+
+            $electrodomestico->CatElectMarca = $request->electmarca;
+            $electrodomestico->CatElectModelo = $request->electmodelo;
+            $electrodomestico->CatElectFechaIngreso = $request->electFecha;
+            $electrodomestico->CatElectCosto = $request->electcosto;
+            $electrodomestico->CatElectDescripcion = $request->electdescripcion;
+
+            $electrodomestico->save();
+
+            return back()->with('ExitoElectrodomestico','Se a agregado el electrodomestico correctamente!!');
+            
+        } catch (Exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

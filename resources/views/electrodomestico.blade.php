@@ -18,10 +18,15 @@
         <div class="card-header">
             <h1 class="card-title">Bienvenido</h1>
         </div>
+        @if (session('ExitoElectrodomestico'))
+            <div class="alert alert-success">
+                {{session('ExitoElectrodomestico')}}
+            </div>
+        @endif
         <div class="card-body">
            <div class="card">
         <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#Crearelectrodomestico">Crear</button>
         </div>
         <div class="card-body">
            <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
@@ -50,6 +55,7 @@
             </div> 
         </div>
     </div>
+    @include('Regelectrodomestico')
 @stop
 
 @section('js')

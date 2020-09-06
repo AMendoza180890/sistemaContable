@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\catImpresorasModel;
+use FFI\Exception;
 use Illuminate\Http\Request;
 
 class catImpresorasController extends Controller
@@ -15,7 +16,7 @@ class catImpresorasController extends Controller
     public function index()
     {
         $listaImpresoras = catImpresorasModel::all();
-        return view('impresora',['listaImpresora'=>$listaImpresoras]);
+        return view('impresora',compact('listaImpresoras'));
     }
 
     /**
@@ -36,7 +37,33 @@ class catImpresorasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->validate(request(),[
+                'impMarca' => 'required',
+                'impModelo' => 'required',
+                'TipoTonner' => 'required',
+                'impFecha' => 'required',
+                'impCosto' => 'required',
+                'impDescripcion' => 'required'
+            ]);
+
+            $impresoras = new catImpresorasModel();
+
+            $impresoras->catImpresorasMarca = $request->impMarca;
+            $impresoras->catImpresoraModelo = $request->impModelo;
+            $impresoras->catImpresoraTipoToner = $request->TipoTonner;
+            $impresoras->catImpresoraFechaIngreso = $request->impFecha;
+            $impresoras->catImpresoraCosto = $request->impCosto;
+            $impresoras->catImpresoraDescripcion = $request->impDescripcion;
+
+            $impresoras->save();
+
+            return back()->with("Exito","Se ha agregado la impresora exitosamente!!");
+            
+        } catch (Exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
+
     }
 
     /**

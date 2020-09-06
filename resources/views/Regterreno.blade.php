@@ -1,4 +1,4 @@
-{{--Modal de crear Cuentas de activo Fijo--}}
+{{--Modal de crear Terreno--}}
 <div class="modal" tabindex="-1" role="dialog" id="CrearTerreno">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

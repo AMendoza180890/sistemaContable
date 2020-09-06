@@ -18,10 +18,15 @@
         <div class="card-header">
             <h1 class="card-title">Listado de Equipos</h1>
         </div>
+        @if (session('mensajeExito'))
+            <div class="alert alert-success">
+                {{session('mensajeExito')}};
+            </div>
+        @endif
         <div class="card-body">
            <div class="card">
         <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearComputadoras">Crear</button>
         </div>
         <div class="card-body">
            <table class="table table-bordered table-hover table-striped dt-responsive TB" id="Computadoras">
@@ -47,7 +52,7 @@
                                     <td>{{$computadoras -> catEquipoModelo }}</td>
                                     <td>{{$computadoras -> catEquipoNumeroSerie }}</td>
                                     <td>{{$computadoras -> catEquipoMarca }}</td>
-                                    <td>{{$computadoras -> catEquipoTamañoAlmacenamiento }}</td>
+                                    <td>{{$computadoras -> catEquipoTamanioAlmacenamiento }}</td>
                                     <td>{{$computadoras -> TipoMemoriaRAM }}</td>
                                     <td>{{$computadoras -> catEquipoCantidadRAM }}</td>
                                     <td>{{$computadoras -> catEquipoTipoSO }}</td>
@@ -61,6 +66,7 @@
             </div> 
         </div>
     </div>
+@include('Regcomputadora')
 @stop
 
 

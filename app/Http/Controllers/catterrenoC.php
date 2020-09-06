@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\catterreno;
 use Illuminate\Http\Request;
+use FFI\Exception;
 
 class catterrenoC extends Controller
 {
@@ -14,8 +15,12 @@ class catterrenoC extends Controller
      */
     public function index()
     {
-        $listaTerrenos = catterreno::all();
-        return view('terreno',['listaTerrenos'=>$listaTerrenos]);
+        try {
+            $listaTerrenos = catterreno::all();
+            return view('terreno',['listaTerrenos'=>$listaTerrenos]);
+        } catch (Exception $ex) {
+            return 'Error:'.$ex->getMessage();
+        }
     }
 
     /**
@@ -36,23 +41,27 @@ class catterrenoC extends Controller
      */
     public function store(Request $request)
     {
-
-        $this->validate(request(), [
-            'TerrenoPropiedadN' => 'required',
-            'TerrenoAreaN' => 'required',
-            'TerrenofechaCompraN'=>'required',
-            'TerrenoCostoN'=>'required'
-        ]);
-
-        $terrenos = new catterreno();
-        $terrenos->catTerrenoPropietario = $request->TerrenoPropiedadN;
-        $terrenos->catTerrenoArea = $request->TerrenoAreaN;
-        $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
-        $terrenos->catterrenoCosto = $request->TerrenoCostoN;
-
-        $terrenos->save();
-
-        return back()->with('mensajeExitoso','Se ha insertado la informacion del terreno');
+        try {
+            $this->validate(request(), [
+                'TerrenoPropiedadN' => 'required',
+                'TerrenoAreaN' => 'required',
+                'TerrenofechaCompraN'=>'required',
+                'TerrenoCostoN'=>'required'
+            ]);
+    
+            $terrenos = new catterreno();
+            $terrenos->catTerrenoPropietario = $request->TerrenoPropiedadN;
+            $terrenos->catTerrenoArea = $request->TerrenoAreaN;
+            $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
+            $terrenos->catterrenoCosto = $request->TerrenoCostoN;
+    
+            $terrenos->save();
+    
+            return back()->with('mensajeExitoso','Se ha insertado la informacion del terreno');
+            
+        } catch (Exception $ex) {
+            return 'Error'.$ex->getMessage();
+        }
     }
 
     /**
