@@ -9,18 +9,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('vehiculo.edit',['catVehiculoId'=> $vehiculo -> catVehiculoId])}}">
+                <form method="POST" action="">
+                    {{-- {{route('vehiculo.edit',['catVehiculoId'=> $vehiculo -> catVehiculoId])}} --}}
                     @csrf
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="vehTipo">Tipo</label>
-                                <input type="text" class="form-control" name="vehTipo" id="vehTipo" value="{{$obtenerVehiculos -> catVehiculoTipo}}" placeholder="ej. inspiron, Thinkpad, etc.">
+                                <input type="text" class="form-control" name="vehTipo" id="vehTipo" value="" placeholder="ej. inspiron, Thinkpad, etc.">
+                                {{-- {{$obtenerVehiculos -> catVehiculoTipo}} --}}
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehModelo">Modelo</label>
-                                <input type="text" class="form-control" name="vehModelo" id="vehModelo" value="{{$obtenerVehiculos->catVehiculoModelo}}" placeholder="ej. MYL12345678.">
+                                <input type="text" class="form-control" name="vehModelo" id="vehModelo" value="" placeholder="ej. MYL12345678.">
+                                {{-- {{$obtenerVehiculos->catVehiculoModelo}} --}}
                                 </div>
                             </div>
                             <div class="form-group">
