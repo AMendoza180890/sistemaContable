@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Sistema Contable')
+@section('title', 'Inicio')
 
 @section('content_header')
     <h1>Escritorio</h1>
