@@ -36,6 +36,8 @@
                              <th>Propietario</th>
                              <th>Area</th>
                              <th>Fecha de Compra</th>
+                             <th>Fecha Ingresos</th>
+                             <th>Costo</th>
                              {{-- <th>Editar / Eliminar</th> --}}
                          </tr>
                      </thead>
@@ -47,6 +49,7 @@
                                 <td>{{$electrodomestico -> CatElectModelo }}</td>
                                 <td>{{$electrodomestico -> CatElectDescripcion }}</td>
                                 <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
+                                <td>{{$electrodomestico -> CatElectCosto}}</td>
                             </tr>
                             @endforeach
                         </tbody>
