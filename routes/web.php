@@ -41,6 +41,8 @@ Route::post('/registrarImpresoras','catImpresorasController@store')->name('impre
 /*Ruta de Vehiculos */
 Route::get('/vehiculos', 'catvehiculoController@index');
 Route::post('/registrarVehiculo','catvehiculoController@store')->name('vehiculo.insertar');
+Route::get('/editarvehiculo/{catVehiculoId}/edit','catvehiculoController@edit')->name('vehiculo.edit');
+Route::put('/actualizarVehiculo/{catVehiculoId/','catvehiculoController@update')->name('vehiculo.update');
 /*Hasta aqui finaliza Vehiculos */
 
 /*Ruta de electrodomesticos */

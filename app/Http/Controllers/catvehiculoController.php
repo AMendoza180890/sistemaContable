@@ -94,7 +94,7 @@ class catvehiculoController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -103,9 +103,15 @@ class catvehiculoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($catVehiculoId)
     {
-        //
+        try {
+            $obtenerVehiculos = catvehiculoModel::find($catVehiculoId);
+            return view('editvehiculo',compact('obtenerVehiculos'));
+            
+        } catch (Exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**

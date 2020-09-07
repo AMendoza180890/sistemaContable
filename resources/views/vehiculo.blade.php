@@ -9,9 +9,11 @@
 
 @section('title', 'Cat Vehiculos')
 
+
 @section('content_header')
     <h1>Catalogo de Vehiculos</h1>
 @stop
+
 
 @section('content')
     <div class="card">
@@ -48,7 +50,7 @@
                              <th>Propietario</th>
                              <th>FechaCompra</th>
                              <th>Costo</th>
-                             {{-- <th>Editar / Eliminar</th> --}}
+                             <th>Editar / Eliminar</th>
                          </tr>
                      </thead>
                         <tbody>
@@ -70,6 +72,12 @@
                                 <td>{{$vehiculo -> catVehiculoPropietario }}</td>
                                 <td>{{$vehiculo -> catVehiculoFechaCompra }}</td>
                                 <td>{{$vehiculo -> catVehiculoCosto }}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                        <button type="button" data-toggle="modal" data-target="ActualizarVehiculos" class="btn btn-primary">Actualizar</a>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -79,7 +87,9 @@
         </div>
     </div>
     @include('Regvehiculo')
+    @include('editvehiculo')
 @stop
+
 
 @section('js')
    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>

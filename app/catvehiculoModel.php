@@ -8,4 +8,5 @@ class catvehiculoModel extends Model
 {
     protected $table = 'catvehiculo';
     protected $fillable = ['catVehiculoId', 'catVehiculoTipo', 'catVehiculoModelo', 'catVehiculoColor', 'catVehiculoMotor', 'catVehiculoChasis', 'catVehiculoVIM','catVehiculoCantPasajeros', 'catVehiculoCombustible', 'catVehiculoUso', 'catVehiculoAnio', 'catVehiculoCilindro', 'catVehiculoServicio', 'catVehiculoPropietario', 'catVehiculoFechaCompra', 'catVehiculoCosto'];
+    public $primaryKey = 'catVehiculoId';
 }
