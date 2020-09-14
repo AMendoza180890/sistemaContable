@@ -25,9 +25,9 @@
                         <th>N</th>
                         <th>Descripción</th>
                         <th>Vida útil</th>
-                        <th>FechaCreado</th>
-                        <th>FechaActualizado</th>
-                        {{-- <th>Editar / Eliminar</th> --}}
+                        <th>Fecha Actualizado</th>
+                        <th>Fecha Creado</th>
+                        <th>Editar / Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,12 @@
                             <td>{{  $ActivoFijo->vidaUtilActivoFijo }}</th>
                             <td>{{  $ActivoFijo->updated_at}}</td>
                             <td>{{  $ActivoFijo->created_at}}</td>
-                            {{--    <td></td>   --}}
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                    <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" id="editarCuentaActivo">Actualizar</button>
+                                </div>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -47,6 +52,7 @@
     </div>
 
 @include('RegtipoCuentas')
+@include('edittipocuenta')
 @stop
 
 @section('js')
@@ -116,4 +122,6 @@
         });
 
     </script>
+
+    <script src="../../resources/js/tipoCuenta.js"></script>
 @stop

@@ -31,7 +31,7 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#CrearVehiculo">Crear</button>
         </div>
         <div class="card-body">
-           <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
+           <table class="table table-bordered table-hover table-striped TB" id="vehiculos">
                      <thead>
                          <tr>
                              <th>N</th>
@@ -75,7 +75,7 @@
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-                                        <button type="button" data-toggle="" data-target="" class="btn btn-primary">Actualizar</a>
+                                        <button type="button" data-toggle="modal" data-target="#ActualizarVehiculos" class="btn btn-primary editarVehiculo" id="editarVehiculo">Actualizar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -92,12 +92,13 @@
 
 
 @section('js')
-   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-     <script src=" https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+    <script src=" https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
     <script>
-        $('#Terrenos').DataTable({
+        $('#vehiculos').DataTable({
             responsive: {
                 breakpoints: [
                 {name: 'bigdesktop', width: Infinity},
@@ -114,7 +115,7 @@
             language: {
                     processing:     "Procesando",
                     search:         "Buscar:",
-                    lengthMenu:    "Lista de Equipos",
+                    lengthMenu:    "Lista de Vehiculos",
                     info:           "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
                     infoEmpty:      "No se ha encontrado ningun elemento en lista",
                     infoFiltered:   "Filtro de _MAX_ Cantidad total de elementos",
@@ -131,4 +132,5 @@
                 }
         });
     </script>
+    <script src="../../resources/js/vehiculo.js"></script>
 @stop
