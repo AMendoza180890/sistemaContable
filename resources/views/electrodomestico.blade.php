@@ -29,16 +29,15 @@
             <button class="btn btn-primary" data-toggle="modal" data-target="#Crearelectrodomestico">Crear</button>
         </div>
         <div class="card-body">
-           <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
+           <table class="table table-bordered table-hover table-striped TB" id="electrodomestico">
                      <thead>
                          <tr>
                              <th>N</th>
-                             <th>Propietario</th>
-                             <th>Area</th>
-                             <th>Fecha de Compra</th>
-                             <th>Fecha Ingresos</th>
-                             <th>Costo</th>
-                             {{-- <th>Editar / Eliminar</th> --}}
+                             <th>Marca</th>
+                             <th>Modelo</th>
+                             <th>Descripcion</th>
+                             <th>Fecha de Ingreso</th>
+                             <th>Editar / Eliminar</th>
                          </tr>
                      </thead>
                         <tbody>
@@ -49,7 +48,12 @@
                                 <td>{{$electrodomestico -> CatElectModelo }}</td>
                                 <td>{{$electrodomestico -> CatElectDescripcion }}</td>
                                 <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
-                                <td>{{$electrodomestico -> CatElectCosto}}</td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                        <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" id="editarElectrodomestico">Actualizar</button>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -59,6 +63,7 @@
         </div>
     </div>
     @include('Regelectrodomestico')
+    @include('editelectrodomestico')
 @stop
 
 @section('js')
@@ -67,7 +72,7 @@
      <script src=" https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
     <script>
-        $('#Terrenos').DataTable({
+        $('#electrodomestico').DataTable({
             responsive: {
                 breakpoints: [
                 {name: 'bigdesktop', width: Infinity},
@@ -101,4 +106,5 @@
                 }
         });
     </script>
+    <script src="../../resources/js/electrodomestico.js"></script>
 @stop

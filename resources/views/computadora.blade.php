@@ -42,7 +42,7 @@
                              <th>TipoSO</th>
                              <th>FechaCompra</th>
                              <th>costoEquipo</th>
-                             {{-- <th>Editar / Eliminar</th> --}}
+                             <th>Editar / Eliminar</th>
                          </tr>
                      </thead>
                      <tbody>
@@ -58,6 +58,12 @@
                                     <td>{{$computadoras -> catEquipoTipoSO }}</td>
                                     <td>{{$computadoras -> catEquipoFechaCompra }}</td>
                                     <td>{{$computadoras -> catEquipoCostoEquipo }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                            <button type="button" data-toggle="modal" data-target="#editcomputadora" class="btn btn-primary editarcomputadoras" id="editarcomputadoras">Actualizar</button>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -67,6 +73,7 @@
         </div>
     </div>
 @include('Regcomputadora')
+@include('editcomputadora')
 @stop
 
 
@@ -111,4 +118,6 @@
                 }
         });
     </script>
+
+    <script src="../../resources/js/computadora.js"></script>
 @stop

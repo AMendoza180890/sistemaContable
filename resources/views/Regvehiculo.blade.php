@@ -1,4 +1,4 @@
-{{--Modal de crear computadoras--}}
+{{--Modal de crear o registrar computadoras--}}
 <div class="modal" tabindex="-1" role="dialog" id="CrearVehiculo">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
