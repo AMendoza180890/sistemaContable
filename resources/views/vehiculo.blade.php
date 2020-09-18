@@ -75,7 +75,7 @@
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-                                        <button type="button" data-toggle="" data-target="" class="btn btn-primary">Actualizar</a>
+                                        <button type="button" data-toggle="" data-target="" class="btn btn-primary btnEdit">Actualizar</a>
                                     </div>
                                 </td>
                             </tr>
@@ -131,4 +131,5 @@
                 }
         });
     </script>
+    <script src="../../resources/js/vehiculo.js"></script>
 @stop
