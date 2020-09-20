@@ -107,7 +107,7 @@ class catvehiculoController extends Controller
     {
         try {
             $obtenerVehiculos = catvehiculoModel::find($catVehiculoId);
-            return view('editvehiculo',compact('obtenerVehiculos'));
+            return $obtenerVehiculos;
             
         } catch (Exception $ex) {
             return 'Error - '.$ex->getMessage();

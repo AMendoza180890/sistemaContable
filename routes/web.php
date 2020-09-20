@@ -26,6 +26,7 @@ Route::post('/registrartipoCuentas', 'CatActivoFijoController@store')->name('tip
 /*Rutas de Terreno*/
 Route::get('/terrenos', 'catterrenoC@index');
 Route::post('/registrarTerreno','catterrenoC@store')->name('terreno.insertar');
+Route::get('/editarTerreno/{catTerrenoid}/edit','catterrenoC@edit')->name('terreno.edit');
 /*Hasta aqui finaliza Terrenos */
 
 /*Rutas de equipos de computo o computadoras*/
@@ -42,7 +43,7 @@ Route::post('/registrarImpresoras','catImpresorasController@store')->name('impre
 Route::get('/vehiculos', 'catvehiculoController@index');
 Route::post('/registrarVehiculo','catvehiculoController@store')->name('vehiculo.insertar');
 Route::get('/editarvehiculo/{catVehiculoId}/edit','catvehiculoController@edit')->name('vehiculo.edit');
-Route::put('/actualizarVehiculo/{catVehiculoId/','catvehiculoController@update')->name('vehiculo.update');
+Route::put('/actualizarVehiculo/{catVehiculoId}/','catvehiculoController@update')->name('vehiculo.update');
 /*Hasta aqui finaliza Vehiculos */
 
 /*Ruta de electrodomesticos */
