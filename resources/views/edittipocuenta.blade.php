@@ -17,11 +17,12 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <h4>Descripción:</h4>
-                                <input type="text" class="form-control input-lg" name="activoDescripcionN" require>
+                                <input type="text" class="form-control input-lg" name="activoDescripcionE" id="activoDescripcionE" require>
+                                <input type="hidden" name="activoCodigoE" id="activoCodigoE">
                             </div>
                             <div class="form-group">
                                 <h4>Vida Util:</h4>
-                                <input type="text" class="form-control input-lg" name="activoVidaUtilN" require>
+                                <input type="text" class="form-control input-lg" name="activoVidaUtilE" id="activoVidaUtilE" require>
                             </div>
                         </div>
                         <div class="modal-footer">

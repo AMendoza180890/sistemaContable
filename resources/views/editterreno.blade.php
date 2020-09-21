@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <h4>Propiedad:</h4>
                                 <input type="text" class="form-control input-lg" name="TerrenoPropiedadE" id="TerrenoPropiedadE" require>
-                                <input type="hidden" name="codigoTerreno" id="codigoTerrenoE">
+                                <input type="hidden" name="codigoTerrenoE" id="codigoTerrenoE">
                             </div>
                             <div class="form-group">
                                 <h4>Area:</h4>

@@ -41,7 +41,7 @@
                             <td>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-                                    <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" id="editarCuentaActivo">Actualizar</button>
+                                    <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" valor="{{  $ActivoFijo->idActivofijo }}" id="editarCuentaActivo">Actualizar</button>
                                 </div>
                             </td>
                         </tr>

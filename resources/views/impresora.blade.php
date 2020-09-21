@@ -56,7 +56,7 @@
                                     <td>
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-                                            <button type="button" data-toggle="modal" data-target="#editImpresora" class="btn btn-primary editarImpresora" id="editarImpresora">Actualizar</button>
+                                            <button type="button" data-toggle="modal" data-target="#editImpresora" class="btn btn-primary editarImpresora" valor="{{$impresoras -> catImpresorasId  }}" id="editarImpresora">Actualizar</button>
                                         </div>
                                     </td>
                                 </tr>
