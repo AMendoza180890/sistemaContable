@@ -82,7 +82,12 @@ class catelectrodomesticoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findElectrodomestico = catelectrodomesticoModel::find($id);
+            return $findElectrodomestico;
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 
     /**

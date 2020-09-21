@@ -85,7 +85,12 @@ class catImpresorasController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findImpresora = catImpresorasModel::find($id);
+            return $findImpresora;
+        } catch (exception $ex) {
+            return "Error - ". $ex->getMessage();
+        }
     }
 
     /**

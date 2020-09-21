@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
@@ -57,8 +57,8 @@
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-danger"
                                                 data-dismiss="modal">Eliminar</button>
-                                            <button type="button" data-toggle="modal" data-target="#editTerreno"
-                                                class="btn btn-primary editarTerreno" id="editarTerreno">Actualizar</button>
+                                            <button type="button" data-toggle="modal" data-target="#EditTerreno"
+                                        class="btn btn-primary editarTerrenos" valor="{{$terreno->catTerrenoId}}" id='mostrar'>Actualizar</a></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -69,8 +69,8 @@
             </div>
         </div>
     </div>
+    @include('EditTerreno')
     @include('Regterreno')
-    @include('editterreno')
 @stop
 
 

@@ -80,7 +80,12 @@ class CatActivoFijoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findActivoFijo = cattipocuentaactivofijo::find($id);
+            return $findActivoFijo;
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 
     /**

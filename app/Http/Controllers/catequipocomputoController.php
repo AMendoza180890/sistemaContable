@@ -93,7 +93,12 @@ class catequipocomputoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            return $findComputadora;
+        } catch (exception $ex) {
+            return "Error -".$ex->getMessage();
+        }
     }
 
     /**

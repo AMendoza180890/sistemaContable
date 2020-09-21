@@ -51,7 +51,7 @@
                                 <td>
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-                                        <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" id="editarElectrodomestico">Actualizar</button>
+                                        <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="editarElectrodomestico">Actualizar</button>
                                     </div>
                                 </td>
                             </tr>

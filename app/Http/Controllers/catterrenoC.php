@@ -83,7 +83,12 @@ class catterrenoC extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $terrenos = catterreno::find($id);
+            return $terrenos;
+        } catch (exception $ex) {
+            return "error - ".$ex->getMessage();
+        }
     }
 
     /**
