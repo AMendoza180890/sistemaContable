@@ -15,4 +15,24 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.TB').on('click', '.eliminarCuenta', function() {
+        let codTipoCuentaEliminar = $(this).attr('valor');
+        let descTipoCuentaEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea eliminar la cuenta " + descTipoCuentaEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'eliminarTipocuenta/' + codTipoCuentaEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'tipoCuentas';
+                }
+            })
+        } else {
+            console.log('no se elimino la cuenta ' + descTipoCuentaEliminar + ' fecha ' + Date.now());
+        }
+    })
 })

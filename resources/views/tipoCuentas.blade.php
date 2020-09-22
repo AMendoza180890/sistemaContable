@@ -18,8 +18,15 @@
         <div class="box-header with-border">
             <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button>
         </div>
+        @if (session('mensajeExitoso'))
+            <div class="alert alert-success">
+                {{session('mensajeExitoso')}}
+            </div>
+        @endif
         <div class="card-body">
             <table class="table table-bordered table-hover table-striped TB" id="TipoCuenta">
+                @csrf
+                @method('delete')
                 <thead>
                     <tr>
                         <th>N</th>
@@ -40,7 +47,7 @@
                             <td>{{  $ActivoFijo->created_at}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                    <button type="button" class="btn btn-danger eliminarCuenta"  valor="{{  $ActivoFijo->idActivofijo }}" descripcion="{{  $ActivoFijo->descripcionActivoFjo }}"  data-dismiss="modal">Eliminar</button>
                                     <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" valor="{{  $ActivoFijo->idActivofijo }}" id="editarCuentaActivo">Actualizar</button>
                                 </div>
                             </td>
