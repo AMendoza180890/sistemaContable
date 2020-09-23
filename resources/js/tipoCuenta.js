@@ -15,4 +15,19 @@ $(document).ready(function() {
             }
         })
     })
+
+    $(".TB").on("click",".eliminarCuenta",function(){
+        let codTipoCuentaEliminar = $(this).attr("valor");
+        let DescripcionTipoCuenta = $(this).attr("Descripcion");
+
+        let opcion = confirm("desea eliminar cuenta " + DescripcionTipoCuenta);
+
+        if (opcion) {
+            alert("codigo a eliminar " + codTipoCuentaEliminar);
+        }else{
+            alert("no se eliminara ninguna cuenta");
+        }
+
+        
+    })
 })

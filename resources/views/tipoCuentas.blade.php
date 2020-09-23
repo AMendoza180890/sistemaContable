@@ -40,7 +40,7 @@
                             <td>{{  $ActivoFijo->created_at}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                    <button type="button" class="btn btn-danger eliminarCuenta" Descripcion="{{  $ActivoFijo->descripcionActivoFjo }}" valor="{{  $ActivoFijo->idActivofijo }}" data-dismiss="modal">Eliminar</button>
                                     <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" valor="{{  $ActivoFijo->idActivofijo }}" id="editarCuentaActivo">Actualizar</button>
                                 </div>
                             </td>

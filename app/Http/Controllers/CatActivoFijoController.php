@@ -107,6 +107,12 @@ class CatActivoFijoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            cattipocuentaactivofijo::find($id)->delete();
+            return redirect()->action('CatActivoFijoController@index');
+        } catch (exception $ex) {
+            return "error - ".$ex->getMessage();
+        }
+        
     }
 }
