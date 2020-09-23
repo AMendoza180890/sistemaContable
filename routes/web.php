@@ -21,11 +21,7 @@ Route::get('/', function () {
 Route::get('/tipoCuentas', 'CatActivoFijoController@index') ->name('tipocuenta.all');
 Route::post('/registrartipoCuentas', 'CatActivoFijoController@store')->name('tipocuenta.insertar');
 Route::get('/editarTipocuenta/{idActivofijo}/edit','CatActivoFijoController@edit')->name('tipocuenta.edit');
-<<<<<<< HEAD
-Route::delete('/eliminarTipocuenta/{idActivofijo}','CatActivoFijoController@destroy')->name('tipocuenta.eliminar');
-=======
 Route::get('/eliminarTipocuenta/{idActivofijo}','CatActivoFijoController@destroy')->name('tipocuenta.destroy');
->>>>>>> 56132ae8d390a24682aa1530f80c1f3d6107b07d
 /*Hasta aqui finaliza Tipo cuentas Activo Fijo */
 
 

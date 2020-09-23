@@ -32,7 +32,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se elimino la cuenta ' + descTipoCuentaEliminar + ' fecha ' + Date.now());
+            console.log('no se elimino la cuenta ' + descTipoCuentaEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })
