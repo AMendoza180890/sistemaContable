@@ -19,4 +19,24 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.TB').on('click', '.eliminarImpresora', function() {
+        let codImpresoraEliminar = $(this).attr('valor');
+        let descImpresoraEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea eliminar la impresora " + descImpresoraEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'eliminarImpresora/' + codImpresoraEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'impresoras';
+                }
+            })
+        } else {
+            console.log('no se elimino la cuenta ' + descImpresoraEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
 })

@@ -73,7 +73,7 @@
                                     <td>{{ $vehiculo->catVehiculoCosto }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger eliminarvehiculo" valor="{{ $vehiculo->catVehiculoId }}" descripcion="{{ $vehiculo->catVehiculoTipo }}"
                                                 data-dismiss="modal">Eliminar</button>
                                             <button type="button" data-toggle="modal" data-target="#ActualizarVehiculos"
                                                 class="btn btn-primary editarVehiculo" valor = "{{ $vehiculo->catVehiculoId }}"

@@ -113,6 +113,11 @@ class catImpresorasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            catimpresorasModel::find($id)->delete();
+            return redirect()->route('impresora.all')->with('mensaje exitoso','Se elimino correctamente la impresora seleccionada');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

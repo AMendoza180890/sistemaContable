@@ -134,6 +134,11 @@ class catvehiculoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            catvehiculoModel::find($id)->delete();
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se elimino correctamente el vehiculo seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

@@ -22,4 +22,24 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.TB').on('click', '.eliminarComputadora', function() {
+        let codComputadoraEliminar = $(this).attr('valor');
+        let descComputadoraEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea eliminar la computadora " + descComputadoraEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'eliminarComputadora/' + codComputadoraEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'computadoras';
+                }
+            })
+        } else {
+            console.log('no se elimino la cuenta ' + descComputadoraEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
 })

@@ -55,7 +55,7 @@
                                     <td>{{ $terreno->created_at }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger eliminarTerreno" valor="{{ $terreno->catTerrenoId }}" descripcion="{{ $terreno->catTerrenoPropietario }}"
                                                 data-dismiss="modal">Eliminar</button>
                                             <button type="button" data-toggle="modal" data-target="#EditTerreno"
                                         class="btn btn-primary editarTerrenos" valor="{{$terreno->catTerrenoId}}" id='mostrar'>Actualizar</a></button>

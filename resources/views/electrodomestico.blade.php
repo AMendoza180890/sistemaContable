@@ -50,7 +50,7 @@
                                 <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                        <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Eliminar</button>
                                         <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="editarElectrodomestico">Actualizar</button>
                                     </div>
                                 </td>

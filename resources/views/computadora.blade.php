@@ -60,7 +60,7 @@
                                     <td>{{$computadoras -> catEquipoCostoEquipo }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+                                            <button type="button" class="btn btn-danger eliminarComputadora" valor="{{$computadoras -> catEquipoCompId }}" descripcion="{{$computadoras -> catEquipoMarca }}" data-dismiss="modal">Eliminar</button>
                                             <button type="button" data-toggle="modal" data-target="#editcomputadora" class="btn btn-primary editarcomputadoras" valor="{{$computadoras -> catEquipoCompId }}" id="editarcomputadoras">Actualizar</button>
                                         </div>
                                     </td>

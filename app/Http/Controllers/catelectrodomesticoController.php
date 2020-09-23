@@ -110,6 +110,11 @@ class catelectrodomesticoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            catelectrodomesticoModel::find($id)->delete();
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se elimino correctamente el electrodomestico seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

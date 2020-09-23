@@ -121,6 +121,11 @@ class catequipocomputoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            catequipocomputoModel::find($id)->delete();
+            return redirect()->route('computadora.all')->with('mensaje exito','Se elimino correctamente el equipo de computo');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

@@ -111,6 +111,11 @@ class catterrenoC extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            catterreno::find($id)->delete();
+            return redirect()->route('terreno.all')->with('mensaje exitoso','Se elimino correctamente el terreno seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

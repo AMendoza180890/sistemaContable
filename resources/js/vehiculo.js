@@ -30,4 +30,24 @@ $(document).ready(function() {
             }
         })
     })
+
+    $('.TB').on('click', '.eliminarvehiculo', function() {
+        let codVehiculoEliminar = $(this).attr('valor');
+        let descVehiculoEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea eliminar el vehiculo " + descVehiculoEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'eliminarVehiculo/' + codVehiculoEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'vehiculo';
+                }
+            })
+        } else {
+            console.log('no se elimino el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
 })
