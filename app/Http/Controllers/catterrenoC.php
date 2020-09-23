@@ -57,7 +57,7 @@ class catterrenoC extends Controller
     
             $terrenos->save();
     
-            return back()->with('mensajeExitoso','Se ha insertado la informacion del terreno');
+            return redirect()->route('terreno.all')->with('mensajeExitoso','Se ha insertado la informacion del terreno');
             
         } catch (Exception $ex) {
             return 'Error'.$ex->getMessage();

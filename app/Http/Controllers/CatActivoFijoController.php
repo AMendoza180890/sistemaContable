@@ -49,12 +49,7 @@ class CatActivoFijoController extends Controller
             $tipoCuenta->vidaUtilActivoFijo = $request ->activoVidaUtilN;
             $tipoCuenta->Save();
 
-            // cattipocuentaactivofijo::insert([
-            //     'descripcionActivoFjo' => ('activoDescripcionN'),
-            //     'vidaUtilActivoFijo' => ('activoVidaUtilN')
-            // ]);
-            return back();
-            //     echo '<script>console.log("finalizo en el redirect")<script>';
+            return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se ha guardado la cuenta '. $request->activoDescripcionN);
                 
         } catch (Exception $ex) {
             return 'faltal error - '. $ex->getMessage();
@@ -109,10 +104,9 @@ class CatActivoFijoController extends Controller
     {
         try {
             cattipocuentaactivofijo::find($id)->delete();
-            return redirect()->action('CatActivoFijoController@index');
+            return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se elimino correctamente la cuenta');
         } catch (exception $ex) {
-            return "error - ".$ex->getMessage();
+            return "Error - ".$ex->getMessage();
         }
-        
     }
 }
