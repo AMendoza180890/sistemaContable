@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('computadora.insertar')}}">
+                <form method="POST" action="">
                     @csrf
                     <div class="modal-body">
                         <div class="box-body">

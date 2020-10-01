@@ -27,6 +27,8 @@ $(document).ready(function() {
                 $('#vehPropietarioE').val(datosVehiculo["catVehiculoPropietario"]);
                 $('#vehFechaE').val(datosVehiculo["catVehiculoFechaCompra"]);
                 $('#vehCostoE').val(datosVehiculo["catVehiculoCosto"]);
+
+                $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoid"]);
             }
         })
     })

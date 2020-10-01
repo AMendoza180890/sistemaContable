@@ -12,8 +12,8 @@ $(document).ready(function() {
                 $("#activoCodigoE").val(datoTipocuenta["idActivofijo"]);
                 $("#activoDescripcionE").val(datoTipocuenta["descripcionActivoFjo"]);
                 $("#activoVidaUtilE").val(datoTipocuenta["vidaUtilActivoFijo"]);
-
-                $('#editCuentaActivo').attr("Action","{{ route('tipocuenta.update',['idActivofijo'=>"+ datoTipocuenta["idActivofijo" ] + "])}}")
+                // se agrega la accion enrutando a la direccion de actualizar Tipo Cuenta.
+                $('Form').attr('Action', 'actualizarTipocuenta/' + datoTipocuenta["idActivofijo"]);
             }
         })
     })

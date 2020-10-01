@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('terreno.insertar') }}">
+                <form method="POST" action="">
                     {{-- role="form" enctype="multipart/form-data"
                     --}}
                     @csrf

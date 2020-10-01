@@ -19,6 +19,8 @@ $(document).ready(function() {
                 $("#inputAlmacenamientoE").val(datoComputadora["catEquipoTamanioAlmacenamiento"]);
                 $("#compTipoSOE").val(datoComputadora["catEquipoTipoSO"]);
                 $("#InputTipoMemoriaE").val(datoComputadora["TipoMemoriaRAM"]);
+
+                $('Form').attr('Action', 'actualizarComputadora/' + datoComputadora["catEquipoCompId"]);
             }
         })
     })

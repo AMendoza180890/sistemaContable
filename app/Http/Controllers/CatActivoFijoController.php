@@ -6,6 +6,9 @@ use App\cattipocuentaactivofijo;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use FFI\Exception;
+use PHPUnit\Framework\Constraint\Count;
+
+use function GuzzleHttp\Promise\exception_for;
 
 class CatActivoFijoController extends Controller
 {
@@ -16,7 +19,7 @@ class CatActivoFijoController extends Controller
      */
     public function index()
     {
-        $ActivoFijoC = cattipocuentaactivofijo::all();
+        $ActivoFijoC = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','!=','0');
         return view('tipoCuentas', compact('ActivoFijoC'));
     }
 
@@ -47,6 +50,7 @@ class CatActivoFijoController extends Controller
             $tipoCuenta = new cattipocuentaactivofijo();
             $tipoCuenta->descripcionActivoFjo = $request ->activoDescripcionN;
             $tipoCuenta->vidaUtilActivoFijo = $request ->activoVidaUtilN;
+            $tipoCuenta->CatTipoCuentaActivoEstado	= 1;
             $tipoCuenta->Save();
 
             return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se ha guardado la cuenta '. $request->activoDescripcionN);
@@ -92,13 +96,19 @@ class CatActivoFijoController extends Controller
     public function update(request $request, $id)
     {
         try {
-            if ($request->isMethod('PUT')) {
-                $updateActivoFijo = cattipocuentaactivofijo::findOrFaile($id);
-                $updateActivoFijo -> update($request.all());
-
-                return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se actualizo el activo de forma correcta');
-            }
             
+            $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo','=',$id)->first();
+
+                $tipoCuenta->descripcionActivoFjo   =   $request->activoDescripcionE;
+                $tipoCuenta->vidaUtilActivoFijo     =   $request->activoVidaUtilE;
+
+                $tipoCuenta->save();
+                return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo la informacion de la cuenta correctamente');
+            
+
+            
+            //back()->with('mensajeExitoso','Se actualizo la informacion de la cuenta correctamente');
+
         } catch (exception $ex) {
             return 'Error - '.$ex->getMessage();
         }
@@ -113,7 +123,13 @@ class CatActivoFijoController extends Controller
     public function destroy($id)
     {
         try {
-            cattipocuentaactivofijo::find($id)->delete();
+            $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo', '=', $id)->first();
+
+            $tipoCuenta->CatTipoCuentaActivoEstado     =   0;
+
+            $tipoCuenta->save();
+
+            // cattipocuentaactivofijo::find($id)->delete();
             return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se elimino correctamente la cuenta');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
