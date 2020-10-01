@@ -15,7 +15,7 @@ class catelectrodomesticoController extends Controller
      */
     public function index()
     {
-        $listaElectrodomesticos = catelectrodomesticoModel::all();
+        $listaElectrodomesticos = catelectrodomesticoModel::all()->where('CatElectEstado','!=','0');
         return view('electrodomestico',compact('listaElectrodomesticos'));
     }
 

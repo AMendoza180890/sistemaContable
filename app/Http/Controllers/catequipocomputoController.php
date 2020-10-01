@@ -17,7 +17,7 @@ class catequipocomputoController extends Controller
      */
     public function index()
     {
-        $listaComputadoras = catequipocomputoModel::all();
+        $listaComputadoras = catequipocomputoModel::all()->where('CatEquipoEstado','!=','0');
         return view('computadora',compact('listaComputadoras'));
     }
 

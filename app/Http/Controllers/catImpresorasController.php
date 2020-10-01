@@ -15,7 +15,7 @@ class catImpresorasController extends Controller
      */
     public function index()
     {
-        $listaImpresoras = catImpresorasModel::all();
+        $listaImpresoras = catImpresorasModel::all()->where('CatImpresoraEstado','!=','0');
         return view('impresora',compact('listaImpresoras'));
     }
 

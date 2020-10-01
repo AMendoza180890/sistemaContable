@@ -16,7 +16,7 @@ class catterrenoC extends Controller
     public function index()
     {
         try {
-            $listaTerrenos = catterreno::all();
+            $listaTerrenos = catterreno::all()->where('CatTerrenoEstado','!=','0');
             return view('terreno',['listaTerrenos'=>$listaTerrenos]);
         } catch (Exception $ex) {
             return 'Error:'.$ex->getMessage();
