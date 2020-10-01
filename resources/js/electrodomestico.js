@@ -15,6 +15,8 @@ $(document).ready(function() {
                 $("#electmarcaE").val(datoElectrodomestico["CatElectMarca"]);
                 $("#electmodeloE").val(datoElectrodomestico["CatElectModelo"]);
                 $("#electcostoE").val(datoElectrodomestico["CatElectCosto"]);
+
+                $('Form').attr('Action', 'actualizarElectrodomestico/' + datoElectrodomestico["CatElectId"]);
             }
         })
     })

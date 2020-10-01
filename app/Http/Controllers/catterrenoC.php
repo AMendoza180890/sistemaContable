@@ -54,6 +54,7 @@ class catterrenoC extends Controller
             $terrenos->catTerrenoArea = $request->TerrenoAreaN;
             $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
             $terrenos->catterrenoCosto = $request->TerrenoCostoN;
+            $terrenos->CatTerrenoEstado = 1;
     
             $terrenos->save();
     
@@ -100,7 +101,17 @@ class catterrenoC extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarTerreno = catterreno::where('catTerrenoId', '=',$id);
+
+            $actualizarTerreno->catTerrenoPropietario = $request->TerrenoPropiedadE;
+            $actualizarTerreno->catTerrenoArea = $request->TerrenoAreaE;
+            $actualizarTerreno->catTerrenoFechaCompra = $request->TerrenofechaCompraE;
+            $actualizarTerreno->caterrenoCosto = $request->TerrenoCostoE;
+            $actualizarTerreno->CatTerrenoEstado = 1;
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -112,7 +123,10 @@ class catterrenoC extends Controller
     public function destroy($id)
     {
         try {
-            catterreno::find($id)->delete();
+            $eliminarTerreno = catterreno::where('catTerrenoId','=',$id);
+
+            $eliminarTerreno->CatTerrenoEstado = 0;
+            //catterreno::find($id)->delete();
             return redirect()->route('terreno.all')->with('mensaje exitoso','Se elimino correctamente el terreno seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();

@@ -53,6 +53,7 @@ class catelectrodomesticoController extends Controller
             $electrodomestico->CatElectFechaIngreso = $request->electFecha;
             $electrodomestico->CatElectCosto = $request->electcosto;
             $electrodomestico->CatElectDescripcion = $request->electdescripcion;
+            $electrodomestico->CatElectEstado = 1;
 
             $electrodomestico->save();
 
@@ -99,7 +100,23 @@ class catelectrodomesticoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
+
+            $actualizarElectrodomestico->CatElectMarca = $request->electmarcaE;
+            $actualizarElectrodomestico->CatElectModelo = $request->electmodeloE;
+            $actualizarElectrodomestico->CatElectDescripcion = $request->electdescripcionE;
+            $actualizarElectrodomestico->CatElectFechaIngreso = $request->electFechaE;
+            $actualizarElectrodomestico->CatElectCosto = $request->electcostoE;
+            $actualizarElectrodomestico->CatElectEstado = 1;
+
+            $actualizarElectrodomestico->save();
+
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se actualizo correctamente el electrodomestico seleccinado');
+
+        } catch (exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**
@@ -111,7 +128,10 @@ class catelectrodomesticoController extends Controller
     public function destroy($id)
     {
         try {
-            catelectrodomesticoModel::find($id)->delete();
+            $eliminarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id);
+            $eliminarElectrodomestico->CatElectEstado = 0;
+            $eliminarElectrodomestico->save();
+            //catelectrodomesticoModel::find($id)->delete();
             return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se elimino correctamente el electrodomestico seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();

@@ -19,7 +19,7 @@ class CatActivoFijoController extends Controller
      */
     public function index()
     {
-        $ActivoFijoC = cattipocuentaactivofijo::all();
+        $ActivoFijoC = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','!=','0');
         return view('tipoCuentas', compact('ActivoFijoC'));
     }
 
@@ -50,6 +50,7 @@ class CatActivoFijoController extends Controller
             $tipoCuenta = new cattipocuentaactivofijo();
             $tipoCuenta->descripcionActivoFjo = $request ->activoDescripcionN;
             $tipoCuenta->vidaUtilActivoFijo = $request ->activoVidaUtilN;
+            $tipoCuenta->CatTipoCuentaActivoEstado	= 1;
             $tipoCuenta->Save();
 
             return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se ha guardado la cuenta '. $request->activoDescripcionN);
@@ -122,7 +123,13 @@ class CatActivoFijoController extends Controller
     public function destroy($id)
     {
         try {
-            cattipocuentaactivofijo::find($id)->delete();
+            $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo', '=', $id)->first();
+
+            $tipoCuenta->CatTipoCuentaActivoEstado     =   0;
+
+            $tipoCuenta->save();
+
+            // cattipocuentaactivofijo::find($id)->delete();
             return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se elimino correctamente la cuenta');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();

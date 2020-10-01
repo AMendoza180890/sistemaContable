@@ -16,6 +16,8 @@ $(document).ready(function() {
                 $("#inputModeloE").val(datoImpresora["catImpresoraModelo"]);
                 $("#inputMarcaE").val(datoImpresora["catImpresorasMarca"]);
                 $("#inputTonnerE").val(datoImpresora["catImpresoraTipoToner"]);
+
+                $('Form').attr('Action', '/actualizarImpresora/' + datoImpresora["catImpresorasId"]);
             }
         })
     })

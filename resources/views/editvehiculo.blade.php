@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('vehiculo.insertar')}}">
+                <form method="POST" action="">
                     {{-- {{route('vehiculo.edit',['catVehiculoId'=> $vehiculo -> catVehiculoId])}} --}}
                     @csrf
                     <div class="modal-body">

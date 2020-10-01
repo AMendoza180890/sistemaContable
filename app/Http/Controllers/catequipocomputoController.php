@@ -63,6 +63,7 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
+               $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
                 
@@ -110,7 +111,24 @@ class catequipocomputoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarComputadora = catequipocomputoModel::where('catEquipoCompId', '=', $id);
+            
+            $actualizarComputadora->catEquipoModelo = $request->inputModeloE;
+            $actualizarComputadora->catEquipoNumeroSerie = $request->inputSerieE;
+            $actualizarComputadora->catEquipoMarca = $request->inputMarcaE;
+            $actualizarComputadora->catEquipoTamanioAlmacenamiento = $request->inputAlmacenamientoE;
+            $actualizarComputadora->TipoMemoriaRAM = $request->InputTipoMemoriaE;
+            $actualizarComputadora->catEquipoCantidadRAM = $request->cantTotalRamE;
+            $actualizarComputadora->catEquipoTipoSO = $request->compTipoSOE;
+            $actualizarComputadora->catEquipoFechaCompra = $request->compFechaCompraE;
+            $actualizarComputadora->catEquipoCostoEquipo = $request->compCostoE;
+            $actualizarComputadora->CatEquipoEstado = 1;
+
+            $actualizarComputadora->save();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -122,7 +140,12 @@ class catequipocomputoController extends Controller
     public function destroy($id)
     {
         try {
-            catequipocomputoModel::find($id)->delete();
+            $eliminarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id);
+
+            $eliminarComputadora->CatEquipoEstado = 0;
+
+            $eliminarComputadora->save();
+            //catequipocomputoModel::find($id)->delete();
             return redirect()->route('computadora.all')->with('mensaje exito','Se elimino correctamente el equipo de computo');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();

@@ -55,6 +55,7 @@ class catImpresorasController extends Controller
             $impresoras->catImpresoraFechaIngreso = $request->impFecha;
             $impresoras->catImpresoraCosto = $request->impCosto;
             $impresoras->catImpresoraDescripcion = $request->impDescripcion;
+            $impresoras->CatImpresoraEstado = 1;
 
             $impresoras->save();
 
@@ -102,7 +103,20 @@ class catImpresorasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id);
+            $actualizarImpresora->catImpresorasMarca = $request->inputMarcaE;
+            $actualizarImpresora->catImpresoraModelo = $request->inputModeloE;
+            $actualizarImpresora->catImpresoraTipoToner = $request->inputTonnerE;
+            $actualizarImpresora->catImpresoraDescripcion = $request->impDescripcionE;
+            $actualizarImpresora->catImpresoraFechaIngreso = $request->impfechaCompraE;
+            $actualizarImpresora->catImpresoraCosto = $request->impcostoE;
+            $actualizarImpresora->CatImpresoraEstado = 1;
+            
+            $actualizarImpresora->save();
+        } catch (exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**
@@ -114,7 +128,12 @@ class catImpresorasController extends Controller
     public function destroy($id)
     {
         try {
-            catimpresorasModel::find($id)->delete();
+
+            $eliminarImpresora = catImpresorasModel::where('catImpresorasId','=',$id);
+
+            $eliminarImpresora->CatImpresoraEstado = 0;
+
+            //catimpresorasModel::find($id)->delete();
             return redirect()->route('impresora.all')->with('mensaje exitoso','Se elimino correctamente la impresora seleccionada');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();

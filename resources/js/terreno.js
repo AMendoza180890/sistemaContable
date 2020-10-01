@@ -19,6 +19,8 @@ $(document).ready(function() {
                 $('#TerrenoAreaE').val(datos['catTerrenoArea']);
                 // $("#direccionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontAdress"])));
                 // $("#descripcionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontMessage"])));
+
+                $('Form').attr('Action', 'actualizarTerreno/' + datos["catTerrenoId"]);
             }
         })
     })
