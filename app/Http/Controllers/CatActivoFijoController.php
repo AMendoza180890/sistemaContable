@@ -6,6 +6,9 @@ use App\cattipocuentaactivofijo;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use FFI\Exception;
+use PHPUnit\Framework\Constraint\Count;
+
+use function GuzzleHttp\Promise\exception_for;
 
 class CatActivoFijoController extends Controller
 {
@@ -89,9 +92,25 @@ class CatActivoFijoController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(request $request, $id)
     {
-        //
+        try {
+            
+            $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo','=',$id)->first();
+
+                $tipoCuenta->descripcionActivoFjo   =   $request->activoDescripcionE;
+                $tipoCuenta->vidaUtilActivoFijo     =   $request->activoVidaUtilE;
+
+                $tipoCuenta->save();
+                return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo la informacion de la cuenta correctamente');
+            
+
+            
+            //back()->with('mensajeExitoso','Se actualizo la informacion de la cuenta correctamente');
+
+        } catch (exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**
