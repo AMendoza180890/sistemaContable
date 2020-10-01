@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2020 a las 20:58:24
+-- Tiempo de generación: 01-10-2020 a las 05:13:57
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -34,6 +34,7 @@ CREATE TABLE `catelectrodomesticos` (
   `CatElectDescripcion` text NOT NULL,
   `CatElectFechaIngreso` date NOT NULL,
   `CatElectCosto` int(11) DEFAULT NULL,
+  `CatElectEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -42,8 +43,8 @@ CREATE TABLE `catelectrodomesticos` (
 -- Volcado de datos para la tabla `catelectrodomesticos`
 --
 
-INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, '2020-09-06', '2020-09-06');
+INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `CatElectEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, 0, '2020-09-06', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -62,6 +63,7 @@ CREATE TABLE `catequipocomputo` (
   `catEquipoTipoSO` text NOT NULL,
   `catEquipoFechaCompra` date NOT NULL,
   `catEquipoCostoEquipo` float NOT NULL,
+  `CatEquipoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -70,11 +72,10 @@ CREATE TABLE `catequipocomputo` (
 -- Volcado de datos para la tabla `catequipocomputo`
 --
 
-INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `updated_at`, `created_at`) VALUES
-(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 0, NULL, NULL),
-(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 250.5, NULL, NULL),
-(3, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-07-01', 250, '2020-09-06', '2020-09-06'),
-(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, '2020-09-06', '2020-09-06');
+INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `CatEquipoEstado`, `updated_at`, `created_at`) VALUES
+(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 0, 0, NULL, NULL),
+(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 250.5, 0, NULL, NULL),
+(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, 0, '2020-09-06', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -90,6 +91,7 @@ CREATE TABLE `catimpresoras` (
   `catImpresoraDescripcion` text NOT NULL,
   `catImpresoraFechaIngreso` date NOT NULL,
   `catImpresoraCosto` int(11) DEFAULT NULL,
+  `CatImpresoraEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -98,9 +100,9 @@ CREATE TABLE `catimpresoras` (
 -- Volcado de datos para la tabla `catimpresoras`
 --
 
-INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', NULL, NULL, NULL),
-(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, '2020-09-06', '2020-09-06');
+INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `CatImpresoraEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', NULL, 0, NULL, NULL),
+(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, 0, '2020-09-06', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -114,6 +116,7 @@ CREATE TABLE `catterreno` (
   `catTerrenoArea` text NOT NULL,
   `catTerrenoFechaCompra` date NOT NULL,
   `catterrenoCosto` int(11) DEFAULT NULL,
+  `CatTerrenoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -122,10 +125,10 @@ CREATE TABLE `catterreno` (
 -- Volcado de datos para la tabla `catterreno`
 --
 
-INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Tesoros de Dios', '150mts cuadrados, área de Equinoterapia', '2018-11-14', NULL, NULL, NULL),
-(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, '2020-09-05', '2020-09-05'),
-(3, 'Tesoros de Dios', '100mts Cuadrados', '2019-09-18', 1500, '2020-09-05', '2020-09-05');
+INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `CatTerrenoEstado`, `updated_at`, `created_at`) VALUES
+(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, 0, '2020-09-05', '2020-09-05'),
+(3, 'Tesoros de Dios', '100mts Cuadrados', '2019-09-18', 1500, 0, '2020-09-05', '2020-09-05'),
+(4, 'Tesoros de Dios', '100 mts Cuadrados', '2020-05-14', 500, 0, '2020-09-22', '2020-09-22');
 
 -- --------------------------------------------------------
 
@@ -137,6 +140,7 @@ CREATE TABLE `cattipocuentaactivofijo` (
   `idActivofijo` int(11) NOT NULL,
   `descripcionActivoFjo` text NOT NULL,
   `vidaUtilActivoFijo` int(11) NOT NULL,
+  `CatTipoCuentaActivoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Catalogo de Tipo de cuentas de activo fijo';
@@ -145,11 +149,10 @@ CREATE TABLE `cattipocuentaactivofijo` (
 -- Volcado de datos para la tabla `cattipocuentaactivofijo`
 --
 
-INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `updated_at`, `created_at`) VALUES
-(1, 'Electrodomesticos', 60, NULL, NULL),
-(2, 'Impresoras', 60, NULL, NULL),
-(3, 'Vehiculos', 60, NULL, NULL),
-(4, 'Computadoras', 60, '2020-09-05', '2020-09-05');
+INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `CatTipoCuentaActivoEstado`, `updated_at`, `created_at`) VALUES
+(6, 'Tecnologia', 60, 0, '2020-10-01', '2020-09-22'),
+(16, 'Electrodomesticos', 60, 0, '2020-10-01', '2020-09-28'),
+(17, 'Terreno', 120, 0, '2020-10-01', '2020-10-01');
 
 -- --------------------------------------------------------
 
@@ -174,6 +177,7 @@ CREATE TABLE `catvehiculo` (
   `catVehiculoPropietario` text NOT NULL,
   `catVehiculoFechaCompra` date NOT NULL,
   `catVehiculoCosto` text NOT NULL,
+  `catVehiculoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -182,8 +186,8 @@ CREATE TABLE `catvehiculo` (
 -- Volcado de datos para la tabla `catvehiculo`
 --
 
-INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', '2020-09-06', '2020-09-06');
+INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `catVehiculoEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', 0, '2020-09-06', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -350,13 +354,13 @@ ALTER TABLE `catimpresoras`
 -- AUTO_INCREMENT de la tabla `catterreno`
 --
 ALTER TABLE `catterreno`
-  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cattipocuentaactivofijo`
 --
 ALTER TABLE `cattipocuentaactivofijo`
-  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `catvehiculo`
