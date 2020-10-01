@@ -9,10 +9,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('tipocuenta.insertar') }}">
-                    {{-- role="form" enctype="multipart/form-data"
-                    --}}
+                <form method="POST" action="">
                     @csrf
+                    {{ method_field('PUT') }}
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-group">

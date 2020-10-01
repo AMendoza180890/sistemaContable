@@ -12,6 +12,8 @@ $(document).ready(function() {
                 $("#activoCodigoE").val(datoTipocuenta["idActivofijo"]);
                 $("#activoDescripcionE").val(datoTipocuenta["descripcionActivoFjo"]);
                 $("#activoVidaUtilE").val(datoTipocuenta["vidaUtilActivoFijo"]);
+
+                $('#editCuentaActivo').attr("Action","{{ route('tipocuenta.update',['idActivofijo'=>"+ datoTipocuenta["idActivofijo" ] + "])}}")
             }
         })
     })
@@ -35,4 +37,6 @@ $(document).ready(function() {
             console.log('no se elimino la cuenta ' + descTipoCuentaEliminar + ' fecha ' + Date.now().toString());
         }
     })
+
+
 })

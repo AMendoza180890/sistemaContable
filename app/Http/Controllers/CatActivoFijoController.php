@@ -89,9 +89,19 @@ class CatActivoFijoController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(request $request, $id)
     {
-        //
+        try {
+            if ($request->isMethod('PUT')) {
+                $updateActivoFijo = cattipocuentaactivofijo::findOrFaile($id);
+                $updateActivoFijo -> update($request.all());
+
+                return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se actualizo el activo de forma correcta');
+            }
+            
+        } catch (exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**
