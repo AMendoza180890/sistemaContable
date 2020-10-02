@@ -53,11 +53,11 @@ $(document).ready(function() {
         }
     })
 
-    $('.TBDeshabilitado').on('click', '.eliminarvehiculo', function() {
+    $('.TBDeshabilitado').on('click', '.habilitarVehiculo', function() {
         let codVehiculoEliminar = $(this).attr('valor');
         let descVehiculoEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea deshabilitar el vehiculo " + descVehiculoEliminar);
+        let opcion = confirm("Desea habilitar el vehiculo " + descVehiculoEliminar);
 
         if (opcion) {
             $.ajax({
@@ -69,7 +69,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se deshabilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
+            console.log('no se habilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

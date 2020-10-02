@@ -172,4 +172,19 @@ class catvehiculoController extends Controller
             return "Error - ".$ex->getMessage();
         }
     }
+
+    public function Recover($id)
+    {
+        try {
+            $ActivarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id);
+
+            $ActivarVehiculo->catVehiculoEstado = 1;
+
+            $ActivarVehiculo->save();
+            //catvehiculoModel::find($id)->delete();
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se elimino correctamente el vehiculo seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
+    }
 }
