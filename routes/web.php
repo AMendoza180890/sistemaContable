@@ -21,6 +21,7 @@ Route::post('/registrartipoCuentas', 'CatActivoFijoController@store')->name('tip
 Route::get('/editarTipocuenta/{idActivofijo}/edit','CatActivoFijoController@edit')->name('tipocuenta.edit')->where(['idActivofijo' => '[0-9]+']);
 Route::get('/eliminarTipocuenta/{idActivofijo}','CatActivoFijoController@destroy')->name('tipocuenta.destroy')->where(['idActivofijo'=>'[0-9]+']);
 Route::put('/actualizarTipocuenta/{UpdateActivo}','CatActivoFijoController@update')->name('tipocuenta.update')->where(['UpdateActivo'=>'[0-9]+']);
+Route::get('/recuperarTipocuenta/{updateActivo}','CatActivoFijoController@Recover')->name('tipocuenta.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza Tipo cuentas Activo Fijo */
 
 
@@ -30,6 +31,7 @@ Route::post('/registrarTerreno','catterrenoC@store')->name('terreno.insertar');
 Route::get('/editarTerreno/{catTerrenoid}/edit','catterrenoC@edit')->name('terreno.edit')->where(['catTerrenoid' => '[0-9]+']);
 Route::get('/eliminarTerreno/{idTerreno}','catterrenoC@destroy')->name('terreno.destroy')->where(['idTerreno' => '[0-9]+']);
 Route::put('/actualizarTerreno/{idTerreno}','catterrenoC@update')->name('terreno.update')->where(['idTerreno'=>'[0-9]+']);
+Route::get('/recuperarTerreno/{updateActivo}','CatActivoFijoController@Recover')->name('terreno.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza Terrenos */
 
 /*Rutas de equipos de computo o computadoras*/
@@ -38,6 +40,7 @@ Route::post('/registrarComputadoras', 'catequipocomputoController@store')->name(
 Route::get('/editarComputadora/{catComputadoraid}/edit','catequipocomputoController@edit')->name('computadora.edit')->where(['catComputadoraid' => '[0-9]+']);
 Route::get('/eliminarComputadora/{idComputadora}','catequipocomputoController@destroy')->name('computadora.destroy')->where(['idComputadora' => '[0-9]+']);
 Route::put('/actualizarComputadora/{idComputadora}','catequipocomputoController@update')->name('computadora.update')->where(['idComputadora'=>'[0-9]+']);
+Route::get('/recuperaComputadora/{updateActivo}','CatActivoFijoController@Recover')->name('computadora.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza Computadoras */
 
 /*Rutas de Impresoras*/
@@ -46,6 +49,7 @@ Route::post('/registrarImpresoras','catImpresorasController@store')->name('impre
 Route::get('/editarImpresora/{catEquipoCompId}/edit','catImpresorasController@edit')->name('impresora.edit')->where(['catEquipoCompId' => '[0-9]+']);
 Route::get('/eliminarImpresora/{idImpresora}','catImpresorasController@destroy')->name('impresora.destroy')->where(['idImpresora' => '[0-9]+']);
 Route::put('/actualizarImpresora/{idImpresora}','catImpresorasController@update')->name('impresora.update')->where(['idImpresora'=>'[0-9]+']);
+Route::get('/recuperarImpresora/{updateActivo}','CatActivoFijoController@Recover')->name('impresora.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza Impresora*/
 
 /*Ruta de Vehiculos */
@@ -54,6 +58,7 @@ Route::post('/registrarVehiculo','catvehiculoController@store')->name('vehiculo.
 Route::get('/editarvehiculo/{catVehiculoId}/edit','catvehiculoController@edit')->name('vehiculo.edit')->where(['catVehiculoId' => '[0-9]+']);
 Route::get('/eliminarVehiculo/{idVehiculo}','catvehiculoController@destroy')->name('vehiculo.destroy')->where(['idVehiculo' => '[0-9]+']);
 Route::put('/actualizarVehiculo/{catVehiculoId}/','catvehiculoController@update')->name('vehiculo.update')->where(['catVehiculoId'=>'[0-9]+']);
+Route::get('/recuperarVehiculos/{updateActivo}','CatActivoFijoController@Recover')->name('vehiculo.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza Vehiculos */
 
 /*Ruta de electrodomesticos */
@@ -62,6 +67,7 @@ Route::post('/registrarElectrodomesticos','catelectrodomesticoController@store')
 Route::get('/editarElectrodomestico/{catElectId}/edit','catelectrodomesticoController@edit')->name('electrodomestico.edit')->where(['catElectId' => '[0-9]+']);
 Route::get('/eliminiarElectrodomestico/{idElectrodomestico}','catelectrodomesticoController@destroy')->name('electrodomestico.destroy')->where(['idElectrodomestico' => '[0-9]+']);
 Route::put('/actualizarElectrodomestico/{idElectrodomestico}','catelectrodomesticoController@update')->name('electrodomestico.update')->where(['idElectrodomestico'=>'[0-9]+']);
+Route::get('/recuperarElectrodomesticos/{updateActivo}','CatActivoFijoController@Recover')->name('electrodomestico.recover')->where(['updateActivo'=>'[0-9]+']);
 /*Hasta aqui finaliza electrodomesticos*/
 
 

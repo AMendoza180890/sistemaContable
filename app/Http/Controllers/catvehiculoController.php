@@ -16,7 +16,8 @@ class catvehiculoController extends Controller
     public function index()
     {
         $listaVehiculos = catvehiculoModel::all()->where('catVehiculoEstado','!=','0');
-        return view('vehiculo',compact('listaVehiculos'));
+        $listaVehiculosDeshabilitados = catvehiculoModel::all()->where('catVehiculoEstado','=','0');
+        return view('vehiculo',compact('listaVehiculos','listaVehiculosDeshabilitados'));
     }
 
     /**

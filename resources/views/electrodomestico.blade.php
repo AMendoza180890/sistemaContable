@@ -50,8 +50,8 @@
                                 <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Eliminar</button>
-                                        <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="editarElectrodomestico">Actualizar</button>
+                                        <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Deshabilitar</button>
+                                        <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="editarElectrodomestico">Ver Detalle</button>
                                     </div>
                                 </td>
                             </tr>
@@ -59,6 +59,36 @@
                         </tbody>
                 </table>
                 </div>
+
+                <div class="card-body">
+                    <table class="table table-bordered table-hover table-striped TBDeshablitado" id="electrodomestico">
+                              <thead>
+                                  <tr>
+                                      <th>N</th>
+                                      <th>Marca</th>
+                                      <th>Modelo</th>
+                                      <th>Descripcion</th>
+                                      <th>Fecha de Ingreso</th>
+                                      <th>Editar / Eliminar</th>
+                                  </tr>
+                              </thead>
+                                 <tbody>
+                                     @foreach ($listaElectrodomesticosDeshabilitado as $electrodomestico)
+                                     <tr>
+                                         <td>{{$electrodomestico -> CatElectId  }}</td>
+                                         <td>{{$electrodomestico -> CatElectMarca }}</td>
+                                         <td>{{$electrodomestico -> CatElectModelo }}</td>
+                                         <td>{{$electrodomestico -> CatElectDescripcion }}</td>
+                                         <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
+                                         <td>
+                                                 <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Recuperar</button>
+                                                 
+                                         </td>
+                                     </tr>
+                                     @endforeach
+                                 </tbody>
+                         </table>
+                         </div>
             </div> 
         </div>
     </div>

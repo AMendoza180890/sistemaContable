@@ -1,7 +1,8 @@
 @extends('adminlte::page')
 
 @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    {{--
+    <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
@@ -55,10 +56,13 @@
                                     <td>{{ $terreno->created_at }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger eliminarTerreno" valor="{{ $terreno->catTerrenoId }}" descripcion="{{ $terreno->catTerrenoPropietario }}"
-                                                data-dismiss="modal">Eliminar</button>
+                                            <button type="button" class="btn btn-danger eliminarTerreno"
+                                                valor="{{ $terreno->catTerrenoId }}"
+                                                descripcion="{{ $terreno->catTerrenoPropietario }}"
+                                                data-dismiss="modal">Deshabilitar</button>
                                             <button type="button" data-toggle="modal" data-target="#EditTerreno"
-                                        class="btn btn-primary editarTerrenos" valor="{{$terreno->catTerrenoId}}" id='mostrar'>Actualizar</a></button>
+                                                class="btn btn-primary editarTerrenos" valor="{{ $terreno->catTerrenoId }}"
+                                                id='mostrar'>Ver Detalle</a></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -66,6 +70,44 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card-body">
+                    <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="Terrenos">
+                        <thead>
+                            <tr>
+                                <th>N</th>
+                                <th>Propietario</th>
+                                <th>Area</th>
+                                <th>Fecha de Compra</th>
+                                <th>Costo</th>
+                                <th>FechaActualizado</th>
+                                <th>FechaCreado</th>
+                                <th>Editar / Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listaTerrenosDeshabilitados as $terreno)
+                                <tr>
+                                    <td>{{ $terreno->catTerrenoId }}</th>
+                                    <td>{{ $terreno->catTerrenoPropietario }}</th>
+                                    <td>{{ $terreno->catTerrenoArea }}</th>
+                                    <td>{{ $terreno->catTerrenoFechaCompra }}</th>
+                                    <td>{{ $terreno->catterrenoCosto }}</td>
+                                    <td>{{ $terreno->updated_at }}</td>
+                                    <td>{{ $terreno->created_at }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger eliminarTerreno"
+                                            valor="{{ $terreno->catTerrenoId }}"
+                                            descripcion="{{ $terreno->catTerrenoPropietario }}"
+                                            data-dismiss="modal">Deshabilitar</button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>

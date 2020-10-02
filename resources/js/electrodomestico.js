@@ -25,7 +25,7 @@ $(document).ready(function() {
         let codelectrodomesticoEliminar = $(this).attr('valor');
         let descelectrodomesticoEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea eliminar el electrodomestico " + descelectrodomesticoEliminar);
+        let opcion = confirm("Desea Desactivar el electrodomestico " + descelectrodomesticoEliminar);
 
         if (opcion) {
             $.ajax({
@@ -38,6 +38,26 @@ $(document).ready(function() {
             })
         } else {
             console.log('no se elimino la cuenta ' + descelectrodomesticoEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
+
+    $('.TBDeshablitado').on('click', '.eliminarElectrodomestico', function() {
+        let codelectrodomesticoEliminar = $(this).attr('valor');
+        let descelectrodomesticoEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea deshabilitar el electrodomestico " + descelectrodomesticoEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperarElectrodomesticos/' + codelectrodomesticoEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'electrodomesticos';
+                }
+            })
+        } else {
+            console.log('no se deshabilito el electrodomestico ' + descelectrodomesticoEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

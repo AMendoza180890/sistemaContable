@@ -37,7 +37,7 @@ $(document).ready(function() {
         let codVehiculoEliminar = $(this).attr('valor');
         let descVehiculoEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea eliminar el vehiculo " + descVehiculoEliminar);
+        let opcion = confirm("Desea Desactivar el vehiculo " + descVehiculoEliminar);
 
         if (opcion) {
             $.ajax({
@@ -50,6 +50,26 @@ $(document).ready(function() {
             })
         } else {
             console.log('no se elimino el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
+
+    $('.TBDeshabilitado').on('click', '.eliminarvehiculo', function() {
+        let codVehiculoEliminar = $(this).attr('valor');
+        let descVehiculoEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea deshabilitar el vehiculo " + descVehiculoEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperarVehiculos/' + codVehiculoEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'vehiculo';
+                }
+            })
+        } else {
+            console.log('no se deshabilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

@@ -38,5 +38,27 @@ $(document).ready(function() {
         }
     })
 
+    // modulo de habilitar Cuentas.
+
+    $('.TBDeshabilitado').on('click', '.habilitarCuenta', function() {
+        let codTipoCuentaHabilitar = $(this).attr('valor');
+        let descTipoCuentaHabilitar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea habilitar la cuenta " + descTipoCuentaHabilitar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperarTipocuenta/' + codTipoCuentaHabilitar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'tipoCuentas';
+                }
+            })
+        } else {
+            console.log('no se elimino la cuenta ' + descTipoCuentaHabilitar + ' fecha ' + Date.now().toString());
+        }
+    })
+
 
 })

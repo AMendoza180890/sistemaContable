@@ -20,7 +20,8 @@ class CatActivoFijoController extends Controller
     public function index()
     {
         $ActivoFijoC = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','!=','0');
-        return view('tipoCuentas', compact('ActivoFijoC'));
+        $ActivoFijoCDeshabilitado = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','=','0');
+        return view('tipoCuentas', compact('ActivoFijoC','ActivoFijoCDeshabilitado'));
     }
 
     /**
@@ -53,7 +54,7 @@ class CatActivoFijoController extends Controller
             $tipoCuenta->CatTipoCuentaActivoEstado	= 1;
             $tipoCuenta->Save();
 
-            return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se ha guardado la cuenta '. $request->activoDescripcionN);
+            return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se ha guardado correctamente la cuenta '. $request->activoDescripcionN);
                 
         } catch (Exception $ex) {
             return 'faltal error - '. $ex->getMessage();
@@ -103,7 +104,7 @@ class CatActivoFijoController extends Controller
                 $tipoCuenta->vidaUtilActivoFijo     =   $request->activoVidaUtilE;
 
                 $tipoCuenta->save();
-                return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo la informacion de la cuenta correctamente');
+                return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo correctamente la informacion de la cuenta');
             
 
             
@@ -130,9 +131,23 @@ class CatActivoFijoController extends Controller
             $tipoCuenta->save();
 
             // cattipocuentaactivofijo::find($id)->delete();
-            return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se elimino correctamente la cuenta');
+            return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se desabilito correctamente la cuenta');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function Recover($id){
+        try {
+            $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo', '=', $id)->first();
+
+            $tipoCuenta->CatTipoCuentaActivoEstado     =   1;
+
+            $tipoCuenta->save();
+
+            return redirect()->route('tipocuenta.all')->with('mensajeExitoso','Se habilito correctamente la cuenta');
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
         }
     }
 }

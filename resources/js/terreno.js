@@ -29,7 +29,7 @@ $(document).ready(function() {
         let codTerrenoEliminar = $(this).attr('valor');
         let descTerrenoEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea eliminar el registro terreno " + descTerrenoEliminar);
+        let opcion = confirm("Desea Desactivar el registro terreno " + descTerrenoEliminar);
 
         if (opcion) {
             $.ajax({
@@ -42,6 +42,26 @@ $(document).ready(function() {
             })
         } else {
             console.log('no se elimino la cuenta ' + descTerrenoEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
+
+    $('.TBDeshabilitado').on('click', '.eliminarTerreno', function() {
+        let codTerrenoEliminar = $(this).attr('valor');
+        let descTerrenoEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea deshabilitar el registro terreno " + descTerrenoEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperarTerreno/' + codTerrenoEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'terrenos';
+                }
+            })
+        } else {
+            console.log('no se deshabilito el terreno ' + descTerrenoEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

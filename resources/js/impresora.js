@@ -26,7 +26,7 @@ $(document).ready(function() {
         let codImpresoraEliminar = $(this).attr('valor');
         let descImpresoraEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea eliminar la impresora " + descImpresoraEliminar);
+        let opcion = confirm("Desea Desactivar la impresora " + descImpresoraEliminar);
 
         if (opcion) {
             $.ajax({
@@ -39,6 +39,26 @@ $(document).ready(function() {
             })
         } else {
             console.log('no se elimino la cuenta ' + descImpresoraEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
+
+    $('.TBDeshabilitado').on('click', '.eliminarImpresora', function() {
+        let codImpresoraEliminar = $(this).attr('valor');
+        let descImpresoraEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea deshabilitar la impresora " + descImpresoraEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperarImpresora/' + codImpresoraEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'impresoras';
+                }
+            })
+        } else {
+            console.log('no se deshabilito la impresora ' + descImpresoraEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

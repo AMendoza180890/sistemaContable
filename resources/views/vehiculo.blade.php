@@ -73,11 +73,14 @@
                                     <td>{{ $vehiculo->catVehiculoCosto }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger eliminarvehiculo" valor="{{ $vehiculo->catVehiculoId }}" descripcion="{{ $vehiculo->catVehiculoTipo }}"
-                                                data-dismiss="modal">Eliminar</button>
+                                            <button type="button" class="btn btn-danger eliminarvehiculo"
+                                                valor="{{ $vehiculo->catVehiculoId }}"
+                                                descripcion="{{ $vehiculo->catVehiculoTipo }}"
+                                                data-dismiss="modal">Deshabilitar</button>
                                             <button type="button" data-toggle="modal" data-target="#ActualizarVehiculos"
-                                                class="btn btn-primary editarVehiculo" valor = "{{ $vehiculo->catVehiculoId }}"
-                                                id="editarVehiculo" >Actualizar</button>
+                                                class="btn btn-primary editarVehiculo"
+                                                valor="{{ $vehiculo->catVehiculoId }}" id="editarVehiculo">Ver
+                                                Detalle</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -85,6 +88,61 @@
                         </tbody>
                     </table>
                 </div>
+
+                <div class="card-body">
+                    <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="vehiculos">
+                        <thead>
+                            <tr>
+                                <th>N</th>
+                                <th>Tipo</th>
+                                <th>Modelo</th>
+                                <th>Color</th>
+                                <th>Motor</th>
+                                <th>Chasis</th>
+                                <th>VIM</th>
+                                <th>Pasajeros</th>
+                                <th>Combustible</th>
+                                <th>Uso</th>
+                                <th>Año</th>
+                                <th>Cilindro</th>
+                                <th>Servicios</th>
+                                <th>Propietario</th>
+                                <th>FechaCompra</th>
+                                <th>Costo</th>
+                                <th>Editar / Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listaVehiculosDeshabilitados as $vehiculo)
+                                <tr>
+                                    <td>{{ $vehiculo->catVehiculoId }}</th>
+                                    <td>{{ $vehiculo->catVehiculoTipo }}</th>
+                                    <td>{{ $vehiculo->catVehiculoModelo }}</th>
+                                    <td>{{ $vehiculo->catVehiculoColor }}</th>
+                                    <td>{{ $vehiculo->catVehiculoMotor }}</td>
+                                    <td>{{ $vehiculo->catVehiculoChasis }}</td>
+                                    <td>{{ $vehiculo->catVehiculoVIM }}</td>
+                                    <td>{{ $vehiculo->catVehiculoCantPasajeros }}</td>
+                                    <td>{{ $vehiculo->catVehiculoCombustible }}</td>
+                                    <td>{{ $vehiculo->catVehiculoUso }}</td>
+                                    <td>{{ $vehiculo->catVehiculoAnio }}</td>
+                                    <td>{{ $vehiculo->catVehiculoCilindro }}</td>
+                                    <td>{{ $vehiculo->catVehiculoServicio }}</td>
+                                    <td>{{ $vehiculo->catVehiculoPropietario }}</td>
+                                    <td>{{ $vehiculo->catVehiculoFechaCompra }}</td>
+                                    <td>{{ $vehiculo->catVehiculoCosto }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger habilitarVehiculo"
+                                            valor="{{ $vehiculo->catVehiculoId }}"
+                                            descripcion="{{ $vehiculo->catVehiculoTipo }}"
+                                            data-dismiss="modal">Recuperar</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>

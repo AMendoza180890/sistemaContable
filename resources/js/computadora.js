@@ -29,7 +29,7 @@ $(document).ready(function() {
         let codComputadoraEliminar = $(this).attr('valor');
         let descComputadoraEliminar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea eliminar la computadora " + descComputadoraEliminar);
+        let opcion = confirm("Desea Desactivar la computadora " + descComputadoraEliminar);
 
         if (opcion) {
             $.ajax({
@@ -42,6 +42,26 @@ $(document).ready(function() {
             })
         } else {
             console.log('no se elimino la cuenta ' + descComputadoraEliminar + ' fecha ' + Date.now().toString());
+        }
+    })
+
+    $('.TBDeshabilitado').on('click', '.eliminarComputadora', function() {
+        let codComputadoraEliminar = $(this).attr('valor');
+        let descComputadoraEliminar = $(this).attr('descripcion');
+
+        let opcion = confirm("Desea deshabilitar la computadora " + descComputadoraEliminar);
+
+        if (opcion) {
+            $.ajax({
+                url: 'recuperaComputadora/' + codComputadoraEliminar,
+                type: "get",
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function() {
+                    window.location = 'computadoras';
+                }
+            })
+        } else {
+            console.log('no se deshabilito la computadora ' + descComputadoraEliminar + ' fecha ' + Date.now().toString());
         }
     })
 })

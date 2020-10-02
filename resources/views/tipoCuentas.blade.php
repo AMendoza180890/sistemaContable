@@ -47,10 +47,39 @@
                             <td>{{  $ActivoFijo->created_at}}</td>
                             <td>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-danger eliminarCuenta"  valor="{{  $ActivoFijo->idActivofijo }}" descripcion="{{  $ActivoFijo->descripcionActivoFjo }}"  data-dismiss="modal">Eliminar</button>
-                                    <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" valor="{{  $ActivoFijo->idActivofijo }}" id="editarCuentaActivo">Actualizar</button>
+                                    <button type="button" class="btn btn-danger eliminarCuenta"  valor="{{  $ActivoFijo->idActivofijo }}" descripcion="{{  $ActivoFijo->descripcionActivoFjo }}"  data-dismiss="modal">Deshabilitar</button>
+                                    <button type="button" data-toggle="modal" data-target="#editCuentaActivo" class="btn btn-primary editarCuentaActivo" valor="{{  $ActivoFijo->idActivofijo }}" id="editarCuentaActivo">Ver Detalle</button>
                                 </div>
                             </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        {{-- La tabla muestra los registros desabilitados --}}
+        <div class="card-body">
+            <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="TipoCuenta">
+                @csrf
+                @method('put')
+                <thead>
+                    <tr>
+                        <th>N</th>
+                        <th>Descripción</th>
+                        <th>Vida útil</th>
+                        <th>Fecha Actualizado</th>
+                        <th>Fecha Creado</th>
+                        <th>Recuperar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($ActivoFijoCDeshabilitado as $ActivoFijo)
+                        <tr>
+                            <td>{{  $ActivoFijo->idActivofijo }}</th>
+                            <td>{{  $ActivoFijo->descripcionActivoFjo }}</th>
+                            <td>{{  $ActivoFijo->vidaUtilActivoFijo }}</th>
+                            <td>{{  $ActivoFijo->updated_at}}</td>
+                            <td>{{  $ActivoFijo->created_at}}</td>
+                            <td><button type="button" class="btn btn-primary habilitarCuenta" descripcion="{{  $ActivoFijo->descripcionActivoFjo }}"" valor="{{  $ActivoFijo->idActivofijo }}" id="habilitarCuenta">Recuperar</button></td>
                         </tr>
                     @endforeach
                 </tbody>

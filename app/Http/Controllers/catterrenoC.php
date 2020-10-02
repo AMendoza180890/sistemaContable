@@ -17,7 +17,8 @@ class catterrenoC extends Controller
     {
         try {
             $listaTerrenos = catterreno::all()->where('CatTerrenoEstado','!=','0');
-            return view('terreno',['listaTerrenos'=>$listaTerrenos]);
+            $listaTerrenosDeshabilitados = catterreno::all()->where('CatTerrenoEstado','=','0');
+            return view('terreno',compact('listaTerrenos','listaTerrenosDeshabilitados'));
         } catch (Exception $ex) {
             return 'Error:'.$ex->getMessage();
         }
