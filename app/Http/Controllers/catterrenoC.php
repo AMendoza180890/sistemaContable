@@ -124,10 +124,11 @@ class catterrenoC extends Controller
     public function destroy($id)
     {
         try {
-            $eliminarTerreno = catterreno::where('catTerrenoId','=',$id);
+            $eliminarTerreno = catterreno::where('catTerrenoId','=',$id)->first();
 
             $eliminarTerreno->CatTerrenoEstado = 0;
             //catterreno::find($id)->delete();
+            $eliminarTerreno->save();
             return redirect()->route('terreno.all')->with('mensaje exitoso','Se desactivo correctamente el terreno seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
@@ -137,10 +138,11 @@ class catterrenoC extends Controller
     public function recover($id)
     {
         try {
-            $habilitarTerreno = catterreno::where('catTerrenoId', '=', $id);
+            $habilitarTerreno = catterreno::where('catTerrenoId', '=', $id)->first();
 
             $habilitarTerreno->CatTerrenoEstado = 1;
             //catterreno::find($id)->delete();
+            $habilitarTerreno->save();
             return redirect()->route('terreno.all')->with('mensaje exitoso', 'Se habilito correctamente el terreno seleccionado');
         } catch (exception $ex) {
             return "Error - " . $ex->getMessage();

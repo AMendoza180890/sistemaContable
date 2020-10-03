@@ -130,10 +130,11 @@ class catImpresorasController extends Controller
     {
         try {
 
-            $eliminarImpresora = catImpresorasModel::where('catImpresorasId','=',$id);
+            $eliminarImpresora = catImpresorasModel::where('catImpresorasId','=',$id)->first();
 
             $eliminarImpresora->CatImpresoraEstado = 0;
 
+            $eliminarImpresora->save();
             //catimpresorasModel::find($id)->delete();
             return redirect()->route('impresora.all')->with('mensaje exitoso','Se deshabilito correctamente la impresora seleccionada');
         } catch (exception $ex) {
@@ -144,10 +145,11 @@ class catImpresorasController extends Controller
     public function recover($id)
     {
         try {
-            $habilitarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id);
+            $habilitarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id)->first();
 
             $habilitarImpresora->CatImpresoraEstado = 1;
 
+            $habilitarImpresora->save();
             //catimpresorasModel::find($id)->delete();
             return redirect()->route('impresora.all')->with('mensaje exitoso', 'Se habilito correctamente la impresora seleccionada');
         } catch (exception $ex) {

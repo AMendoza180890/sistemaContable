@@ -132,7 +132,7 @@
                                     <td>{{ $vehiculo->catVehiculoFechaCompra }}</td>
                                     <td>{{ $vehiculo->catVehiculoCosto }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-danger habilitarVehiculo"
+                                        <button type="button" class="btn btn-primary habilitarVehiculo"
                                             valor="{{ $vehiculo->catVehiculoId }}"
                                             descripcion="{{ $vehiculo->catVehiculoTipo }}"
                                             data-dismiss="modal">Recuperar</button>

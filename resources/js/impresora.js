@@ -42,15 +42,15 @@ $(document).ready(function() {
         }
     })
 
-    $('.TBDeshabilitado').on('click', '.eliminarImpresora', function() {
-        let codImpresoraEliminar = $(this).attr('valor');
-        let descImpresoraEliminar = $(this).attr('descripcion');
+    $('.TBDeshabilitado').on('click', '.habilitarImpresora', function() {
+        let codImpresorahabilitar = $(this).attr('valor');
+        let descImpresorahabilitar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea deshabilitar la impresora " + descImpresoraEliminar);
+        let opcion = confirm("Desea deshabilitar la impresora " + descImpresorahabilitar);
 
         if (opcion) {
             $.ajax({
-                url: 'recuperarImpresora/' + codImpresoraEliminar,
+                url: 'recuperarImpresora/' + codImpresorahabilitar,
                 type: "get",
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function() {
@@ -58,7 +58,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se deshabilito la impresora ' + descImpresoraEliminar + ' fecha ' + Date.now().toString());
+            console.log('no se deshabilito la impresora ' + descImpresorahabilitar + ' fecha ' + Date.now().toString());
         }
     })
 })

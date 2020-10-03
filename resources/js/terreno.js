@@ -45,23 +45,34 @@ $(document).ready(function() {
         }
     })
 
-    $('.TBDeshabilitado').on('click', '.eliminarTerreno', function() {
-        let codTerrenoEliminar = $(this).attr('valor');
-        let descTerrenoEliminar = $(this).attr('descripcion');
+    $(".TBDeshabilitado").on("click", ".habilitarTerreno", function() {
+        let codTerrenoHabilitar = $(this).attr("valor");
+        let descTerrenoHabilitar = $(this).attr("descripcion");
 
-        let opcion = confirm("Desea deshabilitar el registro terreno " + descTerrenoEliminar);
+        let opcion = confirm(
+            "Desea habilitar el registro terreno " + descTerrenoHabilitar
+        );
 
         if (opcion) {
             $.ajax({
-                url: 'recuperarTerreno/' + codTerrenoEliminar,
+                url: "recuperarTerreno/" + codTerrenoHabilitar,
                 type: "get",
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
                 success: function() {
-                    window.location = 'terrenos';
-                }
-            })
+                    window.location = "terrenos";
+                },
+            });
         } else {
-            console.log('no se deshabilito el terreno ' + descTerrenoEliminar + ' fecha ' + Date.now().toString());
+            console.log(
+                "no se deshabilito el terreno " +
+                descTerrenoHabilitar +
+                " fecha " +
+                Date.now().toString()
+            );
         }
-    })
+    });
 })

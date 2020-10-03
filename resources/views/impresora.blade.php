@@ -97,10 +97,10 @@
                                     <td>{{ $impresoras->catImpresoraCosto }}</td>
                                     <td>
 
-                                        <button type="button" class="btn btn-danger eliminarImpresora"
+                                        <button type="button" class="btn btn-primary habilitarImpresora"
                                             valor="{{ $impresoras->catImpresorasId }}"
                                             descripcion="{{ $impresoras->catImpresorasMarca }}"
-                                            data-dismiss="modal">Deshabilitar</button>
+                                            data-dismiss="modal">Recuperar</button>
 
                                     </td>
                                 </tr>

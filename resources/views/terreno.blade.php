@@ -96,10 +96,10 @@
                                     <td>{{ $terreno->updated_at }}</td>
                                     <td>{{ $terreno->created_at }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-danger eliminarTerreno"
+                                        <button type="button" class="btn btn-primary habilitarTerreno"
                                             valor="{{ $terreno->catTerrenoId }}"
                                             descripcion="{{ $terreno->catTerrenoPropietario }}"
-                                            data-dismiss="modal">Deshabilitar</button>
+                                            data-dismiss="modal">Recuperar</button>
 
                                     </td>
                                 </tr>

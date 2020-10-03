@@ -109,10 +109,10 @@
                                     <td>{{ $computadoras->catEquipoCostoEquipo }}</td>
                                     <td>
 
-                                        <button type="button" class="btn btn-danger habilitarComputadora"
+                                        <button type="button" class="btn btn-primary habilitarComputadora"
                                             valor="{{ $computadoras->catEquipoCompId }}"
                                             descripcion="{{ $computadoras->catEquipoMarca }}"
-                                            data-dismiss="modal">Deshabilitar</button>
+                                            data-dismiss="modal">Recuperar</button>
                                     </td>
                                 </tr>
                             @endforeach
