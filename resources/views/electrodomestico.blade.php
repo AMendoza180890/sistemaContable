@@ -81,7 +81,7 @@
                                          <td>{{$electrodomestico -> CatElectDescripcion }}</td>
                                          <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
                                          <td>
-                                                 <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Recuperar</button>
+                                                 <button type="button" class="btn btn-danger habilitarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Recuperar</button>
                                                  
                                          </td>
                                      </tr>

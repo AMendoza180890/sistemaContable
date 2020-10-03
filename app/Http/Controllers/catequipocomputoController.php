@@ -113,7 +113,7 @@ class catequipocomputoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarComputadora = catequipocomputoModel::where('catEquipoCompId', '=', $id);
+            $actualizarComputadora = catequipocomputoModel::where('catEquipoCompId', '=', $id)->first();
             
             $actualizarComputadora->catEquipoModelo = $request->inputModeloE;
             $actualizarComputadora->catEquipoNumeroSerie = $request->inputSerieE;
@@ -141,15 +141,29 @@ class catequipocomputoController extends Controller
     public function destroy($id)
     {
         try {
-            $eliminarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id);
+            $DesactivarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id)->first();
 
-            $eliminarComputadora->CatEquipoEstado = 0;
+            $DesactivarComputadora->CatEquipoEstado = 0;
 
-            $eliminarComputadora->save();
+            $DesactivarComputadora->save();
             //catequipocomputoModel::find($id)->delete();
-            return redirect()->route('computadora.all')->with('mensaje exito','Se elimino correctamente el equipo de computo');
+            return redirect()->route('computadora.all')->with('mensaje exito','Se desactivo correctamente el equipo de computo');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id){
+        try {
+            $habilitarComputadora = catequipocomputoModel::where('catEquipoCompId', '=',$id)->first();
+
+            $habilitarComputadora->CatEquipoEstado = 1;
+
+            $habilitarComputadora->save();
+
+            return redirect()->route('computadora.all')->with('mensaje exito','Se activo correctamente el equipo de computo');
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
         }
     }
 }

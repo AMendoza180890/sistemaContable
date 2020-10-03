@@ -128,9 +128,22 @@ class catterrenoC extends Controller
 
             $eliminarTerreno->CatTerrenoEstado = 0;
             //catterreno::find($id)->delete();
-            return redirect()->route('terreno.all')->with('mensaje exitoso','Se elimino correctamente el terreno seleccionado');
+            return redirect()->route('terreno.all')->with('mensaje exitoso','Se desactivo correctamente el terreno seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id)
+    {
+        try {
+            $habilitarTerreno = catterreno::where('catTerrenoId', '=', $id);
+
+            $habilitarTerreno->CatTerrenoEstado = 1;
+            //catterreno::find($id)->delete();
+            return redirect()->route('terreno.all')->with('mensaje exitoso', 'Se habilito correctamente el terreno seleccionado');
+        } catch (exception $ex) {
+            return "Error - " . $ex->getMessage();
         }
     }
 }

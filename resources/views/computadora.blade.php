@@ -109,7 +109,7 @@
                                     <td>{{ $computadoras->catEquipoCostoEquipo }}</td>
                                     <td>
 
-                                        <button type="button" class="btn btn-danger eliminarComputadora"
+                                        <button type="button" class="btn btn-danger habilitarComputadora"
                                             valor="{{ $computadoras->catEquipoCompId }}"
                                             descripcion="{{ $computadoras->catEquipoMarca }}"
                                             data-dismiss="modal">Deshabilitar</button>

@@ -129,13 +129,26 @@ class catelectrodomesticoController extends Controller
     public function destroy($id)
     {
         try {
-            $eliminarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id);
+            $eliminarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
             $eliminarElectrodomestico->CatElectEstado = 0;
             $eliminarElectrodomestico->save();
             //catelectrodomesticoModel::find($id)->delete();
-            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se elimino correctamente el electrodomestico seleccionado');
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se desactivo correctamente el electrodomestico seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id)
+    {
+        try {
+            $activarElectrodomestico = catelectrodomesticoModel::where('CatElectId', '=', $id)->first();
+            $activarElectrodomestico->CatElectEstado = 1;
+            $activarElectrodomestico->save();
+            //catelectrodomesticoModel::find($id)->delete();
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso', 'Se habilito correctamente el electrodomestico seleccionado');
+        } catch (exception $ex) {
+            return "Error - " . $ex->getMessage();
         }
     }
 }

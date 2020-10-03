@@ -45,7 +45,7 @@ $(document).ready(function() {
                 type: "get",
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function() {
-                    window.location = 'vehiculo';
+                    window.location = 'vehiculos';
                 }
             })
         } else {
@@ -65,7 +65,7 @@ $(document).ready(function() {
                 type: "get",
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function() {
-                    window.location = 'vehiculo';
+                    window.location = 'vehiculos';
                 }
             })
         } else {

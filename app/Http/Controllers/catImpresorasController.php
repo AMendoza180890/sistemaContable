@@ -135,9 +135,23 @@ class catImpresorasController extends Controller
             $eliminarImpresora->CatImpresoraEstado = 0;
 
             //catimpresorasModel::find($id)->delete();
-            return redirect()->route('impresora.all')->with('mensaje exitoso','Se elimino correctamente la impresora seleccionada');
+            return redirect()->route('impresora.all')->with('mensaje exitoso','Se deshabilito correctamente la impresora seleccionada');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id)
+    {
+        try {
+            $habilitarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id);
+
+            $habilitarImpresora->CatImpresoraEstado = 1;
+
+            //catimpresorasModel::find($id)->delete();
+            return redirect()->route('impresora.all')->with('mensaje exitoso', 'Se habilito correctamente la impresora seleccionada');
+        } catch (exception $ex) {
+            return "Error - " . $ex->getMessage();
         }
     }
 }

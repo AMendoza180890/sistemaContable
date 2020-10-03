@@ -39,7 +39,6 @@ $(document).ready(function() {
     })
 
     // modulo de habilitar Cuentas.
-
     $('.TBDeshabilitado').on('click', '.habilitarCuenta', function() {
         let codTipoCuentaHabilitar = $(this).attr('valor');
         let descTipoCuentaHabilitar = $(this).attr('descripcion');
@@ -56,7 +55,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se elimino la cuenta ' + descTipoCuentaHabilitar + ' fecha ' + Date.now().toString());
+            console.log('no se desactivo la cuenta ' + descTipoCuentaHabilitar + ' fecha ' + Date.now().toString());
         }
     })
 

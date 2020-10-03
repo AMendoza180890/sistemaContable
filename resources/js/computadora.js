@@ -45,15 +45,15 @@ $(document).ready(function() {
         }
     })
 
-    $('.TBDeshabilitado').on('click', '.eliminarComputadora', function() {
-        let codComputadoraEliminar = $(this).attr('valor');
-        let descComputadoraEliminar = $(this).attr('descripcion');
+    $('.TBDeshabilitado').on('click', '.habilitarComputadora', function() {
+        let codComputadorahabilitar = $(this).attr('valor');
+        let descComputadorahabilitar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea deshabilitar la computadora " + descComputadoraEliminar);
+        let opcion = confirm("Desea habilitar la computadora " + descComputadorahabilitar);
 
         if (opcion) {
             $.ajax({
-                url: 'recuperaComputadora/' + codComputadoraEliminar,
+                url: 'recuperaComputadora/' + codComputadorahabilitar,
                 type: "get",
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function() {
@@ -61,7 +61,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se deshabilito la computadora ' + descComputadoraEliminar + ' fecha ' + Date.now().toString());
+            console.log('no se deshabilito la computadora ' + descComputadorahabilitar + ' fecha ' + Date.now().toString());
         }
     })
 })

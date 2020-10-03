@@ -161,13 +161,13 @@ class catvehiculoController extends Controller
     public function destroy($id)
     {
         try {
-            $eliminarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id);
+            $eliminarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id)->first();
 
             $eliminarVehiculo->catVehiculoEstado = 0;
 
             $eliminarVehiculo->save();
             //catvehiculoModel::find($id)->delete();
-            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se elimino correctamente el vehiculo seleccionado');
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se desactivo correctamente el vehiculo seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
         }
@@ -176,13 +176,13 @@ class catvehiculoController extends Controller
     public function Recover($id)
     {
         try {
-            $ActivarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id);
+            $ActivarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id)->first();
 
             $ActivarVehiculo->catVehiculoEstado = 1;
 
             $ActivarVehiculo->save();
             //catvehiculoModel::find($id)->delete();
-            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se elimino correctamente el vehiculo seleccionado');
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se habilito correctamente el vehiculo seleccionado');
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
         }
