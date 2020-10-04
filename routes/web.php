@@ -70,6 +70,14 @@ Route::put('/actualizarElectrodomestico/{idElectrodomestico}','catelectrodomesti
 Route::get('/recuperarElectrodomesticos/{idElectrodomestico}','catelectrodomesticoController@Recover')->name('electrodomestico.recover')->where(['idElectrodomestico'=>'[0-9]+']);
 /*Hasta aqui finaliza electrodomesticos*/
 
+
+/*Rutas de Login */
+Route::get('/usuarios','catUsuarioController@index')->name('usuario.all');
+Route::post('/registrarUsuario','catUsuarioController@store')->name('usuario.insertar');
+Route::get('/eliminarUsuario/{idusuario}','catUsuarioController@destroy')->name('usuario.destroy')->where(['idusuario'=>'[0-9]+']);
+Route::get('/recuperarUsuario/{idusuario}', 'catUsuarioController@recover')->name('usuario.recover')->where(['idusuario' => '[0-9]+']);
+/*Hasta aqui finaliza Login */
+
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();
  Route::get('/home', 'HomeController@index')->name('home');

@@ -49,7 +49,7 @@ $(document).ready(function() {
                 }
             })
         } else {
-            console.log('no se elimino el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
+            console.log('no se deshabilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
         }
     })
 
