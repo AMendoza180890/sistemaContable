@@ -92,7 +92,12 @@ class catUsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $recuperarUsuario = catUsuarioModel::find($id);
+            return $recuperarUsuario;
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

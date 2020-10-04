@@ -53,7 +53,7 @@
                                                 valor="{{ $usuarios->id }}"
                                                 descripcion="{{ $usuarios->name }}"
                                                 data-dismiss="modal">Deshabilitar</button>
-                                            <button type="button" data-toggle="modal" data-target="#ActualizarVehiculos"
+                                            <button type="button" data-toggle="modal" data-target="#EditUsuario"
                                                 class="btn btn-primary editarUsuario"
                                                 valor="{{ $usuarios->id }}" id="editarVehiculo">Ver
                                                 Detalle</button>
@@ -99,7 +99,7 @@
         </div>
     </div>
     @include('RegUsuarios')
-    {{-- @include('editvehiculo') --}}
+    @include('editUsuarios')
 @stop
 
 

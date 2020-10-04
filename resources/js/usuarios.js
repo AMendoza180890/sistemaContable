@@ -10,6 +10,27 @@ $(document).ready(function() {
         }
     })
 
+    //mostrar informacion del usuario
+    $(".TB").on("click", ".editarUsuario", function() {
+        let codEditUsuario = $(this).attr('valor');
+        $.ajax({
+            url: "usuarioEdit/" + codEditUsuario + '/edit',
+            method: "get",
+            processData: false,
+            cache: false,
+            contentType: false,
+            dataType: "json",
+            success: function(mostrarUsuario) {
+                $("#UserNombreE").val(mostrarUsuario["name"]);
+                $("#UserEmailE").val(mostrarUsuario["email"]);
+                $('#UserPasswordE').val(mostrarUsuario["password"]);
+                $("#UserPasswordConfirmE").val(mostrarUsuario["password"]);
+                //$("#UserCreadoE").val(parseDate(mostrarUsuario["created_at"]));
+            },
+        });
+    });
+
+
     $(".TB").on("click", ".desactivarUsuario", function() {
         let codUsuarioDeshabilitar = $(this).attr("valor");
         let descUsuarioDeshabilitar = $(this).attr("descripcion");
