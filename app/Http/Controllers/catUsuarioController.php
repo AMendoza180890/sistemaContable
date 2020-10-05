@@ -17,8 +17,8 @@ class catUsuarioController extends Controller
     public function index()
     {
         try {
-            $listaUsuarios = catUsuarioModel::all()->where('estado','!=','0');
-            $listaUsuariosDesactivado = catUsuarioModel::all()->where('estado','=','0');
+            $listaUsuarios = catUsuarioModel::all()->where('estado','!=','2');
+            $listaUsuariosDesactivado = catUsuarioModel::all()->where('estado','=','2');
             return view('usuarios',compact('listaUsuarios', 'listaUsuariosDesactivado'));
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
@@ -123,7 +123,7 @@ class catUsuarioController extends Controller
         try {
             $desactivarUsuario = catUsuarioModel::where('id','=', $id)->first();
 
-            $desactivarUsuario->estado = 0;
+            $desactivarUsuario->estado = 2;
 
             $desactivarUsuario->save();
 

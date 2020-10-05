@@ -15,8 +15,8 @@ class catelectrodomesticoController extends Controller
      */
     public function index()
     {
-        $listaElectrodomesticos = catelectrodomesticoModel::all()->where('CatElectEstado','!=','0');
-        $listaElectrodomesticosDeshabilitado = catelectrodomesticoModel::all()->where('CatElectEstado','=','0');
+        $listaElectrodomesticos = catelectrodomesticoModel::all()->where('CatElectEstado','!=','2');
+        $listaElectrodomesticosDeshabilitado = catelectrodomesticoModel::all()->where('CatElectEstado','=','2');
         return view('electrodomestico',compact('listaElectrodomesticos','listaElectrodomesticosDeshabilitado'));
     }
 
@@ -130,7 +130,7 @@ class catelectrodomesticoController extends Controller
     {
         try {
             $eliminarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
-            $eliminarElectrodomestico->CatElectEstado = 0;
+            $eliminarElectrodomestico->CatElectEstado = 2;
             $eliminarElectrodomestico->save();
             //catelectrodomesticoModel::find($id)->delete();
             return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se desactivo correctamente el electrodomestico seleccionado');

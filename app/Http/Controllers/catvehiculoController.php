@@ -15,8 +15,8 @@ class catvehiculoController extends Controller
      */
     public function index()
     {
-        $listaVehiculos = catvehiculoModel::all()->where('catVehiculoEstado','!=','0');
-        $listaVehiculosDeshabilitados = catvehiculoModel::all()->where('catVehiculoEstado','=','0');
+        $listaVehiculos = catvehiculoModel::all()->where('catVehiculoEstado','!=','2');
+        $listaVehiculosDeshabilitados = catvehiculoModel::all()->where('catVehiculoEstado','=','2');
         return view('vehiculo',compact('listaVehiculos','listaVehiculosDeshabilitados'));
     }
 
@@ -163,7 +163,7 @@ class catvehiculoController extends Controller
         try {
             $eliminarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id)->first();
 
-            $eliminarVehiculo->catVehiculoEstado = 0;
+            $eliminarVehiculo->catVehiculoEstado = 2;
 
             $eliminarVehiculo->save();
             //catvehiculoModel::find($id)->delete();

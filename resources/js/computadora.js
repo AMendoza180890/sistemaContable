@@ -1,4 +1,24 @@
 $(document).ready(function() {
+
+    // $.ajax({
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     url: "Monitor/getHarvestProductsDropdown",
+    //     success: function(data) {
+
+    //         $('#ajaxData').empty();
+    //         for (var i = 0; i < data.length; i++) {
+
+    //             $('#ajaxData').append('<option value="' + data[i]['name'] + '">' + data[i]['name'] + '</option>');
+    //         }
+    //         console.log(data);
+    //     },
+    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //         alert(textStatus);
+    //     }
+    // })
+
+
     $('.TB').on('click', '.editarcomputadoras', function() {
         let codComputadora = $(this).attr('valor');
 

@@ -16,8 +16,8 @@ class catterrenoC extends Controller
     public function index()
     {
         try {
-            $listaTerrenos = catterreno::all()->where('CatTerrenoEstado','!=','0');
-            $listaTerrenosDeshabilitados = catterreno::all()->where('CatTerrenoEstado','=','0');
+            $listaTerrenos = catterreno::all()->where('CatTerrenoEstado','!=','2');
+            $listaTerrenosDeshabilitados = catterreno::all()->where('CatTerrenoEstado','=','2');
             return view('terreno',compact('listaTerrenos','listaTerrenosDeshabilitados'));
         } catch (Exception $ex) {
             return 'Error:'.$ex->getMessage();
@@ -126,7 +126,7 @@ class catterrenoC extends Controller
         try {
             $eliminarTerreno = catterreno::where('catTerrenoId','=',$id)->first();
 
-            $eliminarTerreno->CatTerrenoEstado = 0;
+            $eliminarTerreno->CatTerrenoEstado = 2;
             //catterreno::find($id)->delete();
             $eliminarTerreno->save();
             return redirect()->route('terreno.all')->with('mensaje exitoso','Se desactivo correctamente el terreno seleccionado');

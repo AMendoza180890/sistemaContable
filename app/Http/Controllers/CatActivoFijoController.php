@@ -19,8 +19,8 @@ class CatActivoFijoController extends Controller
      */
     public function index()
     {
-        $ActivoFijoC = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','!=','0');
-        $ActivoFijoCDeshabilitado = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','=','0');
+        $ActivoFijoC = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','!=','2');
+        $ActivoFijoCDeshabilitado = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado','=','2');
         return view('tipoCuentas', compact('ActivoFijoC','ActivoFijoCDeshabilitado'));
     }
 
@@ -126,7 +126,7 @@ class CatActivoFijoController extends Controller
         try {
             $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo', '=', $id)->first();
 
-            $tipoCuenta->CatTipoCuentaActivoEstado     =   0;
+            $tipoCuenta->CatTipoCuentaActivoEstado     =   2;
 
             $tipoCuenta->save();
 
@@ -149,5 +149,19 @@ class CatActivoFijoController extends Controller
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
         }
+    }
+
+     public function listarTipoCuenta(){
+         try {
+             $ActivoFijolista = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado', '!=', '2');
+
+             return view('Regcomputadora',compact('ActivoFijolista'));
+    //         return  foreach ($ActivoFijolista as $key => $value) {
+    //             echo '<option value="'.$value->idActivofijo.'">'.$value->descripcionActivoFjo.'</option>';
+    //         };
+
+         } catch (Exception $ex) {
+             return 'Error -'.$ex->getMessage();
+         }
     }
 }

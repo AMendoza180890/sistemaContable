@@ -15,8 +15,8 @@ class catImpresorasController extends Controller
      */
     public function index()
     {
-        $listaImpresoras = catImpresorasModel::all()->where('CatImpresoraEstado','!=','0');
-        $listaImpresorasDeshabilitadas = catImpresorasModel::all()->where('CatImpresoraEstado','=','0');
+        $listaImpresoras = catImpresorasModel::all()->where('CatImpresoraEstado','!=','2');
+        $listaImpresorasDeshabilitadas = catImpresorasModel::all()->where('CatImpresoraEstado','=','2');
         return view('impresora',compact('listaImpresoras', 'listaImpresorasDeshabilitadas'));
     }
 
@@ -132,7 +132,7 @@ class catImpresorasController extends Controller
 
             $eliminarImpresora = catImpresorasModel::where('catImpresorasId','=',$id)->first();
 
-            $eliminarImpresora->CatImpresoraEstado = 0;
+            $eliminarImpresora->CatImpresoraEstado = 2;
 
             $eliminarImpresora->save();
             //catimpresorasModel::find($id)->delete();

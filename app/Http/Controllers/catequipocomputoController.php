@@ -17,8 +17,8 @@ class catequipocomputoController extends Controller
      */
     public function index()
     {
-        $listaComputadoras = catequipocomputoModel::all()->where('CatEquipoEstado','!=','0');
-        $listaComputadorasDeshablitados = catequipocomputoModel::all()->where('CatEquipoEstado','=','0');
+        $listaComputadoras = catequipocomputoModel::all()->where('CatEquipoEstado','!=','2');
+        $listaComputadorasDeshablitados = catequipocomputoModel::all()->where('CatEquipoEstado','=','2');
         return view('computadora',compact('listaComputadoras','listaComputadorasDeshablitados'));
     }
 
@@ -143,7 +143,7 @@ class catequipocomputoController extends Controller
         try {
             $DesactivarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id)->first();
 
-            $DesactivarComputadora->CatEquipoEstado = 0;
+            $DesactivarComputadora->CatEquipoEstado = 2;
 
             $DesactivarComputadora->save();
             //catequipocomputoModel::find($id)->delete();
