@@ -79,6 +79,10 @@ Route::get('/recuperarUsuario/{idusuario}', 'catUsuarioController@recover')->nam
 Route::get('/usuarioEdit/{idusuario}/edit','catUsuarioController@edit')->name('usuario.edit')->where(['idusuario' => '[0-9]+']);
 /*Hasta aqui finaliza Login */
 
+/* Cargar catalogos en   formularios*/
+Route::get('/catalogoTipocuenta', 'CatActivoFijoController@listarTipoCuenta')->name('catalogoTipoCuentas.all'); 
+/* fin del cargar  formularios */
+
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();
  Route::get('/home', 'HomeController@index')->name('home');

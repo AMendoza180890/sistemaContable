@@ -1,22 +1,24 @@
 $(document).ready(function() {
+    $('#tipocuenta').show(function(){
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
 
-    // $.ajax({
-    //     type: 'POST',
-    //     dataType: 'json',
-    //     url: "Monitor/getHarvestProductsDropdown",
-    //     success: function(data) {
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
 
-    //         $('#ajaxData').empty();
-    //         for (var i = 0; i < data.length; i++) {
-
-    //             $('#ajaxData').append('<option value="' + data[i]['name'] + '">' + data[i]['name'] + '</option>');
-    //         }
-    //         console.log(data);
-    //     },
-    //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-    //         alert(textStatus);
-    //     }
-    // })
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+        //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+   
 
 
     $('.TB').on('click', '.editarcomputadoras', function() {

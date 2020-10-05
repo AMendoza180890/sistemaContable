@@ -66,7 +66,7 @@
 
                             <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
-                                    <select name="tipocuenta" id="tipocuenta">
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
                                             <option value="valor"></option>
                                     </select>
                             </div>

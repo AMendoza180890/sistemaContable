@@ -155,7 +155,7 @@ class CatActivoFijoController extends Controller
          try {
              $ActivoFijolista = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado', '!=', '2');
 
-             return view('Regcomputadora',compact('ActivoFijolista'));
+             return $ActivoFijolista;
     //         return  foreach ($ActivoFijolista as $key => $value) {
     //             echo '<option value="'.$value->idActivofijo.'">'.$value->descripcionActivoFjo.'</option>';
     //         };
