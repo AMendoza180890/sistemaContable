@@ -1,68 +1,62 @@
 @extends('adminlte::page')
 
 @section('css')
-    {{--
-    <link rel="stylesheet" href="/css/admin_custom.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
 @stop
 
-@section('title', 'CatTerrenos')
+@section('title', 'Cat Vehiculos')
+
 
 @section('content_header')
-    <h1>Catalogo de Terrenos</h1>
+    <h1>Catalogo de Usuarios</h1>
 @stop
+
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="card-title">Lista de Terrenos</h1>
+            <h1 class="card-title">Lista de Usuarios</h1>
         </div>
-        @if (session('mensajeExitoso'))
+        @if (session('ExitoVehiculos'))
             <div class="alert alert-success">
-                {{ session('mensajeExitoso') }}
+                {{ session('ExitoVehiculos') }}
             </div>
         @endif
-
         <div class="card-body">
             <div class="card">
                 <div class="box-header with-border">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#CrearTerreno">Crear</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#CrearUsuario">Crear</button>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered table-hover table-striped TB" id="Terrenos">
+                    <table class="table table-bordered table-hover table-striped TB" id="usuarios">
                         <thead>
                             <tr>
-                                <th>N</th>
-                                <th>Propietario</th>
-                                <th>Area</th>
-                                <th>Fecha de Compra</th>
-                                <th>Costo</th>
-                                <th>FechaActualizado</th>
-                                <th>FechaCreado</th>
+                                <th>id</th>
+                                <th>nombre</th>
+                                <th>email</th>
+                                <th>password</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($listaTerrenos as $terreno)
+                            @foreach ($listaUsuarios as $usuarios)
                                 <tr>
-                                    <td>{{ $terreno->catTerrenoId }}</th>
-                                    <td>{{ $terreno->catTerrenoPropietario }}</th>
-                                    <td>{{ $terreno->catTerrenoArea }}</th>
-                                    <td>{{ $terreno->catTerrenoFechaCompra }}</th>
-                                    <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
-                                    <td>{{ $terreno->created_at }}</td>
+                                    <td>{{ $usuarios->id }}</th>
+                                    <td>{{ $usuarios->name }}</th>
+                                    <td>{{ $usuarios->email }}</th>
+                                    <td>{{ $usuarios->password }}</th>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-danger eliminarTerreno"
-                                                valor="{{ $terreno->catTerrenoId }}"
-                                                descripcion="{{ $terreno->catTerrenoPropietario }}"
+                                            <button type="button" class="btn btn-danger desactivarUsuario"
+                                                valor="{{ $usuarios->id }}"
+                                                descripcion="{{ $usuarios->name }}"
                                                 data-dismiss="modal">Deshabilitar</button>
-                                            <button type="button" data-toggle="modal" data-target="#EditTerreno"
-                                                class="btn btn-primary editarTerrenos" valor="{{ $terreno->catTerrenoId }}"
-                                                id='mostrar'>Ver Detalle</a></button>
+                                            <button type="button" data-toggle="modal" data-target="#EditUsuario"
+                                                class="btn btn-primary editarUsuario"
+                                                valor="{{ $usuarios->id }}" id="editarVehiculo">Ver
+                                                Detalle</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -72,35 +66,28 @@
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="Terrenos">
+                    <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="usuarios">
                         <thead>
                             <tr>
-                                <th>N</th>
-                                <th>Propietario</th>
-                                <th>Area</th>
-                                <th>Fecha de Compra</th>
-                                <th>Costo</th>
-                                <th>FechaActualizado</th>
-                                <th>FechaCreado</th>
-                                <th>Editar / Eliminar</th>
+                                <th>id</th>
+                                <th>nombre</th>
+                                <th>email</th>
+                                <th>password</th>
+                                <th>Editar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($listaTerrenosDeshabilitados as $terreno)
+                            @foreach ($listaUsuariosDesactivado as $usuariosDesactivado)
                                 <tr>
-                                    <td>{{ $terreno->catTerrenoId }}</th>
-                                    <td>{{ $terreno->catTerrenoPropietario }}</th>
-                                    <td>{{ $terreno->catTerrenoArea }}</th>
-                                    <td>{{ $terreno->catTerrenoFechaCompra }}</th>
-                                    <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
-                                    <td>{{ $terreno->created_at }}</td>
+                                    <td>{{ $usuariosDesactivado->id }}</th>
+                                    <td>{{ $usuariosDesactivado->name }}</th>
+                                    <td>{{ $usuariosDesactivado->email }}</th>
+                                    <td>{{ $usuariosDesactivado->password }}</th>
                                     <td>
-                                        <button type="button" class="btn btn-primary habilitarTerreno"
-                                            valor="{{ $terreno->catTerrenoId }}"
-                                            descripcion="{{ $terreno->catTerrenoPropietario }}"
+                                        <button type="button" class="btn btn-primary habilitarusuario"
+                                            valor="{{ $usuariosDesactivado->id }}"
+                                            descripcion="{{ $usuariosDesactivado->name }}"
                                             data-dismiss="modal">Recuperar</button>
-
                                     </td>
                                 </tr>
                             @endforeach
@@ -111,19 +98,19 @@
             </div>
         </div>
     </div>
-    @include('EditTerreno')
-    @include('Regterreno')
+    @include('RegUsuarios')
+    @include('editUsuarios')
 @stop
 
 
-
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src=" https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
     <script>
-        $('#Terrenos').DataTable({
+        $('#usuarios').DataTable({
             responsive: {
                 breakpoints: [{
                         name: 'bigdesktop',
@@ -166,7 +153,7 @@
             language: {
                 processing: "Procesando",
                 search: "Buscar:",
-                lengthMenu: "Lista de Equipos",
+                lengthMenu: "Lista de Usuarios",
                 info: "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
                 infoEmpty: "No se ha encontrado ningun elemento en lista",
                 infoFiltered: "Filtro de _MAX_ Cantidad total de elementos",
@@ -184,5 +171,5 @@
         });
 
     </script>
-    <script src="../../resources/js/terreno.js"></script>
+    <script src="../../resources/js/usuarios.js"></script>
 @stop

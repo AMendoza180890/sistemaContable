@@ -21,47 +21,99 @@
         </div>
         @if (session('Exito'))
             <div class="alert alert-success">
-                {{session('Exito')}}
+                {{ session('Exito') }}
             </div>
         @endif
         <div class="card-body">
-           <div class="card">
-        <div class="box-header with-border">
-            <button class="btn btn-primary" data-toggle="modal" data-target="#CrearImpresora">Crear</button>
-        </div>
-        <div class="card-body">
-           <table class="table table-bordered table-hover table-striped TB" id="Impresoras">
-                     <thead>
-                         <tr>
-                             <th>N</th>
-                             <th>Marca</th>
-                             <th>Modelo</th>
-                             <th>TipoTonnner</th>
-                             <th>Descripcion</th>
-                             <th>FechaIngreso</th>
-                             <th>Costo</th>
-                             {{-- <th>Editar / Eliminar</th> --}}
-                         </tr>
-                     </thead>
-                     <tbody>
-                        @foreach ($listaImpresoras as $impresoras)
+            <div class="card">
+                <div class="box-header with-border">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#CrearImpresora">Crear</button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-hover table-striped TB" id="Impresoras">
+                        <thead>
+                            <tr>
+                                <th>N</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>TipoTonnner</th>
+                                <th>Descripcion</th>
+                                <th>FechaIngreso</th>
+                                <th>Costo</th>
+                                <th>Editar / Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listaImpresoras as $impresoras)
                                 <tr>
-                                    <td>{{$impresoras -> catImpresorasId  }}</td>
-                                    <td>{{$impresoras -> catImpresorasMarca }}</td>
-                                    <td>{{$impresoras -> catImpresoraModelo }}</td>
-                                    <td>{{$impresoras -> catImpresoraTipoToner }}</td>
-                                    <td>{{$impresoras -> catImpresoraDescripcion }}</td>
-                                    <td>{{$impresoras -> catImpresoraFechaIngreso }}</td>
-                                    <td>{{$impresoras -> catImpresoraCosto}}</td>
+                                    <td>{{ $impresoras->catImpresorasId }}</td>
+                                    <td>{{ $impresoras->catImpresorasMarca }}</td>
+                                    <td>{{ $impresoras->catImpresoraModelo }}</td>
+                                    <td>{{ $impresoras->catImpresoraTipoToner }}</td>
+                                    <td>{{ $impresoras->catImpresoraDescripcion }}</td>
+                                    <td>{{ $impresoras->catImpresoraFechaIngreso }}</td>
+                                    <td>{{ $impresoras->catImpresoraCosto }}</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger eliminarImpresora"
+                                                valor="{{ $impresoras->catImpresorasId }}"
+                                                descripcion="{{ $impresoras->catImpresorasMarca }}"
+                                                data-dismiss="modal">Deshabilitar</button>
+                                            <button type="button" data-toggle="modal" data-target="#editImpresora"
+                                                class="btn btn-primary editarImpresora"
+                                                valor="{{ $impresoras->catImpresorasId }}" id="editarImpresora">Ver
+                                                Detalle</button>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div> 
+
+                <div class="card-body">
+                    <table class="table table-bordered table-hover table-striped TBDeshabilitado" id="Impresoras">
+                        <thead>
+                            <tr>
+                                <th>N</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th>TipoTonnner</th>
+                                <th>Descripcion</th>
+                                <th>FechaIngreso</th>
+                                <th>Costo</th>
+                                <th>Editar / Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($listaImpresorasDeshabilitadas as $impresoras)
+                                <tr>
+                                    <td>{{ $impresoras->catImpresorasId }}</td>
+                                    <td>{{ $impresoras->catImpresorasMarca }}</td>
+                                    <td>{{ $impresoras->catImpresoraModelo }}</td>
+                                    <td>{{ $impresoras->catImpresoraTipoToner }}</td>
+                                    <td>{{ $impresoras->catImpresoraDescripcion }}</td>
+                                    <td>{{ $impresoras->catImpresoraFechaIngreso }}</td>
+                                    <td>{{ $impresoras->catImpresoraCosto }}</td>
+                                    <td>
+
+                                        <button type="button" class="btn btn-primary habilitarImpresora"
+                                            valor="{{ $impresoras->catImpresorasId }}"
+                                            descripcion="{{ $impresoras->catImpresorasMarca }}"
+                                            data-dismiss="modal">Recuperar</button>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
     </div>
     @include('Regimpresora')
+    @include('editimpresora')
 @stop
 
 
@@ -73,36 +125,65 @@
     <script>
         $('#Impresoras').DataTable({
             responsive: {
-                breakpoints: [
-                {name: 'bigdesktop', width: Infinity},
-                {name: 'meddesktop', width: 1480},
-                {name: 'smalldesktop', width: 1280},
-                {name: 'medium', width: 1188},
-                {name: 'tabletl', width: 1024},
-                {name: 'btwtabllandp', width: 848},
-                {name: 'tabletp', width: 768},
-                {name: 'mobilel', width: 480},
-                {name: 'mobilep', width: 320}
+                breakpoints: [{
+                        name: 'bigdesktop',
+                        width: Infinity
+                    },
+                    {
+                        name: 'meddesktop',
+                        width: 1480
+                    },
+                    {
+                        name: 'smalldesktop',
+                        width: 1280
+                    },
+                    {
+                        name: 'medium',
+                        width: 1188
+                    },
+                    {
+                        name: 'tabletl',
+                        width: 1024
+                    },
+                    {
+                        name: 'btwtabllandp',
+                        width: 848
+                    },
+                    {
+                        name: 'tabletp',
+                        width: 768
+                    },
+                    {
+                        name: 'mobilel',
+                        width: 480
+                    },
+                    {
+                        name: 'mobilep',
+                        width: 320
+                    }
                 ]
             },
             language: {
-                    processing:     "Procesando",
-                    search:         "Buscar:",
-                    lengthMenu:    "Lista de Equipos",
-                    info:           "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
-                    infoEmpty:      "No se ha encontrado ningun elemento en lista",
-                    infoFiltered:   "Filtro de _MAX_ Cantidad total de elementos",
-                    infoPostFix:    "",
-                    loadingRecords: "Espere un momento",
-                    zeroRecords:    "No se ha encontrado ningun elemento en lista",
-                    emptyTable:     "Aún no hay ningun elemento en lista",
-                    paginate: {
-                        first:      "Primer",
-                        previous:   "Anterior",
-                        next:       "Siguiente",
-                        last:       "Ultimo"
-                    }
+                processing: "Procesando",
+                search: "Buscar:",
+                lengthMenu: "Lista de Equipos",
+                info: "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
+                infoEmpty: "No se ha encontrado ningun elemento en lista",
+                infoFiltered: "Filtro de _MAX_ Cantidad total de elementos",
+                infoPostFix: "",
+                loadingRecords: "Espere un momento",
+                zeroRecords: "No se ha encontrado ningun elemento en lista",
+                emptyTable: "Aún no hay ningun elemento en lista",
+                paginate: {
+                    first: "Primer",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Ultimo"
                 }
+            }
         });
+
     </script>
+
+    <script src="../../resources/js/impresora.js"></script>
 @stop

@@ -1,4 +1,4 @@
-{{--Modal de crear computadoras--}}
+{{--Modal de crear o registrar computadoras--}}
 <div class="modal" tabindex="-1" role="dialog" id="CrearVehiculo">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -9,7 +9,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('vehiculo.insertar')}}">
+                <form method="POST" action="">
+                    {{-- {{route('vehiculo.insertar')}} --}}
                     @csrf
                     <div class="modal-body">
                         <div class="box-body">

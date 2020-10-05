@@ -15,8 +15,9 @@ class catelectrodomesticoController extends Controller
      */
     public function index()
     {
-        $listaElectrodomesticos = catelectrodomesticoModel::all();
-        return view('electrodomestico',compact('listaElectrodomesticos'));
+        $listaElectrodomesticos = catelectrodomesticoModel::all()->where('CatElectEstado','!=','2');
+        $listaElectrodomesticosDeshabilitado = catelectrodomesticoModel::all()->where('CatElectEstado','=','2');
+        return view('electrodomestico',compact('listaElectrodomesticos','listaElectrodomesticosDeshabilitado'));
     }
 
     /**
@@ -53,6 +54,7 @@ class catelectrodomesticoController extends Controller
             $electrodomestico->CatElectFechaIngreso = $request->electFecha;
             $electrodomestico->CatElectCosto = $request->electcosto;
             $electrodomestico->CatElectDescripcion = $request->electdescripcion;
+            $electrodomestico->CatElectEstado = 1;
 
             $electrodomestico->save();
 
@@ -82,7 +84,12 @@ class catelectrodomesticoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findElectrodomestico = catelectrodomesticoModel::find($id);
+            return $findElectrodomestico;
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 
     /**
@@ -94,7 +101,23 @@ class catelectrodomesticoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
+
+            $actualizarElectrodomestico->CatElectMarca = $request->electmarcaE;
+            $actualizarElectrodomestico->CatElectModelo = $request->electmodeloE;
+            $actualizarElectrodomestico->CatElectDescripcion = $request->electdescripcionE;
+            $actualizarElectrodomestico->CatElectFechaIngreso = $request->electFechaE;
+            $actualizarElectrodomestico->CatElectCosto = $request->electcostoE;
+            $actualizarElectrodomestico->CatElectEstado = 1;
+
+            $actualizarElectrodomestico->save();
+
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se actualizo correctamente el electrodomestico seleccinado');
+
+        } catch (exception $ex) {
+            return 'Error - '.$ex->getMessage();
+        }
     }
 
     /**
@@ -105,6 +128,27 @@ class catelectrodomesticoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $eliminarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
+            $eliminarElectrodomestico->CatElectEstado = 2;
+            $eliminarElectrodomestico->save();
+            //catelectrodomesticoModel::find($id)->delete();
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso','Se desactivo correctamente el electrodomestico seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id)
+    {
+        try {
+            $activarElectrodomestico = catelectrodomesticoModel::where('CatElectId', '=', $id)->first();
+            $activarElectrodomestico->CatElectEstado = 1;
+            $activarElectrodomestico->save();
+            //catelectrodomesticoModel::find($id)->delete();
+            return redirect()->route('electrodomestico.all')->with('mensaje exitoso', 'Se habilito correctamente el electrodomestico seleccionado');
+        } catch (exception $ex) {
+            return "Error - " . $ex->getMessage();
+        }
     }
 }

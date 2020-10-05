@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-09-2020 a las 20:58:24
+-- Tiempo de generación: 05-10-2020 a las 05:23:04
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -34,6 +34,7 @@ CREATE TABLE `catelectrodomesticos` (
   `CatElectDescripcion` text NOT NULL,
   `CatElectFechaIngreso` date NOT NULL,
   `CatElectCosto` int(11) DEFAULT NULL,
+  `CatElectEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -42,8 +43,8 @@ CREATE TABLE `catelectrodomesticos` (
 -- Volcado de datos para la tabla `catelectrodomesticos`
 --
 
-INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, '2020-09-06', '2020-09-06');
+INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `CatElectEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, 1, '2020-10-03', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -62,6 +63,7 @@ CREATE TABLE `catequipocomputo` (
   `catEquipoTipoSO` text NOT NULL,
   `catEquipoFechaCompra` date NOT NULL,
   `catEquipoCostoEquipo` float NOT NULL,
+  `CatEquipoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -70,11 +72,29 @@ CREATE TABLE `catequipocomputo` (
 -- Volcado de datos para la tabla `catequipocomputo`
 --
 
-INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `updated_at`, `created_at`) VALUES
-(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 0, NULL, NULL),
-(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 250.5, NULL, NULL),
-(3, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-07-01', 250, '2020-09-06', '2020-09-06'),
-(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, '2020-09-06', '2020-09-06');
+INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `CatEquipoEstado`, `updated_at`, `created_at`) VALUES
+(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 0, 2, '2020-10-03', NULL),
+(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 250.5, 1, '2020-10-03', NULL),
+(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, 1, '2020-10-03', '2020-09-06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catestado`
+--
+
+CREATE TABLE `catestado` (
+  `id` int(11) NOT NULL,
+  `catEstadoDescripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `catestado`
+--
+
+INSERT INTO `catestado` (`id`, `catEstadoDescripcion`) VALUES
+(1, 'Activo'),
+(2, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -90,6 +110,7 @@ CREATE TABLE `catimpresoras` (
   `catImpresoraDescripcion` text NOT NULL,
   `catImpresoraFechaIngreso` date NOT NULL,
   `catImpresoraCosto` int(11) DEFAULT NULL,
+  `CatImpresoraEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -98,9 +119,9 @@ CREATE TABLE `catimpresoras` (
 -- Volcado de datos para la tabla `catimpresoras`
 --
 
-INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', NULL, NULL, NULL),
-(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, '2020-09-06', '2020-09-06');
+INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `CatImpresoraEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', NULL, 1, '2020-10-03', NULL),
+(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, 2, '2020-10-03', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -114,6 +135,7 @@ CREATE TABLE `catterreno` (
   `catTerrenoArea` text NOT NULL,
   `catTerrenoFechaCompra` date NOT NULL,
   `catterrenoCosto` int(11) DEFAULT NULL,
+  `CatTerrenoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -122,10 +144,11 @@ CREATE TABLE `catterreno` (
 -- Volcado de datos para la tabla `catterreno`
 --
 
-INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Tesoros de Dios', '150mts cuadrados, área de Equinoterapia', '2018-11-14', NULL, NULL, NULL),
-(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, '2020-09-05', '2020-09-05'),
-(3, 'Tesoros de Dios', '100mts Cuadrados', '2019-09-18', 1500, '2020-09-05', '2020-09-05');
+INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `CatTerrenoEstado`, `updated_at`, `created_at`) VALUES
+(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, 2, '2020-10-03', '2020-09-05'),
+(3, 'Tesoros de Dios', '100mts Cuadrados', '2019-09-18', 1500, 1, '2020-10-03', '2020-09-05'),
+(4, 'Tesoros de Dios', '100 mts Cuadrados', '2020-05-14', 500, 2, '2020-09-22', '2020-09-22'),
+(5, 'Tesoros de Dios', '300 mts Cuadrados', '2020-10-03', 500, 1, '2020-10-04', '2020-10-04');
 
 -- --------------------------------------------------------
 
@@ -137,6 +160,7 @@ CREATE TABLE `cattipocuentaactivofijo` (
   `idActivofijo` int(11) NOT NULL,
   `descripcionActivoFjo` text NOT NULL,
   `vidaUtilActivoFijo` int(11) NOT NULL,
+  `CatTipoCuentaActivoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Catalogo de Tipo de cuentas de activo fijo';
@@ -145,11 +169,10 @@ CREATE TABLE `cattipocuentaactivofijo` (
 -- Volcado de datos para la tabla `cattipocuentaactivofijo`
 --
 
-INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `updated_at`, `created_at`) VALUES
-(1, 'Electrodomesticos', 60, NULL, NULL),
-(2, 'Impresoras', 60, NULL, NULL),
-(3, 'Vehiculos', 60, NULL, NULL),
-(4, 'Computadoras', 60, '2020-09-05', '2020-09-05');
+INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `CatTipoCuentaActivoEstado`, `updated_at`, `created_at`) VALUES
+(6, 'Tecnologia', 60, 1, '2020-10-04', '2020-09-22'),
+(16, 'Electrodomesticos', 60, 1, '2020-10-04', '2020-09-28'),
+(17, 'Terreno', 120, 2, '2020-10-01', '2020-10-01');
 
 -- --------------------------------------------------------
 
@@ -174,6 +197,7 @@ CREATE TABLE `catvehiculo` (
   `catVehiculoPropietario` text NOT NULL,
   `catVehiculoFechaCompra` date NOT NULL,
   `catVehiculoCosto` text NOT NULL,
+  `catVehiculoEstado` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -182,8 +206,8 @@ CREATE TABLE `catvehiculo` (
 -- Volcado de datos para la tabla `catvehiculo`
 --
 
-INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `updated_at`, `created_at`) VALUES
-(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', '2020-09-06', '2020-09-06');
+INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `catVehiculoEstado`, `updated_at`, `created_at`) VALUES
+(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', 2, '2020-10-03', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -235,6 +259,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('tecnologia@tesorosdedios.org', '$2y$10$1lG2aYPVKgQ9YCYGDhTFWObNTQEknfVybO5//XbY5xGP/aRDbxQEq', '2020-10-03 22:32:31');
+
 -- --------------------------------------------------------
 
 --
@@ -248,6 +279,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -256,8 +288,9 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Allan', 'tecnologia@tesorosdedios.org', NULL, '$2y$10$t/P8vLpce1DTK48NQ/8yxe8flJIE1fpUFRwODoJwW8Kh80Kms/49G', '5GRr17HFqYwTOGx6Xd7lltfHNYzbR00V7kCZmFyoQFVmolvf6Sz1RP0o4d97', '2020-08-17 04:52:20', '2020-08-17 04:52:20');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Allan', 'tecnologia@tesorosdedios.org', NULL, '$2y$10$t/P8vLpce1DTK48NQ/8yxe8flJIE1fpUFRwODoJwW8Kh80Kms/49G', 'U6MtoEhsu9BA6ZVgS0DmMki9B2rizCF8805iwimrV3B7u66Khzi8IvAqva8v', 1, '2020-08-17 04:52:20', '2020-08-17 04:52:20'),
+(2, 'Wendy', 'wendy@tesorosdedios.org', NULL, '$2y$10$gLBNTIuZi0djmGP2CG2SZeW8K/mA7cktnamh3sh.G1dU3plRQlEKO', NULL, 1, '2020-10-03 06:00:00', '2020-10-05 03:41:17');
 
 --
 -- Índices para tablas volcadas
@@ -267,37 +300,49 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Indices de la tabla `catelectrodomesticos`
 --
 ALTER TABLE `catelectrodomesticos`
-  ADD PRIMARY KEY (`CatElectId`);
+  ADD PRIMARY KEY (`CatElectId`),
+  ADD KEY `CatElectEstado` (`CatElectEstado`);
 
 --
 -- Indices de la tabla `catequipocomputo`
 --
 ALTER TABLE `catequipocomputo`
-  ADD PRIMARY KEY (`catEquipoCompId`);
+  ADD PRIMARY KEY (`catEquipoCompId`),
+  ADD KEY `CatEquipoEstado` (`CatEquipoEstado`);
+
+--
+-- Indices de la tabla `catestado`
+--
+ALTER TABLE `catestado`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `catimpresoras`
 --
 ALTER TABLE `catimpresoras`
-  ADD PRIMARY KEY (`catImpresorasId`);
+  ADD PRIMARY KEY (`catImpresorasId`),
+  ADD KEY `CatImpresoraEstado` (`CatImpresoraEstado`);
 
 --
 -- Indices de la tabla `catterreno`
 --
 ALTER TABLE `catterreno`
-  ADD PRIMARY KEY (`catTerrenoId`);
+  ADD PRIMARY KEY (`catTerrenoId`),
+  ADD KEY `CatTerrenoEstado` (`CatTerrenoEstado`);
 
 --
 -- Indices de la tabla `cattipocuentaactivofijo`
 --
 ALTER TABLE `cattipocuentaactivofijo`
-  ADD PRIMARY KEY (`idActivofijo`);
+  ADD PRIMARY KEY (`idActivofijo`),
+  ADD KEY `CatTipoCuentaActivoEstado` (`CatTipoCuentaActivoEstado`);
 
 --
 -- Indices de la tabla `catvehiculo`
 --
 ALTER TABLE `catvehiculo`
-  ADD PRIMARY KEY (`catVehiculoId`);
+  ADD PRIMARY KEY (`catVehiculoId`),
+  ADD KEY `catVehiculoEstado` (`catVehiculoEstado`);
 
 --
 -- Indices de la tabla `failed_jobs`
@@ -322,7 +367,8 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `estado` (`estado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -341,6 +387,12 @@ ALTER TABLE `catequipocomputo`
   MODIFY `catEquipoCompId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `catestado`
+--
+ALTER TABLE `catestado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `catimpresoras`
 --
 ALTER TABLE `catimpresoras`
@@ -350,13 +402,13 @@ ALTER TABLE `catimpresoras`
 -- AUTO_INCREMENT de la tabla `catterreno`
 --
 ALTER TABLE `catterreno`
-  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cattipocuentaactivofijo`
 --
 ALTER TABLE `cattipocuentaactivofijo`
-  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `catvehiculo`
@@ -380,7 +432,53 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `catelectrodomesticos`
+--
+ALTER TABLE `catelectrodomesticos`
+  ADD CONSTRAINT `catelectrodomesticos_ibfk_1` FOREIGN KEY (`CatElectEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catequipocomputo`
+--
+ALTER TABLE `catequipocomputo`
+  ADD CONSTRAINT `catequipocomputo_ibfk_1` FOREIGN KEY (`CatEquipoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catimpresoras`
+--
+ALTER TABLE `catimpresoras`
+  ADD CONSTRAINT `catimpresoras_ibfk_1` FOREIGN KEY (`CatImpresoraEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catterreno`
+--
+ALTER TABLE `catterreno`
+  ADD CONSTRAINT `catterreno_ibfk_1` FOREIGN KEY (`CatTerrenoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `cattipocuentaactivofijo`
+--
+ALTER TABLE `cattipocuentaactivofijo`
+  ADD CONSTRAINT `cattipocuentaactivofijo_ibfk_1` FOREIGN KEY (`CatTipoCuentaActivoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catvehiculo`
+--
+ALTER TABLE `catvehiculo`
+  ADD CONSTRAINT `catvehiculo_ibfk_1` FOREIGN KEY (`catVehiculoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`estado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

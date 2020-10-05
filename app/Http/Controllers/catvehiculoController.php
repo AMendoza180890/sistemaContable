@@ -15,8 +15,9 @@ class catvehiculoController extends Controller
      */
     public function index()
     {
-        $listaVehiculos = catvehiculoModel::all();
-        return view('vehiculo',compact('listaVehiculos'));
+        $listaVehiculos = catvehiculoModel::all()->where('catVehiculoEstado','!=','2');
+        $listaVehiculosDeshabilitados = catvehiculoModel::all()->where('catVehiculoEstado','=','2');
+        return view('vehiculo',compact('listaVehiculos','listaVehiculosDeshabilitados'));
     }
 
     /**
@@ -75,6 +76,7 @@ class catvehiculoController extends Controller
             $vehiculos->catVehiculoPropietario = $request->vehPropietario;
             $vehiculos->catVehiculoFechaCompra = $request->vehFecha;
             $vehiculos->catVehiculoCosto = $request->vehCosto;
+            $vehiculos->catVehiculoEstado = 1;
 
             $vehiculos->save();
 
@@ -107,7 +109,7 @@ class catvehiculoController extends Controller
     {
         try {
             $obtenerVehiculos = catvehiculoModel::find($catVehiculoId);
-            return view('editvehiculo',compact('obtenerVehiculos'));
+            return $obtenerVehiculos;
             
         } catch (Exception $ex) {
             return 'Error - '.$ex->getMessage();
@@ -123,7 +125,31 @@ class catvehiculoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarVehiculo = catvehiculoModel::where('catVehiculoId', '=', $id);
+    
+            $actualizarVehiculo->catVehiculoTipo  = $request->vehTipoE;
+            $actualizarVehiculo->catVehiculoModelo = $request->vehModeloE;
+            $actualizarVehiculo->catVehiculoColor = $request->vehColorE;
+            $actualizarVehiculo->catVehiculoMotor = $request->vehMotorE;
+            $actualizarVehiculo->catVehiculoChasis = $request->vehChasisE;
+            $actualizarVehiculo->catVehiculoVIM = $request->vehVIME;
+            $actualizarVehiculo->catVehiculoCantPasajeros = $request->vehPasajerosE;
+            $actualizarVehiculo->catVehiculoCombustible = $request->vehcombustibleE;
+            $actualizarVehiculo->catVehiculoUso = $request->vehUsoE;
+            $actualizarVehiculo->catVehiculoAnio = $request->vehAnioE;
+            $actualizarVehiculo->catVehiculoCilindro = $request->vehCilindroE;
+            $actualizarVehiculo->catVehiculoServicio = $request->vehServicioE;
+            $actualizarVehiculo->catVehiculoPropietario = $request->vehPropietarioE;
+            $actualizarVehiculo->catVehiculoFechaCompra = $request->vehFechaE;
+            $actualizarVehiculo->catVehiculoCosto = $request->vehCostoE;
+            $actualizarVehiculo->catVehiculoEstado = 1;
+    
+            $actualizarVehiculo->save();
+            
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -134,6 +160,31 @@ class catvehiculoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $eliminarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id)->first();
+
+            $eliminarVehiculo->catVehiculoEstado = 2;
+
+            $eliminarVehiculo->save();
+            //catvehiculoModel::find($id)->delete();
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se desactivo correctamente el vehiculo seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function Recover($id)
+    {
+        try {
+            $ActivarVehiculo = catvehiculoModel::where('catVehiculoId','=',$id)->first();
+
+            $ActivarVehiculo->catVehiculoEstado = 1;
+
+            $ActivarVehiculo->save();
+            //catvehiculoModel::find($id)->delete();
+            return redirect()->route('vehiculo.all')->with('mensajeExitoso','Se habilito correctamente el vehiculo seleccionado');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
     }
 }

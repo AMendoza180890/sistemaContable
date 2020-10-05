@@ -17,8 +17,9 @@ class catequipocomputoController extends Controller
      */
     public function index()
     {
-        $listaComputadoras = catequipocomputoModel::all();
-        return view('computadora',compact('listaComputadoras'));
+        $listaComputadoras = catequipocomputoModel::all()->where('CatEquipoEstado','!=','2');
+        $listaComputadorasDeshablitados = catequipocomputoModel::all()->where('CatEquipoEstado','=','2');
+        return view('computadora',compact('listaComputadoras','listaComputadorasDeshablitados'));
     }
 
     /**
@@ -63,6 +64,7 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
+               $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
                 
@@ -93,7 +95,12 @@ class catequipocomputoController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            return $findComputadora;
+        } catch (exception $ex) {
+            return "Error -".$ex->getMessage();
+        }
     }
 
     /**
@@ -105,7 +112,24 @@ class catequipocomputoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $actualizarComputadora = catequipocomputoModel::where('catEquipoCompId', '=', $id)->first();
+            
+            $actualizarComputadora->catEquipoModelo = $request->inputModeloE;
+            $actualizarComputadora->catEquipoNumeroSerie = $request->inputSerieE;
+            $actualizarComputadora->catEquipoMarca = $request->inputMarcaE;
+            $actualizarComputadora->catEquipoTamanioAlmacenamiento = $request->inputAlmacenamientoE;
+            $actualizarComputadora->TipoMemoriaRAM = $request->InputTipoMemoriaE;
+            $actualizarComputadora->catEquipoCantidadRAM = $request->cantTotalRamE;
+            $actualizarComputadora->catEquipoTipoSO = $request->compTipoSOE;
+            $actualizarComputadora->catEquipoFechaCompra = $request->compFechaCompraE;
+            $actualizarComputadora->catEquipoCostoEquipo = $request->compCostoE;
+            $actualizarComputadora->CatEquipoEstado = 1;
+
+            $actualizarComputadora->save();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -116,6 +140,30 @@ class catequipocomputoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $DesactivarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id)->first();
+
+            $DesactivarComputadora->CatEquipoEstado = 2;
+
+            $DesactivarComputadora->save();
+            //catequipocomputoModel::find($id)->delete();
+            return redirect()->route('computadora.all')->with('mensaje exito','Se desactivo correctamente el equipo de computo');
+        } catch (exception $ex) {
+            return "Error - ".$ex->getMessage();
+        }
+    }
+
+    public function recover($id){
+        try {
+            $habilitarComputadora = catequipocomputoModel::where('catEquipoCompId', '=',$id)->first();
+
+            $habilitarComputadora->CatEquipoEstado = 1;
+
+            $habilitarComputadora->save();
+
+            return redirect()->route('computadora.all')->with('mensaje exito','Se activo correctamente el equipo de computo');
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 }

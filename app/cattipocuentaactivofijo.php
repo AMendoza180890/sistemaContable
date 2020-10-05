@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class cattipocuentaactivofijo extends Model
 {
     protected $table = 'cattipocuentaactivofijo';
-    protected $fillable = ['idActivofijo','descripcionActivoFjo','vidaUtilActivoFijo','updated_at','created_at'];
+    protected $primaryKey = 'idActivofijo';
+    protected $fillable = ['idActivofijo','descripcionActivoFjo','vidaUtilActivoFijo', 'CatTipoCuentaActivoEstado','updated_at','created_at'];
 }
