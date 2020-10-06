@@ -12,6 +12,7 @@
                 <form method="POST" action="">
                     {{-- {{route('vehiculo.edit',['catVehiculoId'=> $vehiculo -> catVehiculoId])}} --}}
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
@@ -121,6 +122,14 @@
                                 <input type="text" class="form-control" id="vehCostoE" name="vehCostoE"
                                     placeholder="Costo Real o apróximado">
                             </div>
+
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

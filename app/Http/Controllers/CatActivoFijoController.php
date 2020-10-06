@@ -106,8 +106,6 @@ class CatActivoFijoController extends Controller
                 $tipoCuenta->save();
                 return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo correctamente la informacion de la cuenta');
             
-
-            
             //back()->with('mensajeExitoso','Se actualizo la informacion de la cuenta correctamente');
 
         } catch (exception $ex) {

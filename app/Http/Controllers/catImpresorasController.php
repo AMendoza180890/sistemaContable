@@ -105,7 +105,8 @@ class catImpresorasController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id);
+            $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id)->first();
+
             $actualizarImpresora->catImpresorasMarca = $request->inputMarcaE;
             $actualizarImpresora->catImpresoraModelo = $request->inputModeloE;
             $actualizarImpresora->catImpresoraTipoToner = $request->inputTonnerE;
@@ -115,6 +116,7 @@ class catImpresorasController extends Controller
             $actualizarImpresora->CatImpresoraEstado = 1;
             
             $actualizarImpresora->save();
+            return redirect()->route('impresora.all')->with('mensaje exitoso','Se actualizo correctamente la impresora');
         } catch (exception $ex) {
             return 'Error - '.$ex->getMessage();
         }

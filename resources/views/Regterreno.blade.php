@@ -31,6 +31,14 @@
                                 <h4>Costo:</h4>
                                 <input type="text" class="form-control input-lg" name="TerrenoCostoN" require>
                             </div>
+
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

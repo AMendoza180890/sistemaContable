@@ -1,4 +1,25 @@
 $(document).ready(function() {
+
+    $('#tipocuenta').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
     $('.TB').on('click', '.editarVehiculo', function() {
         let codVehiculo = $(this).attr('valor');
 
@@ -10,7 +31,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(datosVehiculo) {
                 console.log(datosVehiculo)
-                $('#vehCodigoE').val(datosVehiculo["catVehiculoid"]);
+                $('#vehCodigoE').val(datosVehiculo["catVehiculoId"]);
                 $('#vehTipoE').val(datosVehiculo["catVehiculoTipo"]);
                 $('#vehModeloE').val(datosVehiculo["catVehiculoModelo"]);
                 $('#vehColorE').val(datosVehiculo["catVehiculoColor"]);
@@ -28,7 +49,7 @@ $(document).ready(function() {
                 $('#vehFechaE').val(datosVehiculo["catVehiculoFechaCompra"]);
                 $('#vehCostoE').val(datosVehiculo["catVehiculoCosto"]);
 
-                $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoid"]);
+                $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoId"]);
             }
         })
     })

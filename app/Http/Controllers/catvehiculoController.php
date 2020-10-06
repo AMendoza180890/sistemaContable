@@ -126,7 +126,7 @@ class catvehiculoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarVehiculo = catvehiculoModel::where('catVehiculoId', '=', $id);
+            $actualizarVehiculo = catvehiculoModel::where('catVehiculoId', '=', $id)->first();
     
             $actualizarVehiculo->catVehiculoTipo  = $request->vehTipoE;
             $actualizarVehiculo->catVehiculoModelo = $request->vehModeloE;
@@ -146,6 +146,8 @@ class catvehiculoController extends Controller
             $actualizarVehiculo->catVehiculoEstado = 1;
     
             $actualizarVehiculo->save();
+
+            return redirect()->route('vehiculo.all')->with('mensaje exitoso','Se actualizo vehiculo correctamente');
             
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();

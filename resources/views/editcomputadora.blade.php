@@ -11,6 +11,7 @@
             <div class="modal-body">
                 <form method="POST" action="">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
@@ -64,6 +65,14 @@
                                 <input type="text" class="form-control" id="compCostoE" name="compCostoE"
                                     placeholder="Costo Real o apróximado">
                             </div>
+
+                            <div class="form-group">
+                                <label for="tipocuentaE">Tipocuenta</label>
+                                    <select class="form-control" name="tipocuentaE" id="tipocuentaE">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

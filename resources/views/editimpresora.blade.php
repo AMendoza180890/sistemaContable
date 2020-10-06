@@ -11,6 +11,7 @@
             <div class="modal-body">
                 <form method="POST" action="">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
@@ -46,6 +47,13 @@
                                 <textarea class="form-control" id="impDescripcionE" name="impDescripcionE" rows="3"></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

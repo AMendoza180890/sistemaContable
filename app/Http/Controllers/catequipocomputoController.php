@@ -127,6 +127,7 @@ class catequipocomputoController extends Controller
             $actualizarComputadora->CatEquipoEstado = 1;
 
             $actualizarComputadora->save();
+            return redirect()->route('computadora.all')->with('mensaje exito', 'Se actualizo correctamente el equipo de computo');
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
         }

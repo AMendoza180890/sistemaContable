@@ -1,4 +1,26 @@
 $(document).ready(function() {
+
+    $('#tipocuenta').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
+
     $('.TB').on('click', '#mostrar', function() {
         let value = $(this).attr('valor');
         console.log('valor = ' + value);

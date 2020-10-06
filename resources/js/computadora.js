@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    $('#tipocuenta').show(function(){
+
+    $('#tipocuenta').show(function() {
         $.ajax({
             type: 'get',
             dataType: 'json',
@@ -11,14 +12,34 @@ $(document).ready(function() {
 
                     $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
                 }
-        //         console.log(data);
+                //         console.log(data);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert(textStatus);
             }
         })
     })
-   
+
+    $('#tipocuentaE').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuentaE').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuentaE').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
 
 
     $('.TB').on('click', '.editarcomputadoras', function() {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     $('.confirmPass').change(function() {
         let pass = $('.passw').val();
         let confirm = $(".confirmPass").val();

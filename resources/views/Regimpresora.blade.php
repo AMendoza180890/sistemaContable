@@ -45,6 +45,13 @@
                                 <textarea class="form-control" id="impDescripcion" name="impDescripcion" rows="3"></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

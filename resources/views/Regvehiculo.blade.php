@@ -116,6 +116,14 @@
                                 <input type="text" class="form-control" id="vehCosto" name="vehCosto"
                                     placeholder="Costo Real o apróximado">
                             </div>
+
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

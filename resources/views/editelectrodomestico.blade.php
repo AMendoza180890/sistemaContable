@@ -9,8 +9,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{route('electrodomestico.insertar')}}">
+                <form method="POST" action="">
                     @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
@@ -40,6 +41,13 @@
                             <div class="form-group">
                                 <label for="electdescripcionE">Descripción</label>
                                 <textarea class="form-control" id="electdescripcionE" name="electdescripcionE" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
                             </div>
 
                         </div>
