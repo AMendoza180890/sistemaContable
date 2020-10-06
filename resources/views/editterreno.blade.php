@@ -35,8 +35,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="tipocuenta">Tipocuenta</label>
-                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                <label for="tipocuentaE">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuentaE" id="tipocuentaE">
                                             <option value="valor"></option>
                                     </select>
                             </div>

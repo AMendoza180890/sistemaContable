@@ -43,6 +43,26 @@ $(document).ready(function() {
         })
     })
 
+    $('#tipocuentaE').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuentaE').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuentaE').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
     $('.TB').on('click', '.eliminarImpresora', function() {
         let codImpresoraEliminar = $(this).attr('valor');
         let descImpresoraEliminar = $(this).attr('descripcion');
