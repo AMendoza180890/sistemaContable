@@ -16,6 +16,10 @@
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-group">
+                                <h4>Codigo Cuenta:</h4>
+                                <input type="text" class="form-control input-lg" name="CodigoCuentaN" require>
+                            </div>
+                            <div class="form-group">
                                 <h4>Descripción:</h4>
                                 <input type="text" class="form-control input-lg" name="activoDescripcionN" require>
                             </div>
