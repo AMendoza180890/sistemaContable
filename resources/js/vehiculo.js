@@ -68,6 +68,8 @@ $(document).ready(function() {
                 $('#vehPropietarioE').val(datosVehiculo["catVehiculoPropietario"]);
                 $('#vehFechaE').val(datosVehiculo["catVehiculoFechaCompra"]);
                 $('#vehCostoE').val(datosVehiculo["catVehiculoCosto"]);
+                $('#catVehiculoPlacaE').val(datosVehiculo["catVehiculoPlaca"]);
+                $('#tipocuentaE').val(datosVehiculo["idActivofijo"]);
 
                 $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoId"]);
             }

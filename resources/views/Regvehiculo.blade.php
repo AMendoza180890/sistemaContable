@@ -118,6 +118,13 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="catVehiculoPlacaN">Placa</label>
+                                <input type="text" class="form-control" id="catVehiculoPlacaN" name="catVehiculoPlacaN"
+                                    placeholder="Placa del vehiculo">
+                            </div>
+
+                            
+                            <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
                                     <select class="form-control"name="tipocuenta" id="tipocuenta">
                                             <option value="valor"></option>

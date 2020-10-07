@@ -8,5 +8,5 @@ class catelectrodomesticoModel extends Model
 {
     protected $table = 'catelectrodomesticos';
     protected $primaryKey = 'CatElectId';
-    protected $fillable = ['CatElectId', 'CatElectMarca', 'CatElectModelo', 'CatElectDescripcion', 'CatElectFechaIngreso','CatElectCosto','CatElectEstado'];
+    protected $fillable = ['CatElectId', 'CatElectMarca', 'CatElectModelo', 'CatElectDescripcion', 'CatElectFechaIngreso','CatElectCosto','CatElectEstado','idActivofijo'];
 }

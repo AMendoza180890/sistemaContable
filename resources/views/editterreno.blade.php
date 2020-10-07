@@ -35,6 +35,11 @@
                             </div>
 
                             <div class="form-group">
+                                <h4>Numero Catastral:</h4>
+                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralE" id="TerrenoNumeroCatastralE" require>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuentaE">Tipocuenta</label>
                                     <select class="form-control"name="tipocuentaE" id="tipocuentaE">
                                             <option value="valor"></option>

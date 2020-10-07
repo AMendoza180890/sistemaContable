@@ -55,8 +55,7 @@ class catvehiculoController extends Controller
                 'vehPropietario'=>'required',
                 'vehFecha' => 'required',
                 'vehCosto' => 'required',
-
-                
+                'catVehiculoPlacaN'=>'required',
             ]);
             
             $vehiculos = new catvehiculoModel();
@@ -76,6 +75,7 @@ class catvehiculoController extends Controller
             $vehiculos->catVehiculoPropietario = $request->vehPropietario;
             $vehiculos->catVehiculoFechaCompra = $request->vehFecha;
             $vehiculos->catVehiculoCosto = $request->vehCosto;
+            $vehiculos->catVehiculoPlaca = $request->catVehiculoPlacaN;
             $vehiculos->catVehiculoEstado = 1;
 
             $vehiculos->save();
@@ -143,6 +143,8 @@ class catvehiculoController extends Controller
             $actualizarVehiculo->catVehiculoPropietario = $request->vehPropietarioE;
             $actualizarVehiculo->catVehiculoFechaCompra = $request->vehFechaE;
             $actualizarVehiculo->catVehiculoCosto = $request->vehCostoE;
+            //Agregar Objeto donde se obtendra la planca en el front-end
+            $actualizarVehiculo->catVehiculoPlaca = $request->catVehiculoPlacaE;
             $actualizarVehiculo->catVehiculoEstado = 1;
     
             $actualizarVehiculo->save();

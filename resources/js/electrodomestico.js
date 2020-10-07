@@ -56,6 +56,7 @@ $(document).ready(function() {
                 $("#electmarcaE").val(datoElectrodomestico["CatElectMarca"]);
                 $("#electmodeloE").val(datoElectrodomestico["CatElectModelo"]);
                 $("#electcostoE").val(datoElectrodomestico["CatElectCosto"]);
+                $("#tipocuentaE").val(datoElectrodomestico["idActivofijo"]);
 
                 $('Form').attr('Action', 'actualizarElectrodomestico/' + datoElectrodomestico["CatElectId"]);
             }

@@ -59,6 +59,9 @@ $(document).ready(function() {
                 $("#TerrenofechaCompraE").val(datos["catTerrenoFechaCompra"]);
                 $("#TerrenoCostoE").val(datos["catterrenoCosto"]);
                 $('#TerrenoAreaE').val(datos['catTerrenoArea']);
+                $("#tipocuentaE").val(datos["idActivofijo"]);
+                // AGREGAR OBJETO DONDE SE MOSTRARA EL NUMERO CATASTRAL
+                $("#TerrenoNumeroCatastralE").val(datos['catTerrenoNumeroCatastral']);
                 // $("#direccionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontAdress"])));
                 // $("#descripcionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontMessage"])));
 

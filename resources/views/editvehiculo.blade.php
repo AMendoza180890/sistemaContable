@@ -124,6 +124,12 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="catVehiculoPlacaE">Placa</label>
+                                <input type="text" class="form-control" id="catVehiculoPlacaE" name="catVehiculoPlacaE"
+                                    placeholder="Placa del vehiculo">
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuentaE">Tipocuenta</label>
                                     <select class="form-control"name="tipocuentaE" id="tipocuentaE">
                                             <option value="valor"></option>
