@@ -83,6 +83,11 @@ Route::get('/usuarioEdit/{idusuario}/edit','catUsuarioController@edit')->name('u
 Route::get('/catalogoTipocuenta', 'CatActivoFijoController@listarTipoCuenta')->name('catalogoTipoCuentas.all'); 
 /* fin del cargar  formularios */
 
+/*Rutas de reportes */
+Route::get('/RptActivoFijo', 'catReporteActivofijoController@index')->name('RptCuenta.all');
+/*Fin de Reportes */
+
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();
  Route::get('/home', 'HomeController@index')->name('home');
+/*fin de Ruta AdminLTE */

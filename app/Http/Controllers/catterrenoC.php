@@ -110,7 +110,7 @@ class catterrenoC extends Controller
             $actualizarTerreno->catTerrenoArea = $request->TerrenoAreaE;
             $actualizarTerreno->catTerrenoFechaCompra = $request->TerrenofechaCompraE;
             $actualizarTerreno->catterrenoCosto = $request->TerrenoCostoE;
-            $actializarTerreno->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralE;
+            $actualizarTerreno->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralE;
             $actualizarTerreno->CatTerrenoEstado = 1;
 
             $actualizarTerreno->save();

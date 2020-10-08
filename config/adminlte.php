@@ -244,6 +244,11 @@ return [
                 'icon' => 'far fa-fw fa fa-home',
             ],
             [
+                'text' => 'Reporte',
+                'url'  => '/RptActivoFijo',
+                'icon' => 'far fa-fw fa fa-home',
+            ],
+            [
                 'text' => 'Tipo Cuentas',
                 'url'  => '/tipoCuentas',
                 'icon' => 'far fa-fw  fa fa-table',

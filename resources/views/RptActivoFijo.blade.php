@@ -1,23 +1,56 @@
 @extends('adminlte::page')
 
-@section('title', 'Inicio')
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+@stop
+
+@section('title', 'TipoCuentas')
 
 @section('content_header')
-    <h1>Escritorio</h1>
+    <h1>Reporte de cuenta de Activo Fijo</h1>
 @stop
 
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <h1 class="card-title">Bienvenido</h1>
+       <div class="box-header with-border">
+            {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button> --}}
+            <label for="dateReporteActivo"> <h4>Fecha de Reporte</h4>
+                <input type="date" name="dateReporteActivo" id="dateReporteActivo">
+            </label>
         </div>
         <div class="card-body">
+            <table class="table table-bordered table-hover table-striped TB" id="Reporte">
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>DETALLE_ACTIVO</th>
+                        <th>FECHA_RECIBIDA</th>
+                        <th>COSTO</th>
+                        <th>VIDA_UTIL</th>
+                        <th>MESES</th>
+                        <th>DEPRECIACION MENSUAL</th>
+                        <th>DEPRECIACION ACUMULADA</th>
+                        <th>VALOR EN LIBRO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($listaGralReporte as $RptActivo)
+                        <tr>
+                            <td>{{ $RptActivo->CATEGORIA }}</th>
+                            <td>{{ $RptActivo->DETALLE_ACTIVO }}</th>
+                            <td>{{ $RptActivo->FECHA_RECIBIDA }}</th>
+                            <td>{{ $RptActivo->COSTO }}</th>
+                            <td>{{ $RptActivo->VIDA_UTIL}}</td>
+                            <td></td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
@@ -88,5 +121,5 @@
         });
 
     </script>
-    <script src="../../resources/js/vehiculo.js"></script>
+    <script src="../../resources/js/ReporteActivo.js"></script>
 @stop
