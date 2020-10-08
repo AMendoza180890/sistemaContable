@@ -37,20 +37,48 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($listaGralReporte as $RptActivo)
-                        <tr>
-                            <td>{{ $RptActivo->CATEGORIA }}</th>
-                            <td>{{ $RptActivo->DETALLE_ACTIVO }}</th>
-                            <td>{{ $RptActivo->FECHA_RECIBIDA }}</th>
-                            <td>{{ $RptActivo->COSTO }}</th>
-                            <td>{{ $RptActivo->VIDA_UTIL}}</td>
-                            <td></td>
-                        </tr>
-                    @endforeach
+                    <?php
+                    foreach ($listaGralReporte as $key => $value) {
+                        echo '<tr>
+                            <td>'.$value["CATEGORIA"].'</th>
+                            <td>'.$value["DETALLE_ACTIVO"].'</th>
+                            <td>'.$value["FECHA_RECIBIDA"].'</th>
+                            <td>'.$value["COSTO"].'</th>
+                            <td>'.$value["VIDA_UTIL"].'</td>
+                            <td>'.mesesReporte($value["FECHA_RECIBIDA"]).'</td>
+                            <td>'.($value["VIDA_UTIL"]!=0 ? $value["COSTO"] / $value["VIDA_UTIL"] : 0).'</td>
+                            <td>'.$value["VIDA_UTIL"].'</td>
+                            <td> en espera</td>
+                        </tr>';
+                    }
+                    function mesesReporte($FECHARECIBIDA) {
+                                try {
+                                    if (post["dateReporteActivo"]) {
+                                        $fechaReporte = post["dateReporteActivo"];
+                                        $inicio = new DateTime($FECHARECIBIDA);
+                                        $fin = new DateTime($fechaReporte);
+    
+                                        $interval=$fin->diff($inicio);
+                                        
+                                        $intervalMeses=$interval->format("%m");
+    
+    
+                                        $intervalAnos = $interval->format("%y")*12;
+                                        $meses = $intervalMeses + $intervalAnos;
+                                        echo '<script> console.log('.$post["dateReporteActivo"].')</script>';
+                                        return $meses;
+                                    }
+                                } catch (exception $ex) {
+                                    echo '<script>console.log('.$ex.')</script>';
+                                }
+                               
+                    }   
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
+
 @stop
 
 @section('js')
