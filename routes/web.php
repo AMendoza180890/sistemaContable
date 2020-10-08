@@ -84,7 +84,7 @@ Route::get('/catalogoTipocuenta', 'CatActivoFijoController@listarTipoCuenta')->n
 /* fin del cargar  formularios */
 
 /*Rutas de reportes */
-Route::get('/RptActivoFijo', 'catReporteActivofijoController@index')->name('RptCuenta.all');
+Route::match(["post","get"],'/RptActivoFijo', 'catReporteActivofijoController@index')->name('RptCuenta.all');
 /*Fin de Reportes */
 
 /*Parte del sistema AdminLTE No tocar*/

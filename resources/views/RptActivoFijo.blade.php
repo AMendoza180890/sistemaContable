@@ -15,11 +15,15 @@
 
 @section('content')
     <div class="card">
-       <div class="box-header with-border">
-            {{-- <button class="btn btn-primary" data-toggle="modal" data-target="#CrearCuentaActivo">Crear</button> --}}
-            <label for="dateReporteActivo"> <h4>Fecha de Reporte</h4>
-                <input type="date" name="dateReporteActivo" id="dateReporteActivo">
-            </label>
+        <div class="box-header with-border">
+     <form action="" method="post">
+         <label for="dateReporteActivo" action={{ route('RptCuenta.all') }} >
+             @csrf
+             <h4>Fecha de Reporte</h4>
+             <input type="date" name="dateReporteActivo" id="dateReporteActivo">
+             <input type="submit" value="Generar Reporte">
+         </label>
+     </form>
         </div>
         <div class="card-body">
             <table class="table table-bordered table-hover table-striped TB" id="Reporte">
@@ -39,40 +43,78 @@
                 <tbody>
                     <?php
                     foreach ($listaGralReporte as $key => $value) {
-                        echo '<tr>
-                            <td>'.$value["CATEGORIA"].'</th>
-                            <td>'.$value["DETALLE_ACTIVO"].'</th>
-                            <td>'.$value["FECHA_RECIBIDA"].'</th>
-                            <td>'.$value["COSTO"].'</th>
-                            <td>'.$value["VIDA_UTIL"].'</td>
-                            <td>'.mesesReporte($value["FECHA_RECIBIDA"]).'</td>
-                            <td>'.($value["VIDA_UTIL"]!=0 ? $value["COSTO"] / $value["VIDA_UTIL"] : 0).'</td>
-                            <td>'.$value["VIDA_UTIL"].'</td>
-                            <td> en espera</td>
-                        </tr>';
+                    echo '<tr>
+                        <td>' .
+                            $value['CATEGORIA'] .
+                            '</th>
+                        <td>' .
+                            $value['DETALLE_ACTIVO'] .
+                            '</th>
+                        <td id="'.$key.'">' .
+                            $value['FECHA_RECIBIDA'] .
+                            '</th>
+                        <td>' .
+                            $value['COSTO'] .
+                            '</th>
+                        <td>' .
+                            $value['VIDA_UTIL'] .
+                            '</td>
+                        <td>' .
+                            obtenerMesDif($value['FECHA_RECIBIDA']) .
+                            '</td>
+                        <td>' .'C$ '.
+                            ($value['VIDA_UTIL'] != 0 ? number_format($value['COSTO'] / $value['VIDA_UTIL'],2) : 0) .
+                            '</td>
+                        <td>' .'C$ '.depreciacionAcumulada($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL'] ).
+                            '</td>
+                        <td>'.'C$ '.saldoLibro($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL']).'</td>
+                    </tr>';
                     }
-                    function mesesReporte($FECHARECIBIDA) {
-                                try {
-                                    if (post["dateReporteActivo"]) {
-                                        $fechaReporte = post["dateReporteActivo"];
-                                        $inicio = new DateTime($FECHARECIBIDA);
-                                        $fin = new DateTime($fechaReporte);
+
+                    function obtenerMesDif($FECHARECIBIDA)
+                    {
+                    
+                        $fechaReporte = date('d-m-Y');
+                        
+                        $inicio = new DateTime($FECHARECIBIDA);
+                        $fin = new DateTime($fechaReporte);
     
-                                        $interval=$fin->diff($inicio);
-                                        
-                                        $intervalMeses=$interval->format("%m");
+                        $interval = $fin->diff($inicio);
     
+                        $intervalMeses = $interval->format('%m');
     
-                                        $intervalAnos = $interval->format("%y")*12;
-                                        $meses = $intervalMeses + $intervalAnos;
-                                        echo '<script> console.log('.$post["dateReporteActivo"].')</script>';
-                                        return $meses;
-                                    }
-                                } catch (exception $ex) {
-                                    echo '<script>console.log('.$ex.')</script>';
-                                }
-                               
-                    }   
+                        $intervalAnos = $interval->format('%y') * 12;
+                        $meses = $intervalMeses + $intervalAnos;
+                        
+                        return $meses;
+
+
+                    }
+                    
+                    function depreciacionAcumulada($mes, $costo, $vidaUtil){
+                        $diferenciaMes = obtenerMesDif($mes);
+
+                        if ($vidaUtil != 0) {
+                            $depreciacionMensual = $costo / $vidaUtil;
+                        } else {
+                            $depreciacionMensual = 0;
+                        }
+
+                        if ($vidaUtil >= $diferenciaMes) {
+                            $depreciacionAcumulada = $depreciacionMensual * $diferenciaMes;
+                        }else {
+                            $depreciacionAcumulada = 0;
+                        }
+                        return number_format($depreciacionAcumulada,2);
+                    }
+
+                    function saldoLibro($fechaRecibido,$costo,$vidaUtil){
+                        $depreciacion = depreciacionAcumulada($fechaRecibido,$costo, $vidaUtil);
+                        $Saldo = $costo - $depreciacion;
+
+                        return number_format($Saldo,2);
+                    }
+
                     ?>
                 </tbody>
             </table>
