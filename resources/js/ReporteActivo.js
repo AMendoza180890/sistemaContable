@@ -7,7 +7,7 @@ $('#dateReporteActivo').val(today);
 
 $('#dateReporteActivo').on('change', function() {
     let fechaActual = $('#dateReporteActivo').val();
-    $('#tituloFechaSeleccionada').html(fechaActual);
+    $('#tituloFechaSeleccionada').html("Reporte Realizado a la fecha " + fechaActual);
 
     $("td").each(function() {
         // let costo = $('#costoActivo').attr('costo');
@@ -44,8 +44,8 @@ $('#dateReporteActivo').on('change', function() {
         let months;
         let fechaActual = $('#dateReporteActivo').val();
         months = (new Date(fechaActual).getFullYear() - new Date(valor).getFullYear()) * 12;
-        months -= new Date(valor).getMonth() + 1;
-        months += new Date(fechaActual).getMonth();
+        months -= (new Date(valor).getMonth());
+        months += (new Date(fechaActual).getMonth());
         return (months <= 0 ? 0 : months);
     }
 

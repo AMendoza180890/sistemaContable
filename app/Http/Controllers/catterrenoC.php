@@ -56,6 +56,7 @@ class catterrenoC extends Controller
             $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
             $terrenos->catterrenoCosto = $request->TerrenoCostoN;
             $terrenos->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralN;
+            $terrenos->idActivofijo = $request->tipocuenta;
             $terrenos->CatTerrenoEstado = 1;
     
             $terrenos->save();
@@ -111,6 +112,7 @@ class catterrenoC extends Controller
             $actualizarTerreno->catTerrenoFechaCompra = $request->TerrenofechaCompraE;
             $actualizarTerreno->catterrenoCosto = $request->TerrenoCostoE;
             $actualizarTerreno->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralE;
+            $actualizarTerreno->idActivofijo = $request->tipocuentaE;
             $actualizarTerreno->CatTerrenoEstado = 1;
 
             $actualizarTerreno->save();

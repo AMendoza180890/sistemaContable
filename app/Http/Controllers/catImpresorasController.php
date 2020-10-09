@@ -56,6 +56,7 @@ class catImpresorasController extends Controller
             $impresoras->catImpresoraFechaIngreso = $request->impFecha;
             $impresoras->catImpresoraCosto = $request->impCosto;
             $impresoras->catImpresoraDescripcion = $request->impDescripcion;
+            $impresoras->idActivofijo=$request->tipocuenta;
             $impresoras->CatImpresoraEstado = 1;
 
             $impresoras->save();
@@ -113,6 +114,7 @@ class catImpresorasController extends Controller
             $actualizarImpresora->catImpresoraDescripcion = $request->impDescripcionE;
             $actualizarImpresora->catImpresoraFechaIngreso = $request->impfechaCompraE;
             $actualizarImpresora->catImpresoraCosto = $request->impcostoE;
+            $actualizarImpresora->idActivofijo = $request->tipocuentaE;
             $actualizarImpresora->CatImpresoraEstado = 1;
             
             $actualizarImpresora->save();

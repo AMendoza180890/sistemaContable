@@ -20,7 +20,7 @@
              @csrf
              <h4>Fecha de Reporte</h4>
              <input type="date" name="dateReporteActivo" id="dateReporteActivo">
-             <input type="submit" value="Generar Reporte">
+             {{-- <input type="submit" value="Generar Reporte"> --}}
          </label>
      </form>
         </div>

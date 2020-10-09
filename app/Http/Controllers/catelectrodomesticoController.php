@@ -54,6 +54,7 @@ class catelectrodomesticoController extends Controller
             $electrodomestico->CatElectFechaIngreso = $request->electFecha;
             $electrodomestico->CatElectCosto = $request->electcosto;
             $electrodomestico->CatElectDescripcion = $request->electdescripcion;
+            $electrodomestico->idActivofijo = $request->tipocuentaE;
             $electrodomestico->CatElectEstado = 1;
 
             $electrodomestico->save();
@@ -109,6 +110,7 @@ class catelectrodomesticoController extends Controller
             $actualizarElectrodomestico->CatElectDescripcion = $request->electdescripcionE;
             $actualizarElectrodomestico->CatElectFechaIngreso = $request->electFechaE;
             $actualizarElectrodomestico->CatElectCosto = $request->electcostoE;
+            $actualizarElectrodomestico->idActivofijo = $request->tipocuentaE;
             $actualizarElectrodomestico->CatElectEstado = 1;
 
             $actualizarElectrodomestico->save();

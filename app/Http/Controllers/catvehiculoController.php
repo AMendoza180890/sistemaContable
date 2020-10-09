@@ -76,6 +76,7 @@ class catvehiculoController extends Controller
             $vehiculos->catVehiculoFechaCompra = $request->vehFecha;
             $vehiculos->catVehiculoCosto = $request->vehCosto;
             $vehiculos->catVehiculoPlaca = $request->catVehiculoPlacaN;
+            $vehiculos->idActivofijo = $request->tipocuenta;
             $vehiculos->catVehiculoEstado = 1;
 
             $vehiculos->save();
@@ -145,6 +146,7 @@ class catvehiculoController extends Controller
             $actualizarVehiculo->catVehiculoCosto = $request->vehCostoE;
             //Agregar Objeto donde se obtendra la planca en el front-end
             $actualizarVehiculo->catVehiculoPlaca = $request->catVehiculoPlacaE;
+            $actualizarVehiculo->idActivofijo = $request->tipocuentaE;
             $actualizarVehiculo->catVehiculoEstado = 1;
     
             $actualizarVehiculo->save();

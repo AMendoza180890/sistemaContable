@@ -64,6 +64,7 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
+               $computadoras->idActivofijo = $request->tipocuenta;
                $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
@@ -124,6 +125,7 @@ class catequipocomputoController extends Controller
             $actualizarComputadora->catEquipoTipoSO = $request->compTipoSOE;
             $actualizarComputadora->catEquipoFechaCompra = $request->compFechaCompraE;
             $actualizarComputadora->catEquipoCostoEquipo = $request->compCostoE;
+            $actualizarComputadora->idActivofijo = $request->tipocuentaE;
             $actualizarComputadora->CatEquipoEstado = 1;
 
             $actualizarComputadora->save();
