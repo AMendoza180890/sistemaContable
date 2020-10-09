@@ -1,7 +1,6 @@
 @extends('adminlte::page')
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
@@ -16,8 +15,8 @@
 @section('content')
     <div class="card">
         <div class="box-header with-border">
-     <form action="" method="post">
-         <label for="dateReporteActivo" action={{ route('RptCuenta.all') }} >
+     <form action="{{ route('RptCuenta.all') }}" method="post">
+         <label for="dateReporteActivo" >
              @csrf
              <h4>Fecha de Reporte</h4>
              <input type="date" name="dateReporteActivo" id="dateReporteActivo">
@@ -25,7 +24,10 @@
          </label>
      </form>
         </div>
+       
         <div class="card-body">
+            
+            <h4 id="tituloFechaSeleccionada"></h4>
             <table class="table table-bordered table-hover table-striped TB" id="Reporte">
                 <thead>
                     <tr>
@@ -41,16 +43,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
+                <?php
                     foreach ($listaGralReporte as $key => $value) {
                     echo '<tr>
-                        <td>' .
+                        <td id="info" indice = "'.$key.'" fechaRecibido="'.$value['FECHA_RECIBIDA'].'" vidaUtil="'.$value['VIDA_UTIL'].'" costo="'.$value['COSTO'].'">' .
                             $value['CATEGORIA'] .
                             '</th>
                         <td>' .
                             $value['DETALLE_ACTIVO'] .
                             '</th>
-                        <td id="'.$key.'">' .
+                        <td>' .
                             $value['FECHA_RECIBIDA'] .
                             '</th>
                         <td>' .
@@ -59,23 +61,23 @@
                         <td>' .
                             $value['VIDA_UTIL'] .
                             '</td>
-                        <td>' .
+                        <td id="'.$key.'">' .
                             obtenerMesDif($value['FECHA_RECIBIDA']) .
                             '</td>
                         <td>' .'C$ '.
                             ($value['VIDA_UTIL'] != 0 ? number_format($value['COSTO'] / $value['VIDA_UTIL'],2) : 0) .
                             '</td>
-                        <td>' .'C$ '.depreciacionAcumulada($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL'] ).
+                        <td id="da'.$key.'">' .'C$ '.depreciacionAcumulada($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL'] ).
                             '</td>
-                        <td>'.'C$ '.saldoLibro($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL']).'</td>
+                        <td id="sl'.$key.'">'.'C$ '.saldoLibro($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL']).'</td>
                     </tr>';
                     }
-
+                    
                     function obtenerMesDif($FECHARECIBIDA)
                     {
-                    
-                        $fechaReporte = date('d-m-Y');
-                        
+                        if (isset($_POST["dateReporteActivo"])) {
+                        $fechaReporte = $_POST["dateReporteActivo"];
+
                         $inicio = new DateTime($FECHARECIBIDA);
                         $fin = new DateTime($fechaReporte);
     
@@ -87,6 +89,23 @@
                         $meses = $intervalMeses + $intervalAnos;
                         
                         return $meses;
+                        
+                    } else {
+
+                            $fechaReporte = date('d-m-Y');
+                            $inicio = new DateTime($FECHARECIBIDA);
+                            $fin = new DateTime($fechaReporte);
+        
+                            $interval = $fin->diff($inicio);
+        
+                            $intervalMeses = $interval->format('%m');
+        
+                            $intervalAnos = $interval->format('%y') * 12;
+                            $meses = $intervalMeses + $intervalAnos;
+                            
+                            return $meses;
+                        }
+                        
 
 
                     }
@@ -173,7 +192,7 @@
             language: {
                 processing: "Procesando",
                 search: "Buscar:",
-                lengthMenu: "Lista de Vehiculos",
+                lengthMenu: "Reporte de Activos",
                 info: "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
                 infoEmpty: "No se ha encontrado ningun elemento en lista",
                 infoFiltered: "Filtro de _MAX_ Cantidad total de elementos",
