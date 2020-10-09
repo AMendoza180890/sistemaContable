@@ -16,38 +16,38 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputMarca">Marca</label>
-                                    <input type="text" class="form-control" name="impMarca" id="inputMarca" placeholder="ej. Canon, Epson.">
+                                    <input type="text" class="form-control" name="impMarca" id="inputMarca" placeholder="ej. Canon, Epson." required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputModelo">Modelo</label>
-                                    <input type="text" class="form-control" name="impModelo" id="inputModelo" placeholder="ej. MYL12345678, etc.">
+                                    <input type="text" class="form-control" name="impModelo" id="inputModelo" placeholder="ej. MYL12345678, etc." required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputTonner">Tipo de Tonner</label>
-                                <input type="text" class="form-control" name="TipoTonner" id="inputTonner" placeholder="ej. Cartucho 128, etc.">
+                                <input type="text" class="form-control" name="TipoTonner" id="inputTonner" placeholder="ej. Cartucho 128, etc." required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impfechaCompra">Fecha</label>
                                 <input type="date" class="form-control" id="impfechaCompra" name="impFecha"
-                                    placeholder="Fecha compra o donacion">
+                                    placeholder="Fecha compra o donacion" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impcosto">Costo</label>
                                 <input type="text" class="form-control" id="impcosto" name="impCosto"
-                                    placeholder="Costo Real o apróximado">
+                                    placeholder="Costo Real o apróximado" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impDescripcion">Descripción</label>
-                                <textarea class="form-control" id="impDescripcion" name="impDescripcion" rows="3"></textarea>
+                                <textarea class="form-control" id="impDescripcion" name="impDescripcion" rows="3" required></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
-                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta" required>
                                             <option value="valor"></option>
                                     </select>
                             </div>

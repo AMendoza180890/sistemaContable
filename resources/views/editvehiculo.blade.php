@@ -21,28 +21,28 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehTipo">Tipo</label>
-                                <input type="text" class="form-control" name="vehTipoE" id="vehTipoE" placeholder="ej. inspiron, Thinkpad, etc.">
+                                <input type="text" class="form-control" name="vehTipoE" id="vehTipoE" placeholder="ej. inspiron, Thinkpad, etc." required>
                                 {{-- {{$obtenerVehiculos -> catVehiculoTipo}} --}}
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehModelo">Modelo</label>
-                                <input type="text" class="form-control" name="vehModeloE" id="vehModeloE"  placeholder="ej. MYL12345678.">
+                                <input type="text" class="form-control" name="vehModeloE" id="vehModeloE"  placeholder="ej. MYL12345678." required>
                                 {{-- {{$obtenerVehiculos->catVehiculoModelo}} --}}
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="vehColor">Color</label>
-                                <input type="text" class="form-control" name="vehColorE" id="vehColorE" placeholder="ej. DELL, Lenovo, HP, etc.">
+                                <input type="text" class="form-control" name="vehColorE" id="vehColorE" placeholder="ej. DELL, Lenovo, HP, etc." required>
                             </div>
                             <div class="form-group">
                                 <label for="vehMotor">Motor</label>
                                 <input type="text" class="form-control" name="vehMotorE" id="vehMotorE"
-                                    placeholder="ej. 250Gb, 1Tb, etc.">
+                                    placeholder="ej. 250Gb, 1Tb, etc." required>
                             </div>
 
                             <div class="form-group">
                                     <label for="vehCilindro">Cilindros</label>
-                                    <select class="form-control" id="vehCilindroE" name="vehCilindroE">
+                                    <select class="form-control" id="vehCilindroE" name="vehCilindroE" required>
                                         <option selected>elegir</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
@@ -58,7 +58,7 @@
 
                                 <div class="form-group">
                                     <label for="vehcombustible">Combustible</label>
-                                    <select class="form-control" id="vehcombustibleE" name="vehcombustibleE">
+                                    <select class="form-control" id="vehcombustibleE" name="vehcombustibleE" required>
                                         <option selected>elegir</option>
                                         <option value="Gasolina">Gasolina</option>
                                         <option value="Diésel">Diésel</option>
@@ -68,29 +68,29 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="vehChasis">Chasis</label>
-                                    <input type="text" class="form-control" name="vehChasisE" id="vehChasisE">
+                                    <input type="text" class="form-control" name="vehChasisE" id="vehChasisE" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehVIM">VIM</label>
-                                    <input type="text" class="form-control" name="vehVIME" id="vehVIME">
+                                    <input type="text" class="form-control" name="vehVIME" id="vehVIME" required>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="vehUso">Uso</label>
-                                    <input type="text" class="form-control" name="vehUsoE" id="vehUsoE">
+                                    <input type="text" class="form-control" name="vehUsoE" id="vehUsoE" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehAnio">Año</label>
-                                    <input type="text" class="form-control" name="vehAnioE" id="vehAnioE">
+                                    <input type="text" class="form-control" name="vehAnioE" id="vehAnioE" required>
                                 </div>
                             </div>
 
 
                             <div class="form-group">
                                     <label for="vehPasajeros">Pasajeros</label>
-                                    <select class="form-control" id="vehPasajerosE" name="vehPasajerosE">
+                                    <select class="form-control" id="vehPasajerosE" name="vehPasajerosE" required>
                                         <option selected>elegir</option>
                                         <option id="4" value="4">4</option>
                                         <option id="5" value="5">5</option>
@@ -104,29 +104,29 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="vehServicio">Servicio</label>
-                                    <input type="text" class="form-control" name="vehServicioE" id="vehServicioE">
+                                    <input type="text" class="form-control" name="vehServicioE" id="vehServicioE" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehPropietario">Propietario</label>
-                                    <input type="text" class="form-control" name="vehPropietarioE" id="vehPropietarioE">
+                                    <input type="text" class="form-control" name="vehPropietarioE" id="vehPropietarioE" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="vehFecha">Fecha</label>
                                 <input type="date" class="form-control" id="vehFechaE" name="vehFechaE"
-                                    placeholder="Fecha compra o donacion">
+                                    placeholder="Fecha compra o donacion" required>
                             </div>
                             <div class="form-group">
                                 <label for="vehCosto">Costo</label>
                                 <input type="text" class="form-control" id="vehCostoE" name="vehCostoE"
-                                    placeholder="Costo Real o apróximado">
+                                    placeholder="Costo Real o apróximado" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="catVehiculoPlacaE">Placa</label>
                                 <input type="text" class="form-control" id="catVehiculoPlacaE" name="catVehiculoPlacaE"
-                                    placeholder="Placa del vehiculo">
+                                    placeholder="Placa del vehiculo" required>
                             </div>
 
                             <div class="form-group">

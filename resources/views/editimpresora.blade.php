@@ -17,39 +17,39 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputMarcaE">Marca</label>
-                                    <input type="text" class="form-control" name="inputMarcaE" id="inputMarcaE" placeholder="ej. Canon, Epson.">
+                                    <input type="text" class="form-control" name="inputMarcaE" id="inputMarcaE" placeholder="ej. Canon, Epson." required>
                                     <input type="hidden" name="codImpresoraE" id="codImpresoraE">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputModeloE">Modelo</label>
-                                    <input type="text" class="form-control" name="inputModeloE" id="inputModeloE" placeholder="ej. MYL12345678, etc.">
+                                    <input type="text" class="form-control" name="inputModeloE" id="inputModeloE" placeholder="ej. MYL12345678, etc." required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputTonnerE">Tipo de Tonner</label>
-                                <input type="text" class="form-control" name="inputTonnerE" id="inputTonnerE" placeholder="ej. Cartucho 128, etc.">
+                                <input type="text" class="form-control" name="inputTonnerE" id="inputTonnerE" placeholder="ej. Cartucho 128, etc." required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impfechaCompraE">Fecha</label>
                                 <input type="date" class="form-control" id="impfechaCompraE" name="impfechaCompraE"
-                                    placeholder="Fecha compra o donacion">
+                                    placeholder="Fecha compra o donacion" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impcostoE">Costo</label>
                                 <input type="text" class="form-control" id="impcostoE" name="impcostoE"
-                                    placeholder="Costo Real o apróximado">
+                                    placeholder="Costo Real o apróximado" required>
                             </div>
                             
                             <div class="form-group">
                                 <label for="impDescripcionE">Descripción</label>
-                                <textarea class="form-control" id="impDescripcionE" name="impDescripcionE" rows="3"></textarea>
+                                <textarea class="form-control" id="impDescripcionE" name="impDescripcionE" rows="3" required></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipocuentaE">Tipocuenta</label>
-                                    <select class="form-control"name="tipocuentaE" id="tipocuentaE">
+                                    <select class="form-control"name="tipocuentaE" id="tipocuentaE" required>
                                             <option value="valor"></option>
                                     </select>
                             </div>

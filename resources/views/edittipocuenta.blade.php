@@ -17,16 +17,16 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <h4>Codigo Cuenta:</h4>
-                                <input type="text" class="form-control input-lg" name="CodigoCuentaE" id="CodigoCuentaE" require>
+                                <input type="text" class="form-control input-lg" name="CodigoCuentaE" id="CodigoCuentaE" required>
                                 <input type="hidden" name="activoCodigoE" id="activoCodigoE">
                             </div>
                             <div class="form-group">
                                 <h4>Descripción:</h4>
-                                <input type="text" class="form-control input-lg" name="activoDescripcionE" id="activoDescripcionE" require>
+                                <input type="text" class="form-control input-lg" name="activoDescripcionE" id="activoDescripcionE" required>
                             </div>
                             <div class="form-group">
                                 <h4>Vida Util:</h4>
-                                <input type="text" class="form-control input-lg" name="activoVidaUtilE" id="activoVidaUtilE" require>
+                                <input type="text" class="form-control input-lg" name="activoVidaUtilE" id="activoVidaUtilE" required>
                             </div>
                         </div>
                         <div class="modal-footer">
