@@ -6,6 +6,7 @@ use App\catReporteActivofijoModel;
 use App\catterreno;
 use FFI\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class catReporteActivofijoController extends Controller
 {
@@ -51,9 +52,14 @@ class catReporteActivofijoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        try {
+            $listaGralReporte = DB::select('CALL SPgenerarReporteFecha(?)',array($request->dateReporteActivo));
+            return view('RptActivoFijo', compact('listaGralReporte'))->with('mensajeExito',"Se genero reporte a la fecha ".$request->dateReporteActivo);
+        } catch (exception $ex) {
+            return 'ERROR - '.$ex->getMessage();
+        }
     }
 
     /**

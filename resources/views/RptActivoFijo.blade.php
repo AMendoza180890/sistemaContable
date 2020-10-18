@@ -19,19 +19,25 @@
 
 @section('content')
     <div class="card">
+        @if (session('mensajeExito'))
+            <div class="alert alert-success">
+                {{ session('mensajeExito') }}
+            </div>
+        @endif
+        
         <div class="box-header with-border">
-     <form action="{{ route('RptCuenta.all') }}" method="post">
-         <label for="dateReporteActivo" >
-             @csrf
-             <h4>Fecha de Reporte</h4>
-             <input type="date" name="dateReporteActivo" id="dateReporteActivo">
-             {{-- <input type="submit" value="Generar Reporte"> --}}
-         </label>
-     </form>
+            <form method="POST" action="{{ route('RptCuenta.show') }}">
+                @csrf
+                <label for="dateReporteActivo" >
+                    <h4>Fecha de Reporte</h4>
+                    <input type="date" name="dateReporteActivo" id="dateReporteActivo">
+                    <input type="submit" value="Generar Reporte">
+                </label>
+            </form>
         </div>
-       
+        
+
         <div class="card-body">
-            
             <h4 id="tituloFechaSeleccionada"></h4>
             <table class="table table-bordered table-hover table-striped TB" id="Reporte">
                 <thead>
@@ -48,98 +54,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    foreach ($listaGralReporte as $key => $value) {
-                    echo '<tr>
-                        <td id="info" indice = "'.$key.'" fechaRecibido="'.$value['FECHA_RECIBIDA'].'" vidaUtil="'.$value['VIDA_UTIL'].'" costo="'.$value['COSTO'].'">' .
-                            $value['CATEGORIA'] .
-                            '</th>
-                        <td>' .
-                            $value['DETALLE_ACTIVO'] .
-                            '</th>
-                        <td>' .
-                            $value['FECHA_RECIBIDA'] .
-                            '</th>
-                        <td>' .
-                            $value['COSTO'] .
-                            '</th>
-                        <td>' .
-                            $value['VIDA_UTIL'] .
-                            '</td>
-                        <td id="'.$key.'">' .
-                            obtenerMesDif($value['FECHA_RECIBIDA']) .
-                            '</td>
-                        <td>' .'C$ '.
-                            ($value['VIDA_UTIL'] != 0 ? number_format($value['COSTO'] / $value['VIDA_UTIL'],2) : 0) .
-                            '</td>
-                        <td id="da'.$key.'">' .'C$ '.depreciacionAcumulada($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL'] ).
-                            '</td>
-                        <td id="sl'.$key.'">'.'C$ '.saldoLibro($value['FECHA_RECIBIDA'],$value['COSTO'], $value['VIDA_UTIL']).'</td>
-                    </tr>';
-                    }
-                    
-                    function obtenerMesDif($FECHARECIBIDA)
-                    {
-                        if (isset($_POST["dateReporteActivo"])) {
-                        $fechaReporte = $_POST["dateReporteActivo"];
-
-                        $inicio = new DateTime($FECHARECIBIDA);
-                        $fin = new DateTime($fechaReporte);
-    
-                        $interval = $fin->diff($inicio);
-    
-                        $intervalMeses = $interval->format('%m');
-    
-                        $intervalAnos = $interval->format('%y') * 12;
-                        $meses = $intervalMeses + $intervalAnos;
-                        
-                        return $meses;
-                        
-                    } else {
-
-                            $fechaReporte = date('d-m-Y');
-                            $inicio = new DateTime($FECHARECIBIDA);
-                            $fin = new DateTime($fechaReporte);
-        
-                            $interval = $fin->diff($inicio);
-        
-                            $intervalMeses = $interval->format('%m');
-        
-                            $intervalAnos = $interval->format('%y') * 12;
-                            $meses = $intervalMeses + $intervalAnos;
-                            
-                            return $meses;
-                        }
-                        
-
-
-                    }
-                    
-                    function depreciacionAcumulada($mes, $costo, $vidaUtil){
-                        $diferenciaMes = obtenerMesDif($mes);
-
-                        if ($vidaUtil != 0) {
-                            $depreciacionMensual = $costo / $vidaUtil;
-                        } else {
-                            $depreciacionMensual = 0;
-                        }
-
-                        if ($vidaUtil >= $diferenciaMes) {
-                            $depreciacionAcumulada = $depreciacionMensual * $diferenciaMes;
-                        }else {
-                            $depreciacionAcumulada = 0;
-                        }
-                        return number_format($depreciacionAcumulada,2);
-                    }
-
-                    function saldoLibro($fechaRecibido,$costo,$vidaUtil){
-                        $depreciacion = depreciacionAcumulada($fechaRecibido,$costo, $vidaUtil);
-                        $Saldo = $costo - $depreciacion;
-
-                        return number_format($Saldo,2);
-                    }
-
-                    ?>
+                    @foreach ($listaGralReporte as $listado)    
+                    <tr>
+                        <td>{{$listado->CATEGORIA}}</th>
+                        <td>{{$listado->DETALLE_ACTIVO}}</th>
+                        <td>{{$listado->FECHA_RECIBIDA}}</th>
+                        <td>{{"C$ ". $listado->COSTO}}</th>
+                        <td>{{$listado->VIDA_UTIL}}</td>
+                        <td>{{$listado->MESES}}</td>
+                        <td>{{"C$ ". $listado->depreciacionMensual}}</td>
+                        <td>{{"C$ ". $listado->depreciacionAcumulada}}</td>
+                        <td>{{"C$ ". $listado->saldoEnLibro}}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
