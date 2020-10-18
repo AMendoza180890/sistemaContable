@@ -97,6 +97,7 @@
     <script>
         $(document).ready(function(){
             $('#Reporte').DataTable({
+                paginate:false,
                 dom: 'Bfrtip',
                 buttons: [
                 {extend: 'copy',
