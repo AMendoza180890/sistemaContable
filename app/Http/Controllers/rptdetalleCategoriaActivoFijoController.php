@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\rptdetalleCategoriaActivoFijo;
 use Illuminate\Http\Request;
 use FFI\Exception;
+
 class rptdetalleCategoriaActivoFijoController extends Controller
 {
     /**

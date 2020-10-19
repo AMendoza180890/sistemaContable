@@ -18,7 +18,7 @@
             <h1 class="card-title">Bienvenido</h1>
         </div>
         <div class="card-body">
-            {{-- <h4 id="tituloFechaSeleccionada"></h4>
+            <h4 id="tituloFechaSeleccionada"></h4>
             <table class="table table-bordered table-hover table-striped TB" id="Reporte">
                 <thead>
                     <tr>
@@ -40,7 +40,7 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table> --}}
+            </table> 
         </div>
     </div>
 @stop

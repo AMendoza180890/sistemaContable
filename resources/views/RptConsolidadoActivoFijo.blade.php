@@ -26,11 +26,11 @@
         @endif
         
         <div class="box-header with-border">
-            <form method="POST" action="{{ route('RptCuenta.show') }}">
+            <form method="POST" action="{{ route('rptConsolidado.show') }}">
                 @csrf
-                <label for="dateReporteActivo" >
+                <label for="dateConsolidadoReporteActivo" >
                     <h4>Fecha de Reporte</h4>
-                    <input type="date" name="dateReporteActivo" id="dateReporteActivo">
+                    <input type="date" name="dateConsolidadoReporteActivo" id="dateConsolidadoReporteActivo">
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>

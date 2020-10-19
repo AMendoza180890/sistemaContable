@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\rptConsolidadoCategoriaActivoFijoModel;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use DB;
 class rptConsolidadoCategoriaActivoFijoController extends Controller
 {
     /**
@@ -49,9 +50,14 @@ class rptConsolidadoCategoriaActivoFijoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        try {
+            $consolidadoActivo = DB::select('CALL SPRptdetallecategoriaactivofijo(?)',array($request->dateConsolidadoReporteActivo));
+            return view('RptConsolidadoActivoFijo',compact('consolidadoActivo'));
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

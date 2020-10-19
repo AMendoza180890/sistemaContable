@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\rptdetalleCategoriaActivoFijo;
 use Illuminate\Http\Request;
+use FFI\Exception;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        try {
+            $detalleCategoria = rptdetalleCategoriaActivoFijo::all();
+            return view('home', compact('detalleCategoria'));
+        } catch (exception $ex) {
+            return 'ERROR = '. $ex->getMessage();
+        }
+        //return view('home');
     }
 }
