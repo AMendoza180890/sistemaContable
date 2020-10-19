@@ -105,7 +105,7 @@ class catterrenoC extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarTerreno = catterreno::where('catTerrenoId', '=',$id)->first();
+            $actualizarTerreno = catterreno::where('catTerrenoId', '=', $id)->first();
 
             $actualizarTerreno->catTerrenoPropietario = $request->TerrenoPropiedadE;
             $actualizarTerreno->catTerrenoArea = $request->TerrenoAreaE;

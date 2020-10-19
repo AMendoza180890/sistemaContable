@@ -44,27 +44,21 @@
                     <tr>
                         <th>CATEGORIA</th>
                         <th>DETALLE_ACTIVO</th>
-                        <th>FECHA_RECIBIDA</th>
                         <th>COSTO</th>
-                        <th>VIDA_UTIL</th>
-                        <th>MESES</th>
                         <th>DEPRECIACION MENSUAL</th>
                         <th>DEPRECIACION ACUMULADA</th>
                         <th>VALOR EN LIBRO</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($listaGralReporte as $listado)    
+                    @foreach ($consolidadoActivo as $listado)    
                     <tr>
                         <td>{{$listado->CATEGORIA}}</th>
                         <td>{{$listado->DETALLE_ACTIVO}}</th>
-                        <td>{{$listado->FECHA_RECIBIDA}}</th>
                         <td>{{"C$ ". $listado->COSTO}}</th>
-                        <td>{{$listado->VIDA_UTIL}}</td>
-                        <td>{{$listado->MESES}}</td>
-                        <td>{{"C$ ". $listado->depreciacionMensual}}</td>
-                        <td>{{"C$ ". $listado->depreciacionAcumulada}}</td>
-                        <td>{{"C$ ". $listado->saldoEnLibro}}</td>
+                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALMENSUAL}}</td>
+                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALACUMULADA}}</td>
+                        <td>{{"C$ ". $listado->SALDOTOTALLIBRO}}</td>
                     </tr>
                     @endforeach
                 </tbody>

@@ -79,13 +79,19 @@ Route::get('/recuperarUsuario/{idusuario}', 'catUsuarioController@recover')->nam
 Route::get('/usuarioEdit/{idusuario}/edit','catUsuarioController@edit')->name('usuario.edit')->where(['idusuario' => '[0-9]+']);
 /*Hasta aqui finaliza Login */
 
-/* Cargar catalogos en   formularios*/
+/* Cargar catalogos en formularios*/
 Route::get('/catalogoTipocuenta', 'CatActivoFijoController@listarTipoCuenta')->name('catalogoTipoCuentas.all'); 
 /* fin del cargar  formularios */
 
 /*Rutas de reportes */
 Route::match(["post","get"],'/RptActivoFijo', 'catReporteActivofijoController@index')->name('RptCuenta.all');
+Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")->name('RptCuenta.show');
 /*Fin de Reportes */
+
+/*Rutas Estado ActivoFijo*/
+//Route::get('/home','rptdetalleCategoriaActivoFijoController@index')->name('rptCategoria.all');
+Route::get('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoController@index')->name('rptConsolidado.all');
+/*Fin de Estado ActivoFijo */
 
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();

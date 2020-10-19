@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\catReporteActivofijoModel;
-use App\catterreno;
-use FFI\Exception;
+use App\rptdetalleCategoriaActivoFijo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-class catReporteActivofijoController extends Controller
+use FFI\Exception;
+class rptdetalleCategoriaActivoFijoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +15,10 @@ class catReporteActivofijoController extends Controller
     public function index()
     {
         try {
-            $listaGralReporte = catReporteActivofijoModel::all();
-            return view('RptActivoFijo',compact('listaGralReporte'));
+            $detalleCategoria = rptdetalleCategoriaActivoFijo::all();
+            return view('home', compact('detalleCategoria'));
         } catch (exception $ex) {
-            return 'ERROR -'.$ex->getMessage();
+            return 'ERROR = '. $ex->getMessage();
         }
     }
 
@@ -52,14 +49,9 @@ class catReporteActivofijoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        try {
-            $listaGralReporte = DB::select('CALL SPgenerarReporteFecha(?)',array($request->dateReporteActivo));
-            return view('RptActivoFijo', compact('listaGralReporte'))->with('mensajeExito',"Se genero reporte a la fecha ".$request->dateReporteActivo);
-        } catch (exception $ex) {
-            return 'ERROR - '.$ex->getMessage();
-        }
+        //
     }
 
     /**
