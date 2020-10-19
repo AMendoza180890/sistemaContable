@@ -10,9 +10,7 @@ $('#dateReporteActivo').on('change', function() {
     $('#tituloFechaSeleccionada').html("Reporte Realizado a la fecha " + fechaActual);
 
     $("td").each(function() {
-            // let costo = $('#costoActivo').attr('costo');
-            // let vidaUtil = $('#vidaUtilActivo').attr('vidaUtil');
-            // let fechaRecibido = $('#fechaRecibidoActivo').attr('fechaRecibido');
+
             let val0 = $(this).attr('indice');
             let val1 = $(this).attr("costo");
             let val2 = $(this).attr("vidaUtil");
@@ -27,11 +25,11 @@ $('#dateReporteActivo').on('change', function() {
             let indice = 'td#' + val0;
             let indice2 = 'td#da' + val0;
             let indice3 = 'td#sl' + val0;
-            // $("#MesDif").each(function() {
+
             $(indice).text(mesDiferencia(val3));
             $(indice2).text(formateo(depreciacionAcumuladaFunction(val3, val1, val2)));
             $(indice3).text(formateo(saldoLibro(val3, val1, val2)));
-            // })
+            
         }),
         $('#Reporte').DataTable({
             destroy: true,
@@ -120,31 +118,5 @@ $('#dateReporteActivo').on('change', function() {
 
         return Saldo.toFixed(2);
     }
-
-    // let costo = $('#costoActivo').attr('costo');
-    // let vidaUtil = $('#vidaUtilActivo').attr('vidaUtil');
-    // let fechaRecibido = $('#fechaRecibidoActivo').attr('fechaRecibido');
-
-    // console.log("costo " + costo);
-    // console.log("vidaUtil " + vidaUtil);
-    // console.log("fechaRecibido " + fechaRecibido);
-
-    // let inicio = new DateTime($FECHARECIBIDA);
-    // let fin = new DateTime($fechaReporte);
-
-    // let interval = findiff(inicio);
-
-    // let intervalMeses = $interval - > format('%m');
-
-    // let intervalAnos = $interval - > format('%y') * 12;
-    // let meses = $intervalMeses + $intervalAnos;
-
-    // var months;
-    // months = (new Date(fechaActual).getFullYear() - new Date(fechaRecibido).getFullYear()) * 12;
-    // months -= new Date(fechaRecibido).getMonth() + 1;
-    // months += new Date(fechaActual).getMonth();
-    // console.log(months <= 0 ? 0 : months);
-
-
 
 })
