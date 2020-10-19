@@ -255,11 +255,12 @@ return [
                                     'icon' => 'far fa-fw fa-list-alt',
                                     'label-color' => 'success',
                                 ],
-                                // [
-                                //     'text' => 'Reporte Por Categoria',
-                                //     'url'  => '/RptActivoFijo',
-                                //     'icon' => 'far fa-fw fa-list-alt',
-                                // ],
+                                [
+                                    'text' => 'Reporte con Totales',
+                                    'url'  => '/RptConsolidadoActivoFijo',
+                                    'icon' => 'far fa-fw fa-list-alt',
+                                    'label-color' => 'success',
+                                ],
                             ],
                     ],
                     [

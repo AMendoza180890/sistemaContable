@@ -1,5 +1,11 @@
 @extends('adminlte::page')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+@stop
+
 @section('title', 'Inicio')
 
 @section('content_header')
@@ -12,6 +18,29 @@
             <h1 class="card-title">Bienvenido</h1>
         </div>
         <div class="card-body">
+            {{-- <h4 id="tituloFechaSeleccionada"></h4>
+            <table class="table table-bordered table-hover table-striped TB" id="Reporte">
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>COSTO</th>
+                        <th>DEPRECIACION MENSUAL</th>
+                        <th>DEPRECIACION ACUMULADA</th>
+                        <th>VALOR EN LIBRO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($detalleCategoria as $listado)    
+                    <tr>
+                        <td>{{$listado->CATEGORIA}}</th>
+                        <td>{{"C$ ". $listado->COSTO}}</th>
+                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALMENSUAL}}</td>
+                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALACUMULADA}}</td>
+                        <td>{{"C$ ". $listado->SALDOTOTALLIBRO}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table> --}}
         </div>
     </div>
 @stop
@@ -28,6 +57,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
     <script>
         $('#Reporte').DataTable({
+            paginate:false,
             responsive: {
                 breakpoints: [{
                         name: 'bigdesktop',
@@ -70,7 +100,7 @@
             language: {
                 processing: "Procesando",
                 search: "Buscar:",
-                lengthMenu: "Lista de Vehiculos",
+                lengthMenu: "",
                 info: "Elemento _START_ de _END_ en _TOTAL_ Total de elementos",
                 infoEmpty: "No se ha encontrado ningun elemento en lista",
                 infoFiltered: "Filtro de _MAX_ Cantidad total de elementos",

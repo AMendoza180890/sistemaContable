@@ -88,6 +88,11 @@ Route::match(["post","get"],'/RptActivoFijo', 'catReporteActivofijoController@in
 Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")->name('RptCuenta.show');
 /*Fin de Reportes */
 
+/*Rutas Estado ActivoFijo*/
+//Route::get('/home','rptdetalleCategoriaActivoFijoController@index')->name('rptCategoria.all');
+Route::get('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoController@index')->name('rptConsolidado.all');
+/*Fin de Estado ActivoFijo */
+
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();
  Route::get('/home', 'HomeController@index')->name('home');
