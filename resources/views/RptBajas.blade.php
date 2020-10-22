@@ -26,11 +26,11 @@
         @endif
         
         <div class="box-header with-border">
-            <form method="POST" action="{{ route('rptConsolidado.show') }}">
+            <form method="POST" action="{{ route('RptCuenta.show') }}">
                 @csrf
-                <label for="dateConsolidadoReporteActivo" >
+                <label for="dateReporteActivo" >
                     <h4>Fecha de Reporte</h4>
-                    <input type="date" name="dateConsolidadoReporteActivo" id="dateConsolidadoReporteActivo">
+                    <input type="date" name="dateReporteActivo" id="dateReporteActivo">
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>
@@ -44,21 +44,28 @@
                     <tr>
                         <th>CATEGORIA</th>
                         <th>DETALLE_ACTIVO</th>
-                        <th>COSTO</th>
+                        <th>FECHA_RECIBIDA</th>
+                        <th>FECHA_BAJA</th>
+                        {{-- <th>COSTO</th>
+                        <th>VIDA_UTIL</th>
+                        <th>MESES</th>
                         <th>DEPRECIACION MENSUAL</th>
                         <th>DEPRECIACION ACUMULADA</th>
-                        <th>VALOR EN LIBRO</th>
+                        <th>VALOR EN LIBRO</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($consolidadoActivo as $listado)    
+                    @foreach ($listaGralReporte as $listado)    
                     <tr>
                         <td>{{$listado->CATEGORIA}}</th>
                         <td>{{$listado->DETALLE_ACTIVO}}</th>
-                        <td>{{"C$ ". $listado->COSTO}}</th>
-                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALMENSUAL}}</td>
-                        <td>{{"C$ ". $listado->DEPRECIACIONTOTALACUMULADA}}</td>
-                        <td>{{"C$ ". $listado->SALDOTOTALLIBRO}}</td>
+                        <td>{{$listado->FECHA_RECIBIDA}}</th>
+                        <td>{{$listado->FECHA_BAJA}}</th>
+                        {{-- <td>{{$listado->VIDA_UTIL}}</td>
+                        <td>{{$listado->MESES}}</td>
+                        <td>{{"C$ ". $listado->depreciacionMensual}}</td>
+                        <td>{{"C$ ". $listado->depreciacionAcumulada}}</td>
+                        <td>{{"C$ ". $listado->saldoEnLibro}}</td> --}}
                     </tr>
                     @endforeach
                 </tbody>
@@ -187,19 +194,13 @@
                         last: "Ultimo"
                     },
                     buttons: {
-                    copyTitle: 'Datos Copiados',
+                    copyTitle: 'Data copied',
                     copyKeys: 'Use your keyboard or menu to select the copy command'
                     }
                 }, 
 
         })
     })
-
-    $(document).on( 'click', 'tr', function () {
-    console.log(
-        $('#Reporte').DataTable().fixedColumns().rowIndex()
-    );
-} );
     </script>
     <script src="../../resources/js/ReporteActivo.js"></script>
 @stop
