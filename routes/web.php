@@ -89,7 +89,6 @@ Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")
 /*Fin de Reportes */
 
 /*Rutas Estado ActivoFijo*/
-//Route::get('/home','rptdetalleCategoriaActivoFijoController@index')->name('rptCategoria.all');
 Route::get('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoController@index')->name('rptConsolidado.all');
 Route::post('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoController@show')->name('rptConsolidado.show');
 /*Fin de Estado ActivoFijo */

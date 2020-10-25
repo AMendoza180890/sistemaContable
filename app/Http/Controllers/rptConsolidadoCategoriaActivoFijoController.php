@@ -53,6 +53,7 @@ class rptConsolidadoCategoriaActivoFijoController extends Controller
     public function show(Request $request)
     {
         try {
+            
             $consolidadoActivo = DB::select('CALL SPRptdetallecategoriaactivofijo(?)',array($request->dateConsolidadoReporteActivo));
             return view('RptConsolidadoActivoFijo',compact('consolidadoActivo'));
         } catch (exception $ex) {

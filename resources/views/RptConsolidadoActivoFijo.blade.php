@@ -30,7 +30,7 @@
                 @csrf
                 <label for="dateConsolidadoReporteActivo" >
                     <h4>Fecha de Reporte</h4>
-                    <input type="date" name="dateConsolidadoReporteActivo" id="dateConsolidadoReporteActivo">
+                    <input type="date" name="dateConsolidadoReporteActivo" id="dateConsolidadoReporteActivo" required>
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>
