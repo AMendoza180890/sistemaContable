@@ -261,6 +261,12 @@ return [
                                     'icon' => 'far fa-fw fa-list-alt',
                                     'label-color' => 'success',
                                 ],
+                                [
+                                    'text' => 'Reporte de Bajas',
+                                    'url'  => '/RptBajas',
+                                    'icon' => 'far fa-fw fa-list-alt',
+                                    'label-color' => 'success',
+                                ],
                             ],
                     ],
                     [
