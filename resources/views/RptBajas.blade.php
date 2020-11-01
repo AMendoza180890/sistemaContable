@@ -14,7 +14,7 @@
 @section('title', 'Reporte Activo Fijo')
 
 @section('content_header')
-    <h1>Reporte de cuenta de Activo Fijo</h1>
+    <h1>Reporte de Bajas</h1>
 @stop
 
 @section('content')
@@ -26,14 +26,32 @@
         @endif
         
         <div class="box-header with-border">
-            <form method="POST" action="{{ route('RptCuenta.show') }}">
+            <form method="POST" action="{{ route('RptBajas.show') }}">
                 @csrf
                 <label for="dateReporteActivo" >
                     <h4>Fecha de Reporte</h4>
-                    <input type="date" name="dateReporteActivo" id="dateReporteActivo">
+                    {{-- realizar busquedas segun meses y años esten disponibles en base de datos --}}
+                    <label for="rptMes">Mes
+                        <select name="rptMes" id="rptMes">  
+                            @for ($i = 1; $i < 13; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+                        </select>
+                    </label>
+
+                    <label for="rptAnio">Año
+                        <select name="rptAnio" id="rptAnio">  
+                            @for ($i = 2020; $i < 2021; $i++)
+                                <option value="{{$i}}">{{$i}}</option>
+                            @endfor
+                        </select>
+                    </label>
+
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>
+            <button onclick="{{route('RptCuenta.all')}}">Ver Activos</button>
+            <button onclick="{{ route('rptConsolidado.show')}}">Ver consolidado</button>
         </div>
         
 

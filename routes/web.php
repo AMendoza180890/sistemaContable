@@ -36,6 +36,7 @@ Route::get('/recuperarTerreno/{idTerreno}', 'catterrenoC@Recover')->name('terren
 
 /*Rutas de equipos de computo o computadoras*/
 Route::get('/computadoras', 'catequipocomputoController@index')->name('computadora.all');
+Route::get('/RptComputadoraPDF/{idComputadora}','catequipocomputoController@show')->name('computadora.show')->where(['idComputadora' => '[0-9]+']);
 Route::post('/registrarComputadoras', 'catequipocomputoController@store')->name('computadora.insertar');
 Route::get('/editarComputadora/{catComputadoraid}/edit','catequipocomputoController@edit')->name('computadora.edit')->where(['catComputadoraid' => '[0-9]+']);
 Route::get('/eliminarComputadora/{idComputadora}','catequipocomputoController@destroy')->name('computadora.destroy')->where(['idComputadora' => '[0-9]+']);
@@ -87,6 +88,7 @@ Route::get('/catalogoTipocuenta', 'CatActivoFijoController@listarTipoCuenta')->n
 Route::match(["post","get"],'/RptActivoFijo', 'catReporteActivofijoController@index')->name('RptCuenta.all');
 Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")->name('RptCuenta.show');
 Route::get("/RptBajas","rptbajasController@index")->name("RptBajas.all");
+Route::post("/RptBajas","rptbajasController@show")->name("RptBajas.show");
 /*Fin de Reportes */
 
 /*Rutas Estado ActivoFijo*/

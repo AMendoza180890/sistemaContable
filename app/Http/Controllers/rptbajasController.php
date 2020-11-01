@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\rptbajasModel;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Support\Facades\DB;
 
 class rptbajasController extends Controller
 {
@@ -50,9 +51,19 @@ class rptbajasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        try {
+            $dataValidate = $request->validate([
+                "rptMes" => "required",
+                "rptAnio" => "required",
+            ]);
+
+            $listaGralReporte = DB::select("CALL SPdetalleactivo_estadobajas_busqueda(?,?)",[$request->rptMes,$request->rptAnio]);
+            return view("RptBajas",compact('listaGralReporte'));
+        } catch (exception $ex) {
+            return "Error -".$ex->getMessage(); 
+        }
     }
 
     /**

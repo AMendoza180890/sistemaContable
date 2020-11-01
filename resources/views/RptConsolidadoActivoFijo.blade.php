@@ -14,7 +14,7 @@
 @section('title', 'Reporte Activo Fijo')
 
 @section('content_header')
-    <h1>Reporte de cuenta de Activo Fijo</h1>
+    <h1>Reporte de Activo Fijo Consolidado</h1>
 @stop
 
 @section('content')
@@ -34,6 +34,8 @@
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>
+            <a  href="{{route('RptCuenta.all')}}">Ver Activos</a>
+            <a  href="{{ route('rptConsolidado.show')}}">Ver consolidado</a>
         </div>
         
 

@@ -68,6 +68,9 @@
                                                 class="btn btn-primary editarcomputadoras"
                                                 valor="{{ $computadoras->catEquipoCompId }}" id="editarcomputadoras">Ver
                                                 Detalle</button>
+                                            <button type="button" class="btn btn-success"
+                                                valor="{{ $computadoras->catEquipoCompId }}" id="verReporte">Ver</button>
+
                                         </div>
                                     </td>
                                 </tr>

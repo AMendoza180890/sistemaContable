@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catequipocomputoModel;
 use FFI\Exception;
 use Illuminate\Auth\Events\Verified;
@@ -64,7 +65,7 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
-               $computadoras->idActivofijo = $request->tipocuenta;
+               $Computadoras->idActivofijo = $request->tipocuenta;
                $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
@@ -85,7 +86,14 @@ class catequipocomputoController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf ->loadview('RptComputadora',compact('findComputadora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error = '.$ex->getMessage();
+        }
     }
 
     /**
