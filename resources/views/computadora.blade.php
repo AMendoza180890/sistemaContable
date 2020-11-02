@@ -42,7 +42,7 @@
                                 <th>TipoSO</th>
                                 <th>FechaCompra</th>
                                 <th>costoEquipo</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,7 +95,7 @@
                                 <th>FechaCompra</th>
                                 <th>costoEquipo</th>
                                 <th>Fecha Baja</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,10 +113,14 @@
                                     <td>{{ $computadoras->catEquipoCostoEquipo }}</td>
                                     <td>{{ $computadoras->updated_at}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary habilitarComputadora"
-                                            valor="{{ $computadoras->catEquipoCompId }}"
-                                            descripcion="{{ $computadoras->catEquipoMarca }}"
-                                            data-dismiss="modal">Recuperar</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary habilitarComputadora"
+                                                valor="{{ $computadoras->catEquipoCompId }}"
+                                                descripcion="{{ $computadoras->catEquipoMarca }}"
+                                                data-dismiss="modal">Recuperar</button>
+                                            <button type="button" class="btn btn-success"
+                                                valor="{{ $computadoras->catEquipoCompId }}" id="verReporteBajas">Ver</button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

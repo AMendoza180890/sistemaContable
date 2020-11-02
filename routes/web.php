@@ -37,6 +37,7 @@ Route::get('/recuperarTerreno/{idTerreno}', 'catterrenoC@Recover')->name('terren
 /*Rutas de equipos de computo o computadoras*/
 Route::get('/computadoras', 'catequipocomputoController@index')->name('computadora.all');
 Route::get('/RptComputadoraPDF/{idComputadora}','catequipocomputoController@show')->name('computadora.show')->where(['idComputadora' => '[0-9]+']);
+Route::get('/RptComputadoraBajaPDF/{idComputadora}','catequipocomputoController@showBajas')->name('computadoraBaja.showBajas')->where(['idComputadora' => '[0-9]+']);
 Route::post('/registrarComputadoras', 'catequipocomputoController@store')->name('computadora.insertar');
 Route::get('/editarComputadora/{catComputadoraid}/edit','catequipocomputoController@edit')->name('computadora.edit')->where(['catComputadoraid' => '[0-9]+']);
 Route::get('/eliminarComputadora/{idComputadora}','catequipocomputoController@destroy')->name('computadora.destroy')->where(['idComputadora' => '[0-9]+']);

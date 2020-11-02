@@ -49,7 +49,7 @@
                                 <th>Propietario</th>
                                 <th>FechaCompra</th>
                                 <th>Costo</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -81,6 +81,9 @@
                                                 class="btn btn-primary editarVehiculo"
                                                 valor="{{ $vehiculo->catVehiculoId }}" id="editarVehiculo">Ver
                                                 Detalle</button>
+                                            <button type="button" 
+                                                class="btn btn-success editarVehiculo"
+                                                valor="{{ $vehiculo->catVehiculoId }}" id="RptVehiculo">Ver</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -110,7 +113,7 @@
                                 <th>FechaCompra</th>
                                 <th>Costo</th>
                                 <th>Fecha Baja</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -134,10 +137,15 @@
                                     <td>{{ $vehiculo->catVehiculoCosto }}</td>
                                     <td>{{ $vehiculo->updated_at}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary habilitarVehiculo"
-                                            valor="{{ $vehiculo->catVehiculoId }}"
-                                            descripcion="{{ $vehiculo->catVehiculoTipo }}"
-                                            data-dismiss="modal">Recuperar</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary habilitarVehiculo"
+                                                valor="{{ $vehiculo->catVehiculoId }}"
+                                                descripcion="{{ $vehiculo->catVehiculoTipo }}"
+                                                data-dismiss="modal">Recuperar</button>
+                                            <button type="button" 
+                                                class="btn btn-success editarVehiculo"
+                                                valor="{{ $vehiculo->catVehiculoId }}" id="RptVehiculoBaja">Ver</button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

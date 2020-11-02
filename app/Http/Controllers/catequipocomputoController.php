@@ -177,4 +177,16 @@ class catequipocomputoController extends Controller
             return 'Error -'.$ex->getMessage();
         }
     }
+
+    public function showBajas($id)
+    {
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf ->loadview('RptComputadoraBaja',compact('findComputadora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error = '.$ex->getMessage();
+        }
+    }
 }

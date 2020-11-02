@@ -108,6 +108,7 @@ $(document).ready(function() {
         }
     })
 
+//Reportes
     $('.TB').on('click', '#verReporte', function() {
         let codComputadora = $(this).attr('valor');
 
@@ -117,6 +118,19 @@ $(document).ready(function() {
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             success: function() {
                 window.location = 'RptComputadoraPDF/' + codComputadora;
+            }
+        })
+    });
+
+    $('.TBDeshabilitado').on('click','#verReporteBajas',function(){
+        let codComputadora = $(this).attr('valor');
+
+        $.ajax({
+            url:'RptComputadoraBajaPDF/' + codComputadora,
+            type:'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function(){
+                window.location = 'RptComputadoraBajaPDF/' + codComputadora;
             }
         })
     });

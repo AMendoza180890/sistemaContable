@@ -37,7 +37,7 @@
                              <th>Modelo</th>
                              <th>Descripcion</th>
                              <th>Fecha de Ingreso</th>
-                             <th>Editar / Eliminar</th>
+                             <th>Acciones</th>
                          </tr>
                      </thead>
                         <tbody>
@@ -52,6 +52,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-danger eliminarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Deshabilitar</button>
                                         <button type="button" data-toggle="modal" data-target="#editelectrodomestico" class="btn btn-primary editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="editarElectrodomestico">Ver Detalle</button>
+                                        <button type="button"  class="btn btn-success editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="ReporteElectrodomestico">Ver</button>
                                     </div>
                                 </td>
                             </tr>
@@ -70,7 +71,7 @@
                                       <th>Descripcion</th>
                                       <th>Fecha Ingreso</th>
                                       <th>Fecha Baja</th>
-                                      <th>Editar / Eliminar</th>
+                                      <th>Acciones</th>
                                   </tr>
                               </thead>
                                  <tbody>
@@ -83,7 +84,10 @@
                                          <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
                                          <td>{{$electrodomestico -> updated_at}}</td>
                                          <td>
+                                             <div class="btn-group">
                                                  <button type="button" class="btn btn-primary habilitarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Recuperar</button>
+                                                 <button type="button" class="btn btn-success editarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" id="ReporteElectrodomesticoBaja">Ver</button>
+                                             </div>
                                                  
                                          </td>
                                      </tr>
