@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <title>Detalles de {{$findComputadora->	catEquipoMarca}}</title>
+    <title>Detalles de Equipo Computo {{$findComputadora->	catEquipoMarca}}</title>
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
         <h4 class="text-center"> <u>Reporte de Equipo Computo</u></h2>
         <br>
         <br>
-        <h3><span class="text-primary"> Nombre del equipo:</span> {{$findComputadora->	catEquipoMarca}}</h3>
+        <h3><span class="text-primary"> Marca del Equipo:</span> {{$findComputadora->	catEquipoMarca}}</h3>
 
         <table class="table text-left">
             <thead>
