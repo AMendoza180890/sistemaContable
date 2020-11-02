@@ -82,6 +82,7 @@
                                 <th>Descripcion</th>
                                 <th>FechaIngreso</th>
                                 <th>Costo</th>
+                                <th>Fecha Baja</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
                         </thead>
@@ -95,6 +96,7 @@
                                     <td>{{ $impresoras->catImpresoraDescripcion }}</td>
                                     <td>{{ $impresoras->catImpresoraFechaIngreso }}</td>
                                     <td>{{ $impresoras->catImpresoraCosto }}</td>
+                                    <td>{{ $impresoras->updated_at}}</td>
                                     <td>
 
                                         <button type="button" class="btn btn-primary habilitarImpresora"

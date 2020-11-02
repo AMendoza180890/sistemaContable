@@ -109,6 +109,7 @@
                                 <th>Propietario</th>
                                 <th>FechaCompra</th>
                                 <th>Costo</th>
+                                <th>Fecha Baja</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
                         </thead>
@@ -131,6 +132,7 @@
                                     <td>{{ $vehiculo->catVehiculoPropietario }}</td>
                                     <td>{{ $vehiculo->catVehiculoFechaCompra }}</td>
                                     <td>{{ $vehiculo->catVehiculoCosto }}</td>
+                                    <td>{{ $vehiculo->updated_at}}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary habilitarVehiculo"
                                             valor="{{ $vehiculo->catVehiculoId }}"

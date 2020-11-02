@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
     $('#tipocuenta').show(function() {
         $.ajax({
             type: 'get',
@@ -108,4 +107,17 @@ $(document).ready(function() {
             console.log('no se deshabilito la computadora ' + descComputadorahabilitar + ' fecha ' + Date.now().toString());
         }
     })
+
+    $('.TB').on('click', '#verReporte', function() {
+        let codComputadora = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptComputadoraPDF/' + codComputadora,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptComputadoraPDF/' + codComputadora;
+            }
+        })
+    });
 })

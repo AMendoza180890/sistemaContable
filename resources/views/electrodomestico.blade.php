@@ -68,7 +68,8 @@
                                       <th>Marca</th>
                                       <th>Modelo</th>
                                       <th>Descripcion</th>
-                                      <th>Fecha de Ingreso</th>
+                                      <th>Fecha Ingreso</th>
+                                      <th>Fecha Baja</th>
                                       <th>Editar / Eliminar</th>
                                   </tr>
                               </thead>
@@ -80,6 +81,7 @@
                                          <td>{{$electrodomestico -> CatElectModelo }}</td>
                                          <td>{{$electrodomestico -> CatElectDescripcion }}</td>
                                          <td>{{$electrodomestico -> CatElectFechaIngreso }}</td>
+                                         <td>{{$electrodomestico -> updated_at}}</td>
                                          <td>
                                                  <button type="button" class="btn btn-primary habilitarElectrodomestico" valor="{{$electrodomestico -> CatElectId  }}" descripcion="{{$electrodomestico -> CatElectMarca }}" data-dismiss="modal">Recuperar</button>
                                                  

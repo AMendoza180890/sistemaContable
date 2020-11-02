@@ -68,6 +68,9 @@
                                                 class="btn btn-primary editarcomputadoras"
                                                 valor="{{ $computadoras->catEquipoCompId }}" id="editarcomputadoras">Ver
                                                 Detalle</button>
+                                            <button type="button" class="btn btn-success"
+                                                valor="{{ $computadoras->catEquipoCompId }}" id="verReporte">Ver</button>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -91,6 +94,7 @@
                                 <th>TipoSO</th>
                                 <th>FechaCompra</th>
                                 <th>costoEquipo</th>
+                                <th>Fecha Baja</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
                         </thead>
@@ -107,8 +111,8 @@
                                     <td>{{ $computadoras->catEquipoTipoSO }}</td>
                                     <td>{{ $computadoras->catEquipoFechaCompra }}</td>
                                     <td>{{ $computadoras->catEquipoCostoEquipo }}</td>
+                                    <td>{{ $computadoras->updated_at}}</td>
                                     <td>
-
                                         <button type="button" class="btn btn-primary habilitarComputadora"
                                             valor="{{ $computadoras->catEquipoCompId }}"
                                             descripcion="{{ $computadoras->catEquipoMarca }}"

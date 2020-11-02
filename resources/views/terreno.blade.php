@@ -39,7 +39,6 @@
                                 <th>Area</th>
                                 <th>Fecha de Compra</th>
                                 <th>Costo</th>
-                                <th>FechaActualizado</th>
                                 <th>FechaCreado</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
@@ -52,7 +51,6 @@
                                     <td>{{ $terreno->catTerrenoArea }}</th>
                                     <td>{{ $terreno->catTerrenoFechaCompra }}</th>
                                     <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>{{ $terreno->created_at }}</td>
                                     <td>
                                         <div class="btn-group">
@@ -80,8 +78,8 @@
                                 <th>Area</th>
                                 <th>Fecha de Compra</th>
                                 <th>Costo</th>
-                                <th>FechaActualizado</th>
-                                <th>FechaCreado</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Fecha Baja</th>
                                 <th>Editar / Eliminar</th>
                             </tr>
                         </thead>
@@ -93,8 +91,8 @@
                                     <td>{{ $terreno->catTerrenoArea }}</th>
                                     <td>{{ $terreno->catTerrenoFechaCompra }}</th>
                                     <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>{{ $terreno->created_at }}</td>
+                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary habilitarTerreno"
                                             valor="{{ $terreno->catTerrenoId }}"
