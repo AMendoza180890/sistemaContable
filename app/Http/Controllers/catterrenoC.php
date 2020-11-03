@@ -166,4 +166,15 @@ class catterrenoC extends Controller
             return "Error - " . $ex->getMessage();
         }
     }
+
+    public function showBajas($id){
+        try {
+            $terrenos = catterreno::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptTerrenoBaja', compact('terrenos'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -' . $ex->getMessage();
+        }
+    }
 }

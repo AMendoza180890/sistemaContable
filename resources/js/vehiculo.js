@@ -129,4 +129,17 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('.TBDeshabilitado').on('click', '#RptVehiculoBaja', function() {
+        let codVehiculo = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptVehiculoBajasPDF/' + codVehiculo,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptVehiculoBajasPDF/' + codVehiculo;
+            }
+        })
+    });
 })

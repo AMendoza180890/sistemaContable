@@ -116,4 +116,17 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('.TBDeshabilitado').on('click', '#ReporteImpresoraBaja', function() {
+        let codImpresora = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptImpresoraBajasPDF/' + codImpresora,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptImpresoraBajasPDF/' + codImpresora;
+            }
+        })
+    });
 })

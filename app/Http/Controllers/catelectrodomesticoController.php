@@ -165,4 +165,16 @@ class catelectrodomesticoController extends Controller
             return "Error - " . $ex->getMessage();
         }
     }
+
+    public function showBajas($id)
+    {
+        try {
+            $findElectrodomestico = catelectrodomesticoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptElectrodomesticoBaja', compact('findElectrodomestico'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -' . $ex->getMessage();
+        }
+    }
 }

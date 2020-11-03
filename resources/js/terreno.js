@@ -134,4 +134,17 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('.TBDeshabilitado').on('click', '#ReporteTerrenoBaja', function() {
+        let codTerreno = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptTerrenoBajaPDF/' + codTerreno,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptTerrenoBajaPDF/' + codTerreno;
+            }
+        })
+    });
 })

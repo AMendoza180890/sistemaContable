@@ -203,4 +203,16 @@ class catvehiculoController extends Controller
             return "Error - ".$ex->getMessage();
         }
     }
+
+    public function showBajas($id)
+    {
+        try {
+            $obtenerVehiculos = catvehiculoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptVehiculoBaja', compact('obtenerVehiculos'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -' . $ex->getMessage();
+        }   
+    }
 }

@@ -115,4 +115,17 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('.TBDeshablitado').on('click', '#ReporteElectrodomesticoBaja', function() {
+        let codElectrodomestico = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptElectrodomesticoBajasPDF/' + codElectrodomestico,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptElectrodomesticoBajasPDF/' + codElectrodomestico;
+            }
+        })
+    });
 })

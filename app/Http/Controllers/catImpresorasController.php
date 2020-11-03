@@ -84,7 +84,7 @@ class catImpresorasController extends Controller
         try {
             $findImpresora = catImpresorasModel::find($id);
             $pdf = App::make('dompdf.wrapper');
-            $pdf->loadview('',compact('findImpresora'));
+            $pdf->loadview('RptImpresora',compact('findImpresora'));
             return $pdf->stream();
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
@@ -169,6 +169,18 @@ class catImpresorasController extends Controller
             return redirect()->route('impresora.all')->with('mensaje exitoso', 'Se habilito correctamente la impresora seleccionada');
         } catch (exception $ex) {
             return "Error - " . $ex->getMessage();
+        }
+    }
+    
+    public function showBajas($id)
+    {
+        try {
+            $findImpresora = catImpresorasModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptImpresoraBaja', compact('findImpresora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -' . $ex->getMessage();
         }
     }
 }
