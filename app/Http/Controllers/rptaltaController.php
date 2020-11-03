@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\rptbajasModel;
+use DB;
 use Illuminate\Http\Request;
-use FFI\Exception;
-use Illuminate\Support\Facades\DB;
 
-class rptbajasController extends Controller
+class rptaltaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +15,13 @@ class rptbajasController extends Controller
     public function index()
     {
         try {
-            $listaGralReporte = rptbajasModel::all();
-            return view('RptBajas',compact('listaGralReporte'));
+            //se creo el modelo rptaltaModel pero ese controlador no hace uso de este objeto
+            $mesActual = date('m');
+            $anioActual = date('Y');
+            $RptActivoAlta = DB::select('CALL SPdetalleactivo_estadoAlta_busqueda(?,?)',[$mesActual,$anioActual]);
+            return $RptActivoAlta;
         } catch (exception $ex) {
-            return 'Error - '.$ex->getMessage();
+            return ''.$ex->getMessage();
         }
     }
 
@@ -40,7 +41,7 @@ class rptbajasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id)
+    public function store(Request $request)
     {
         //
     }
@@ -51,17 +52,9 @@ class rptbajasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        try {   
-            $mes = date('n');
-            $anio = date('Y');
-            // echo '<script>console.log('.$mes.' '.$anio.')</script>';
-            $listaGralReporte = DB::select("CALL SPdetalleactivo_estadobajas_busqueda(?,?)",[$mes,$anio]);
-            return $listaGralReporte;
-        } catch (exception $ex) {
-            return "Error -".$ex->getMessage(); 
-        }
+        //
     }
 
     /**

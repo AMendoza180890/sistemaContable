@@ -26,12 +26,12 @@
         @endif
         
         <div class="box-header with-border">
-            <form method="POST" action="{{ route('RptBajas.show') }}">
+            {{-- <form method="POST" action="{{ route('RptBajas.show') }}">
                 @csrf
                 <label for="dateReporteActivo" >
                     <h4>Fecha de Reporte</h4>
                     {{-- realizar busquedas segun meses y años esten disponibles en base de datos --}}
-                    <label for="rptMes">Mes
+                    {{-- <label for="rptMes">Mes
                         <select name="rptMes" id="rptMes">  
                             @for ($i = 1; $i < 13; $i++)
                                 <option value="{{$i}}">{{$i}}</option>
@@ -46,10 +46,9 @@
                             @endfor
                         </select>
                     </label>
-
                     <input type="submit" value="Generar Reporte">
-                </label>
-            </form>
+                </label> --}}
+            {{-- </form>  --}}
             <button onclick="{{route('RptCuenta.all')}}">Ver Activos</button>
             <button onclick="{{ route('rptConsolidado.show')}}">Ver consolidado</button>
         </div>

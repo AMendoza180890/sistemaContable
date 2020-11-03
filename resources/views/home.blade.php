@@ -9,16 +9,17 @@
 @section('title', 'Inicio')
 
 @section('content_header')
-    <h1>Escritorio</h1>
+    <h1>Inicio</h1>
 @stop
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1 class="card-title">Bienvenido</h1>
+            <h1 class="card-title">Informe sobre Activo Fijo en el mes <?php echo date('M'); ?></h1>
         </div>
+        
         <div class="card-body">
-            <h4 id="tituloFechaSeleccionada"></h4>
+            <h4>Total por categorias</h4>
             <table class="table table-bordered table-hover table-striped TB" id="Reporte">
                 <thead>
                     <tr>
@@ -42,7 +43,58 @@
                 </tbody>
             </table> 
         </div>
+
+        <div class="card-body">
+            <h4>Lista de Activos dados de baja en el mes actual <?php echo date('M'); ?></h4>
+            <table class="table table-bordered table-hover table-striped TB" id="Reporte">
+                <thead>
+                    <tr>
+                        <th>CATEGORIA</th>
+                        <th>DETALLE_ACTIVO</th>
+                        <th>FECHA_RECIBIDA</th>
+                        <th>FECHA_BAJA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($rptBajasMesActual as $listado)    
+                    <tr>
+                        <td>{{$listado->CATEGORIA}}</th>
+                        <td>{{$listado->DETALLE_ACTIVO}}</th>
+                        <td>{{$listado->FECHA_RECIBIDA}}</th>
+                        <td>{{$listado->FECHA_BAJA}}</th>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+    <div class="card-body">
+    <h4>Lista de Activos Nuevos en el mes actual <?php echo date('M'); ?></h4>
+        <table class="table table-bordered table-hover table-striped TB" id="Reporte">
+            <thead>
+                <tr>
+                    <th>CATEGORIA</th>
+                    <th>DETALLE_ACTIVO</th>
+                    <th>FECHA_RECIBIDA</th>
+                    <th>COSTO</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($rptAltaMesActual as $listado)    
+                <tr>
+                    <td>{{$listado->CATEGORIA}}</th>
+                    <td>{{$listado->DETALLE_ACTIVO}}</th>
+                    <td>{{$listado->FECHA_RECIBIDA}}</th>
+                    <td>C$ {{$listado->COSTO}}</th>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
+
+</div>
+
+
 @stop
 
 @section('css')
@@ -58,6 +110,7 @@
     <script>
         $('#Reporte').DataTable({
             paginate:false,
+            search:false,
             responsive: {
                 breakpoints: [{
                         name: 'bigdesktop',
@@ -116,6 +169,8 @@
                 }
             }
         });
+
+        $(".dataTables_filter").hide();
 
     </script>
     <script src="../../resources/js/vehiculo.js"></script>

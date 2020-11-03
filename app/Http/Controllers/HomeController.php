@@ -26,7 +26,11 @@ class HomeController extends Controller
     {
         try {
             $detalleCategoria = rptdetalleCategoriaActivoFijo::all();
-            return view('home', compact('detalleCategoria'));
+            $rptBajasClass = new rptbajasController();
+            $rptAltaClass = new rptaltaController();
+            $rptBajasMesActual = $rptBajasClass->show();
+            $rptAltaMesActual = $rptAltaClass->index();
+            return view('home', compact('detalleCategoria','rptBajasMesActual','rptAltaMesActual'));
         } catch (exception $ex) {
             return 'ERROR = '. $ex->getMessage();
         }
