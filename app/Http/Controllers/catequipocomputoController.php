@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App;
-use App\catequipocomputoModel;
 use FFI\Exception;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use App\catequipocomputoModel;
+use Illuminate\Auth\Events\Verified;
 use SebastianBergmann\Environment\Console;
 
 class catequipocomputoController extends Controller

@@ -28,6 +28,7 @@ Route::get('/recuperarTipocuenta/{updateActivo}','CatActivoFijoController@Recove
 /*Rutas de Terreno*/
 Route::get('/terrenos', 'catterrenoC@index')->name('terreno.all');
 Route::post('/registrarTerreno','catterrenoC@store')->name('terreno.insertar');
+Route::get('/RptTerrenoPDF/{catTerrenoid}', 'catterrenoC@show')->name('terreno.show')->where(['catTerrenoid' => '[0-9]+']);
 Route::get('/editarTerreno/{catTerrenoid}/edit','catterrenoC@edit')->name('terreno.edit')->where(['catTerrenoid' => '[0-9]+']);
 Route::get('/eliminarTerreno/{idTerreno}','catterrenoC@destroy')->name('terreno.destroy')->where(['idTerreno' => '[0-9]+']);
 Route::put('/actualizarTerreno/{idTerreno}','catterrenoC@update')->name('terreno.update')->where(['idTerreno'=>'[0-9]+']);
@@ -48,6 +49,7 @@ Route::get('/recuperaComputadora/{idComputadora}','catequipocomputoController@Re
 /*Rutas de Impresoras*/
 Route::get('/impresoras', 'catImpresorasController@index')->name('impresora.all');
 Route::post('/registrarImpresoras','catImpresorasController@store')->name('impresora.insertar');
+Route::get('/RptImpresoraPDF/{idImpresora}', 'catImpresorasController@show')->name('impresora.show')->where(['idImpresora' => '[0-9]+']);
 Route::get('/editarImpresora/{catEquipoCompId}/edit','catImpresorasController@edit')->name('impresora.edit')->where(['catEquipoCompId' => '[0-9]+']);
 Route::get('/eliminarImpresora/{idImpresora}','catImpresorasController@destroy')->name('impresora.destroy')->where(['idImpresora' => '[0-9]+']);
 Route::put('/actualizarImpresora/{idImpresora}','catImpresorasController@update')->name('impresora.update')->where(['idImpresora'=>'[0-9]+']);
@@ -57,6 +59,7 @@ Route::get('/recuperarImpresora/{idImpresora}', 'catImpresorasController@Recover
 /*Ruta de Vehiculos */
 Route::get('/vehiculos', 'catvehiculoController@index')->name('vehiculo.all');
 Route::post('/registrarVehiculo','catvehiculoController@store')->name('vehiculo.insertar');
+Route::get('/RptVehiculoPDF/{idVehiculo}', 'catvehiculoController@show')->name('vehiculo.show')->where(['idVehiculo' => '[0-9]+']);
 Route::get('/editarvehiculo/{catVehiculoId}/edit','catvehiculoController@edit')->name('vehiculo.edit')->where(['catVehiculoId' => '[0-9]+']);
 Route::get('/eliminarVehiculo/{idVehiculo}','catvehiculoController@destroy')->name('vehiculo.destroy')->where(['idVehiculo' => '[0-9]+']);
 Route::put('/actualizarVehiculo/{catVehiculoId}/','catvehiculoController@update')->name('vehiculo.update')->where(['catVehiculoId'=>'[0-9]+']);
@@ -66,12 +69,12 @@ Route::get('/recuperarVehiculos/{catVehiculoId}', 'catvehiculoController@Recover
 /*Ruta de electrodomesticos */
 Route::get('/electrodomesticos', 'catelectrodomesticoController@index')->name('electrodomestico.all');
 Route::post('/registrarElectrodomesticos','catelectrodomesticoController@store')->name('electrodomestico.insertar');
+Route::get('/RptElectrodomesticoPDF/{idElectrodomestico}', 'catelectrodomesticoController@show')->name('electrodomestico.show')->where(['idElectrodomestico' => '[0-9]+']);
 Route::get('/editarElectrodomestico/{catElectId}/edit','catelectrodomesticoController@edit')->name('electrodomestico.edit')->where(['catElectId' => '[0-9]+']);
 Route::get('/eliminiarElectrodomestico/{idElectrodomestico}','catelectrodomesticoController@destroy')->name('electrodomestico.destroy')->where(['idElectrodomestico' => '[0-9]+']);
 Route::put('/actualizarElectrodomestico/{idElectrodomestico}','catelectrodomesticoController@update')->name('electrodomestico.update')->where(['idElectrodomestico'=>'[0-9]+']);
 Route::get('/recuperarElectrodomesticos/{idElectrodomestico}','catelectrodomesticoController@Recover')->name('electrodomestico.recover')->where(['idElectrodomestico'=>'[0-9]+']);
 /*Hasta aqui finaliza electrodomesticos*/
-
 
 /*Rutas de Login */
 Route::get('/usuarios','catUsuarioController@index')->name('usuario.all');

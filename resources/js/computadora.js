@@ -89,26 +89,25 @@ $(document).ready(function() {
     })
 
     $('.TBDeshabilitado').on('click', '.habilitarComputadora', function() {
-        let codComputadorahabilitar = $(this).attr('valor');
-        let descComputadorahabilitar = $(this).attr('descripcion');
+            let codComputadorahabilitar = $(this).attr('valor');
+            let descComputadorahabilitar = $(this).attr('descripcion');
 
-        let opcion = confirm("Desea habilitar la computadora " + descComputadorahabilitar);
+            let opcion = confirm("Desea habilitar la computadora " + descComputadorahabilitar);
 
-        if (opcion) {
-            $.ajax({
-                url: 'recuperaComputadora/' + codComputadorahabilitar,
-                type: "get",
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                success: function() {
-                    window.location = 'computadoras';
-                }
-            })
-        } else {
-            console.log('no se deshabilito la computadora ' + descComputadorahabilitar + ' fecha ' + Date.now().toString());
-        }
-    })
-
-//Reportes
+            if (opcion) {
+                $.ajax({
+                    url: 'recuperaComputadora/' + codComputadorahabilitar,
+                    type: "get",
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function() {
+                        window.location = 'computadoras';
+                    }
+                })
+            } else {
+                console.log('no se deshabilito la computadora ' + descComputadorahabilitar + ' fecha ' + Date.now().toString());
+            }
+        })
+        //Reportes
     $('.TB').on('click', '#verReporte', function() {
         let codComputadora = $(this).attr('valor');
 
@@ -122,14 +121,14 @@ $(document).ready(function() {
         })
     });
 
-    $('.TBDeshabilitado').on('click','#verReporteBajas',function(){
+    $('.TBDeshabilitado').on('click', '#verReporteBajas', function() {
         let codComputadora = $(this).attr('valor');
 
         $.ajax({
-            url:'RptComputadoraBajaPDF/' + codComputadora,
-            type:'get',
+            url: 'RptComputadoraBajaPDF/' + codComputadora,
+            type: 'get',
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            success: function(){
+            success: function() {
                 window.location = 'RptComputadoraBajaPDF/' + codComputadora;
             }
         })

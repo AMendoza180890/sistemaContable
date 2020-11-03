@@ -120,4 +120,18 @@ $(document).ready(function() {
             );
         }
     });
+
+    //reporte
+    $('.TB').on('click', '#ReporteTerreno', function() {
+        let codTerreno = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptTerrenoPDF/' + codTerreno,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptTerrenoPDF/' + codTerreno;
+            }
+        })
+    });
 })

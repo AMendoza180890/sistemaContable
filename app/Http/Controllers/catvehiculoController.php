@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catvehiculoModel;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
 
 class catvehiculoController extends Controller
 {
@@ -97,7 +100,14 @@ class catvehiculoController extends Controller
      */
     public function show($id)
     {
-        
+        try {
+            $obtenerVehiculos = catvehiculoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptVehiculo',compact('obtenerVehiculos'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }   
     }
 
     /**

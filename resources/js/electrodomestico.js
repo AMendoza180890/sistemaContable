@@ -101,5 +101,18 @@ $(document).ready(function() {
         } else {
             console.log('no se deshabilito el electrodomestico ' + descelectrodomesticoHabilitar + ' fecha ' + Date.now().toString());
         }
-    })
+    });
+    //reporte
+    $('.TB').on('click', '#ReporteElectrodomestico', function() {
+        let codElectrodomestico = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptElectrodomesticoPDF/' + codElectrodomestico,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptElectrodomesticoPDF/' + codElectrodomestico;
+            }
+        })
+    });
 })

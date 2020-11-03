@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catterreno;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
 
 class catterrenoC extends Controller
 {
@@ -76,7 +79,14 @@ class catterrenoC extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $terrenos = catterreno::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptTerreno',compact('terrenos'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

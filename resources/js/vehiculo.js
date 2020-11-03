@@ -114,5 +114,19 @@ $(document).ready(function() {
         } else {
             console.log('no se habilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
         }
-    })
+    });
+
+    //reporte 
+    $('.TB').on('click', '#RptVehiculo', function() {
+        let codVehiculo = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptVehiculoPDF/' + codVehiculo,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptVehiculoPDF/' + codVehiculo;
+            }
+        })
+    });
 })

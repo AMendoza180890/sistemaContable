@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catImpresorasModel;
 use FFI\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
+
 
 class catImpresorasController extends Controller
 {
@@ -77,7 +81,14 @@ class catImpresorasController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $findImpresora = catImpresorasModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('',compact('findImpresora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**

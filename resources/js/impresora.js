@@ -102,5 +102,18 @@ $(document).ready(function() {
         } else {
             console.log('no se deshabilito la impresora ' + descImpresorahabilitar + ' fecha ' + Date.now().toString());
         }
-    })
+    });
+    //reporte
+    $('.TB').on('click', '#ReporteImpresora', function() {
+        let codImpresora = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptImpresoraPDF/' + codImpresora,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptImpresoraPDF/' + codImpresora;
+            }
+        })
+    });
 })
