@@ -18,6 +18,12 @@
 @stop
 
 @section('content')
+
+<nav class="nav">
+    <a class="nav-link active" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
+    <a class="nav-link" href="{{ route('rptConsolidado.show')}}">Reporte con Totales</a>
+</nav>
+
     <div class="card">
         @if (session('mensajeExito'))
             <div class="alert alert-success">
@@ -25,7 +31,7 @@
             </div>
         @endif
         
-        <div class="box-header with-border">
+        {{-- <div class="box-header with-border"> --}}
             {{-- <form method="POST" action="{{ route('RptBajas.show') }}">
                 @csrf
                 <label for="dateReporteActivo" >
@@ -49,9 +55,9 @@
                     <input type="submit" value="Generar Reporte">
                 </label> --}}
             {{-- </form>  --}}
-            <button onclick="{{route('RptCuenta.all')}}">Ver Activos</button>
-            <button onclick="{{ route('rptConsolidado.show')}}">Ver consolidado</button>
-        </div>
+            {{-- <button onclick="">Ver Activos</button>
+            <button onclick="">Ver consolidado</button>
+        </div> --}}
         
 
         <div class="card-body">

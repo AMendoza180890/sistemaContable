@@ -18,6 +18,11 @@
 @stop
 
 @section('content')
+    <nav class="nav">
+        <a class="nav-link" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
+        <a class="nav-link active" href="{{route('RptBajas.show')}}">Reporte de Baja</a>
+    </nav>
+
     <div class="card">
         @if (session('mensajeExito'))
             <div class="alert alert-success">
@@ -34,8 +39,6 @@
                     <input type="submit" value="Generar Reporte">
                 </label>
             </form>
-            <a  href="{{route('RptCuenta.all')}}">Ver Activos</a>
-            <a  href="{{ route('rptConsolidado.show')}}">Ver consolidado</a>
         </div>
         
 
