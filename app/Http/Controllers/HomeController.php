@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\rptdetalleCategoriaActivoFijo;
 use Illuminate\Http\Request;
 use FFI\Exception;
@@ -35,5 +36,20 @@ class HomeController extends Controller
             return 'ERROR = '. $ex->getMessage();
         }
         //return view('home');
+    }
+    public function rptResumen(){
+        try{
+            $detalleCategoria = rptdetalleCategoriaActivoFijo::all();
+            $rptBajasClass = new rptbajasController();
+            $rptAltaClass = new rptaltaController();
+            $rptBajasMesActual = $rptBajasClass->show();
+            $rptAltaMesActual = $rptAltaClass->index();
+            $pdf = App::make('dompdf.wrapper');
+            //$pdf->set_paper('letter', 'landscape');
+            $pdf->loadview('RptResumenActivoFijo',compact('detalleCategoria','rptBajasMesActual','rptAltaMesActual'));
+            return $pdf->stream();
+        }catch(exception $ex){
+            return 'Error -'.$ex->getMessage();
+        }
     }
 }

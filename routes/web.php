@@ -97,6 +97,7 @@ Route::match(["post","get"],'/RptActivoFijo', 'catReporteActivofijoController@in
 Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")->name('RptCuenta.show');
 Route::get("/RptBajas","rptbajasController@index")->name("RptBajas.all");
 Route::post("/RptBajas","rptbajasController@show")->name("RptBajas.show");
+Route::get("/RptResumen","HomeController@rptResumen")->name("rptResumenActivo.rptResumen");
 /*Fin de Reportes */
 
 /*Rutas Estado ActivoFijo*/

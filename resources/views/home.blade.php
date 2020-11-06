@@ -14,10 +14,12 @@
 
 @section('content')
 
-    <nav class="nav">
-        <a class="nav-link active" href="#">Active</a>
-        <a class="nav-link" href="#">Link</a>
-    </nav>
+<nav class="nav">
+    <a class="nav-link btn-success" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
+    <a class="nav-link btn-danger" href="{{route('RptBajas.show')}}">Reporte de Bajas</a>
+    <a class="nav-link btn-primary" href="{{ route('rptConsolidado.show')}}">Reporte con Totales</a>
+<a class="nav-link btn-info" href="{{route('rptResumenActivo.rptResumen')}}">Descargar Resumen</a>
+</nav>
 
     <div class="card">
         <div class="card-header">
@@ -99,7 +101,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 
 
