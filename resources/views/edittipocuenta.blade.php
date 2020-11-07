@@ -9,21 +9,24 @@
                 </button>
             </div>
             <div class="modal-body">
-            <form method="post" action="actualizarTipocuenta" >
+            <form method="post" action="" >
                     {{--role="form" enctype="multipart/form-data"--}}
-                    <input type="hidden" name="_method" value="PUT">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+                    @csrf
+                    @method('put')
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-group">
-                                <h4>Descripción:</h4>
-                                <input type="text" class="form-control input-lg" name="activoDescripcionE" id="activoDescripcionE" require>
+                                <h4>Codigo Cuenta:</h4>
+                                <input type="text" class="form-control input-lg" name="CodigoCuentaE" id="CodigoCuentaE" required>
                                 <input type="hidden" name="activoCodigoE" id="activoCodigoE">
                             </div>
                             <div class="form-group">
+                                <h4>Descripción:</h4>
+                                <input type="text" class="form-control input-lg" name="activoDescripcionE" id="activoDescripcionE" required>
+                            </div>
+                            <div class="form-group">
                                 <h4>Vida Util:</h4>
-                                <input type="text" class="form-control input-lg" name="activoVidaUtilE" id="activoVidaUtilE" require>
+                                <input type="text" class="form-control input-lg" name="activoVidaUtilE" id="activoVidaUtilE" required>
                             </div>
                         </div>
                         <div class="modal-footer">

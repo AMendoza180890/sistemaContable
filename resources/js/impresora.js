@@ -1,4 +1,25 @@
 $(document).ready(function() {
+
+    $('#tipocuenta').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
     $('.TB').on('click', '.editarImpresora', function() {
         let codImpresora = $(this).attr('valor');
 
@@ -16,8 +37,29 @@ $(document).ready(function() {
                 $("#inputModeloE").val(datoImpresora["catImpresoraModelo"]);
                 $("#inputMarcaE").val(datoImpresora["catImpresorasMarca"]);
                 $("#inputTonnerE").val(datoImpresora["catImpresoraTipoToner"]);
+                $("#tipocuentaE").val(datoImpresora["idActivofijo"])
 
-                $('Form').attr('Action', '/actualizarImpresora/' + datoImpresora["catImpresorasId"]);
+                $('Form').attr('Action', 'actualizarImpresora/' + datoImpresora["catImpresorasId"]);
+            }
+        })
+    })
+
+    $('#tipocuentaE').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuentaE').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuentaE').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
             }
         })
     })
@@ -60,5 +102,31 @@ $(document).ready(function() {
         } else {
             console.log('no se deshabilito la impresora ' + descImpresorahabilitar + ' fecha ' + Date.now().toString());
         }
-    })
+    });
+    //reporte
+    $('.TB').on('click', '#ReporteImpresora', function() {
+        let codImpresora = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptImpresoraPDF/' + codImpresora,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptImpresoraPDF/' + codImpresora;
+            }
+        })
+    });
+
+    $('.TBDeshabilitado').on('click', '#ReporteImpresoraBaja', function() {
+        let codImpresora = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptImpresoraBajasPDF/' + codImpresora,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptImpresoraBajasPDF/' + codImpresora;
+            }
+        })
+    });
 })

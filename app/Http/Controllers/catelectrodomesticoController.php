@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catelectrodomesticoModel;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
 
 class catelectrodomesticoController extends Controller
 {
@@ -54,6 +57,7 @@ class catelectrodomesticoController extends Controller
             $electrodomestico->CatElectFechaIngreso = $request->electFecha;
             $electrodomestico->CatElectCosto = $request->electcosto;
             $electrodomestico->CatElectDescripcion = $request->electdescripcion;
+            $electrodomestico->idActivofijo = $request->tipocuentaE;
             $electrodomestico->CatElectEstado = 1;
 
             $electrodomestico->save();
@@ -73,7 +77,14 @@ class catelectrodomesticoController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $findElectrodomestico = catelectrodomesticoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptElectrodomestico',compact('findElectrodomestico'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -109,6 +120,7 @@ class catelectrodomesticoController extends Controller
             $actualizarElectrodomestico->CatElectDescripcion = $request->electdescripcionE;
             $actualizarElectrodomestico->CatElectFechaIngreso = $request->electFechaE;
             $actualizarElectrodomestico->CatElectCosto = $request->electcostoE;
+            $actualizarElectrodomestico->idActivofijo = $request->tipocuentaE;
             $actualizarElectrodomestico->CatElectEstado = 1;
 
             $actualizarElectrodomestico->save();
@@ -149,6 +161,18 @@ class catelectrodomesticoController extends Controller
             return redirect()->route('electrodomestico.all')->with('mensaje exitoso', 'Se habilito correctamente el electrodomestico seleccionado');
         } catch (exception $ex) {
             return "Error - " . $ex->getMessage();
+        }
+    }
+
+    public function showBajas($id)
+    {
+        try {
+            $findElectrodomestico = catelectrodomesticoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptElectrodomesticoBaja', compact('findElectrodomestico'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -' . $ex->getMessage();
         }
     }
 }

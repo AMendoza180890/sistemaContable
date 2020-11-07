@@ -44,11 +44,13 @@ class CatActivoFijoController extends Controller
         try {
 
              $this->validate(request(),[
+                    'CodigoCuentaN'=> 'required',
                   'activoDescripcionN' => 'required',
                   'activoVidaUtilN'=>'required'
               ]);
     
             $tipoCuenta = new cattipocuentaactivofijo();
+            $tipoCuenta ->ActivoFijoCodigoDescripcion = $request->CodigoCuentaN;
             $tipoCuenta->descripcionActivoFjo = $request ->activoDescripcionN;
             $tipoCuenta->vidaUtilActivoFijo = $request ->activoVidaUtilN;
             $tipoCuenta->CatTipoCuentaActivoEstado	= 1;
@@ -99,14 +101,12 @@ class CatActivoFijoController extends Controller
         try {
             
             $tipoCuenta = cattipocuentaactivofijo::where('idActivofijo','=',$id)->first();
-
+                $tipoCuenta->ActivoFijoCodigoDescripcion = $request->CodigoCuentaE;
                 $tipoCuenta->descripcionActivoFjo   =   $request->activoDescripcionE;
                 $tipoCuenta->vidaUtilActivoFijo     =   $request->activoVidaUtilE;
 
                 $tipoCuenta->save();
                 return redirect()->route('tipocuenta.all')->with('mensajeExitoso', 'Se actualizo correctamente la informacion de la cuenta');
-            
-
             
             //back()->with('mensajeExitoso','Se actualizo la informacion de la cuenta correctamente');
 
@@ -155,7 +155,7 @@ class CatActivoFijoController extends Controller
          try {
              $ActivoFijolista = cattipocuentaactivofijo::all()->where('CatTipoCuentaActivoEstado', '!=', '2');
 
-             return view('Regcomputadora',compact('ActivoFijolista'));
+             return $ActivoFijolista;
     //         return  foreach ($ActivoFijolista as $key => $value) {
     //             echo '<option value="'.$value->idActivofijo.'">'.$value->descripcionActivoFjo.'</option>';
     //         };

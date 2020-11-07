@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('vehiculo.insertar')}}">
                     {{-- {{route('vehiculo.insertar')}} --}}
                     @csrf
                     <div class="modal-body">
@@ -98,24 +98,39 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="vehServicio">Servicio</label>
-                                    <input type="text" class="form-control" name="vehServicio" id="vehServicio">
+                                    <input type="text" class="form-control" name="vehServicio" id="vehServicio" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="vehPropietario">Propietario</label>
-                                    <input type="text" class="form-control" name="vehPropietario" id="vehPropietario">
+                                    <input type="text" class="form-control" name="vehPropietario" id="vehPropietario" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="vehFecha">Fecha</label>
                                 <input type="date" class="form-control" id="vehFecha" name="vehFecha"
-                                    placeholder="Fecha compra o donacion">
+                                    placeholder="Fecha compra o donacion" required>
                             </div>
                             <div class="form-group">
                                 <label for="vehCosto">Costo</label>
                                 <input type="text" class="form-control" id="vehCosto" name="vehCosto"
-                                    placeholder="Costo Real o apróximado">
+                                    placeholder="Costo Real o apróximado" required>
                             </div>
+
+                            <div class="form-group">
+                                <label for="catVehiculoPlacaN">Placa</label>
+                                <input type="text" class="form-control" id="catVehiculoPlacaN" name="catVehiculoPlacaN"
+                                    placeholder="Placa del vehiculo" required>
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta" required>
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

@@ -229,63 +229,91 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#611-menu
     |
     */
-
     'menu' => [
         [
             'text' => 'search',
             'search' => false,
             'topnav' => false,
         ],
-        
+        [
+            'text' => 'Inicio',
+            'url'  => '/home',
+            'icon' => 'far fa-fw fa fa-home',
+        ],
         ['header' => 'ACTIVOS'],
             [
-                'text' => 'Inicio',
-                'url'  => '/home',
-                'icon' => 'far fa-fw fa fa-home',
+                'text'=>'Activo Fijo',
+                'icon'=>'',
+                'submenu'=>[
+                    [
+                        'text' => 'Reporte',
+                        'icon' => 'far fa-fw fa-list-alt',
+                        'submenu'=>[
+                                [
+                                    'text'=>'Reporte General Activo',
+                                    'url'  => '/RptActivoFijo',
+                                    'icon' => 'far fa-fw fa-list-alt',
+                                    'label-color' => 'success',
+                                ],
+                                [
+                                    'text' => 'Reporte con Totales',
+                                    'url'  => '/RptConsolidadoActivoFijo',
+                                    'icon' => 'far fa-fw fa-list-alt',
+                                    'label-color' => 'success',
+                                ],
+                                [
+                                    'text' => 'Reporte de Bajas',
+                                    'url'  => '/RptBajas',
+                                    'icon' => 'far fa-fw fa-list-alt',
+                                    'label-color' => 'success',
+                                ],
+                            ],
+                    ],
+                    [
+                        'text' => 'Tipo Cuentas',
+                        'url'  => '/tipoCuentas',
+                        'icon' => 'far fa-fw  fa fa-table',
+                    ],
+                    [
+                        'text' => 'Computadora',
+                        'url'  => '/computadoras',
+                        'icon' => 'far fa-fw fa fa-tv',
+                        //'label'       => 4,
+                        //'label_color' => 'success',
+                    ],
+                    [
+                        'text' => 'Impresora',
+                        'url'  => '/impresoras',
+                        'icon' => 'far fa-fw  fa fa-print',
+                    ],
+                    [
+                        'text' => 'Electrodomestico',
+                        'url'  => '/electrodomesticos',
+                        'icon' => 'far fa-fw  fa fa-tty',
+                    ],
+                    [
+                        'text' => 'Vehiculo',
+                        'url'  => '/vehiculos',
+                        'icon' => 'far fa-fw  fa fa-car',
+                    ],
+                    [
+                        'text' => 'Terreno',
+                        'url'  => '/terrenos',
+                        'icon' => 'far fa-fw  fa fa-map',
+                    ],
+                ],
             ],
-            [
-                'text' => 'Tipo Cuentas',
-                'url'  => '/tipoCuentas',
-                'icon' => 'far fa-fw  fa fa-table',
-            ],
-            [
-                'text' => 'Computadora',
-                'url'  => '/computadoras',
-                'icon' => 'far fa-fw fa fa-tv',
-                //'label'       => 4,
-                //'label_color' => 'success',
-            ],
-            [
-                'text' => 'Impresora',
-                'url'  => '/impresoras',
-                'icon' => 'far fa-fw  fa fa-print',
-            ],
-            [
-                'text' => 'Electrodomestico',
-                'url'  => '/electrodomesticos',
-                'icon' => 'far fa-fw  fa fa-tty',
-            ],
-            [
-                'text' => 'Vehiculo',
-                'url'  => '/vehiculos',
-                'icon' => 'far fa-fw  fa fa-car',
-            ],
-            [
-                'text' => 'Terreno',
-                'url'  => '/terrenos',
-                'icon' => 'far fa-fw  fa fa-map',
-            ],
-        ['header' => 'CUENTA'],
-        //  [
-        //      'text' => 'profile',
-        //      'url'  => 'admin/settings',
-        //      'icon' => 'fas fa-fw fa-user',
-        //  ],
-         [
-             'text' => 'Usuarios',
-             'url'  => '/usuarios',
-             'icon' => 'fas fa-fw fa-lock',
-         ],
+            ['header' => 'CUENTA'],
+            //  [
+            //      'text' => 'profile',
+            //      'url'  => 'admin/settings',
+            //      'icon' => 'fas fa-fw fa-user',
+            //  ],
+             [
+                 'text' => 'Usuarios',
+                 'url'  => '/usuarios',
+                 'icon' => 'fas fa-fw fa-lock',
+             ],
         // [
         //     'text'    => 'multilevel',
         //     'icon'    => 'fas fa-fw fa-share',

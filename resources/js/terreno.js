@@ -1,4 +1,46 @@
 $(document).ready(function() {
+
+    $('#tipocuenta').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
+    $('#tipocuentaE').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuentaE').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuentaE').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
+
     $('.TB').on('click', '#mostrar', function() {
         let value = $(this).attr('valor');
         console.log('valor = ' + value);
@@ -17,6 +59,9 @@ $(document).ready(function() {
                 $("#TerrenofechaCompraE").val(datos["catTerrenoFechaCompra"]);
                 $("#TerrenoCostoE").val(datos["catterrenoCosto"]);
                 $('#TerrenoAreaE').val(datos['catTerrenoArea']);
+                $("#tipocuentaE").val(datos["idActivofijo"]);
+                // AGREGAR OBJETO DONDE SE MOSTRARA EL NUMERO CATASTRAL
+                $("#TerrenoNumeroCatastralE").val(datos['catTerrenoNumeroCatastral']);
                 // $("#direccionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontAdress"])));
                 // $("#descripcionE").val(decodeURIComponent(escape(mensaje_obtenido["catclicontMessage"])));
 
@@ -74,5 +119,32 @@ $(document).ready(function() {
                 Date.now().toString()
             );
         }
+    });
+
+    //reporte
+    $('.TB').on('click', '#ReporteTerreno', function() {
+        let codTerreno = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptTerrenoPDF/' + codTerreno,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptTerrenoPDF/' + codTerreno;
+            }
+        })
+    });
+
+    $('.TBDeshabilitado').on('click', '#ReporteTerrenoBaja', function() {
+        let codTerreno = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptTerrenoBajaPDF/' + codTerreno,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptTerrenoBajaPDF/' + codTerreno;
+            }
+        })
     });
 })

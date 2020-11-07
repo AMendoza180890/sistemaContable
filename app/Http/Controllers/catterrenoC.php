@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catterreno;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
 
 class catterrenoC extends Controller
 {
@@ -55,6 +58,8 @@ class catterrenoC extends Controller
             $terrenos->catTerrenoArea = $request->TerrenoAreaN;
             $terrenos->catTerrenoFechaCompra = $request->TerrenofechaCompraN;
             $terrenos->catterrenoCosto = $request->TerrenoCostoN;
+            $terrenos->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralN;
+            $terrenos->idActivofijo = $request->tipocuenta;
             $terrenos->CatTerrenoEstado = 1;
     
             $terrenos->save();
@@ -74,7 +79,14 @@ class catterrenoC extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $terrenos = catterreno::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptTerreno',compact('terrenos'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -103,13 +115,19 @@ class catterrenoC extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarTerreno = catterreno::where('catTerrenoId', '=',$id);
+            $actualizarTerreno = catterreno::where('catTerrenoId', '=', $id)->first();
 
             $actualizarTerreno->catTerrenoPropietario = $request->TerrenoPropiedadE;
             $actualizarTerreno->catTerrenoArea = $request->TerrenoAreaE;
             $actualizarTerreno->catTerrenoFechaCompra = $request->TerrenofechaCompraE;
-            $actualizarTerreno->caterrenoCosto = $request->TerrenoCostoE;
+            $actualizarTerreno->catterrenoCosto = $request->TerrenoCostoE;
+            $actualizarTerreno->catTerrenoNumeroCatastral = $request->TerrenoNumeroCatastralE;
+            $actualizarTerreno->idActivofijo = $request->tipocuentaE;
             $actualizarTerreno->CatTerrenoEstado = 1;
+
+            $actualizarTerreno->save();
+
+            return redirect()->route('terreno.all')->with('mensaje exitoso','Se actualizo terreno correctamente');
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
         }
@@ -146,6 +164,17 @@ class catterrenoC extends Controller
             return redirect()->route('terreno.all')->with('mensaje exitoso', 'Se habilito correctamente el terreno seleccionado');
         } catch (exception $ex) {
             return "Error - " . $ex->getMessage();
+        }
+    }
+
+    public function showBajas($id){
+        try {
+            $terrenos = catterreno::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptTerrenoBaja', compact('terrenos'));
+            return $pdf->stream();
+        } catch (Exception $ex) {
+            return 'Error -' . $ex->getMessage();
         }
     }
 }

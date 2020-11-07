@@ -9,6 +9,7 @@ $(document).ready(function() {
             cache: false,
             dataType: "json",
             success: function(datoTipocuenta) {
+                $("#CodigoCuentaE").val(datoTipocuenta["ActivoFijoCodigoDescripcion"]);
                 $("#activoCodigoE").val(datoTipocuenta["idActivofijo"]);
                 $("#activoDescripcionE").val(datoTipocuenta["descripcionActivoFjo"]);
                 $("#activoVidaUtilE").val(datoTipocuenta["vidaUtilActivoFijo"]);

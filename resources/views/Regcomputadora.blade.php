@@ -16,35 +16,35 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputModelo">Modelo</label>
-                                    <input type="text" class="form-control" name="compModelo" id="inputModelo" placeholder="ej. inspiron, Thinkpad, etc.">
+                                    <input type="text" class="form-control" name="compModelo" id="inputModelo" placeholder="ej. inspiron, Thinkpad, etc." required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputSerie">Numero de Serie</label>
-                                    <input type="text" class="form-control" name="compSerie" id="inputSerie" placeholder="ej. MYL12345678.">
+                                    <input type="text" class="form-control" name="compSerie" id="inputSerie" placeholder="ej. MYL12345678." required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputMarca">Marca</label>
-                                <input type="text" class="form-control" name="compMarca" id="inputMarca" placeholder="ej. DELL, Lenovo, HP, etc.">
+                                <input type="text" class="form-control" name="compMarca" id="inputMarca" placeholder="ej. DELL, Lenovo, HP, etc." required>
                             </div>
                             <div class="form-group">
                                 <label for="inputAlmacenamiento">Tamaño de Almacenamiento</label>
                                 <input type="text" class="form-control" name="compAlmacenamiento" id="inputAlmacenamiento"
-                                    placeholder="ej. 250Gb, 1Tb, etc.">
+                                    placeholder="ej. 250Gb, 1Tb, etc." required>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="InputTipoMemoria">Tipo Memoria RAM</label>
-                                    <input type="text" class="form-control" name="compTipoMemoriaRAM" id="InputTipoMemoria">
+                                    <input type="text" class="form-control" name="compTipoMemoriaRAM" id="InputTipoMemoria" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputState">Cantidad total RAM</label>
-                                    <input type="text" class="form-control" name="compCantidadRAM" id="inputState">
+                                    <input type="text" class="form-control" name="compCantidadRAM" id="inputState" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                     <label for="tipoSO">Tipo SO</label>
-                                    <select class="form-control" id="tipoSO" name="compTipoSO">
+                                    <select class="form-control" id="tipoSO" name="compTipoSO" required>
                                         <option selected>elegir</option>
                                         <option value="windows10">windows10</option>
                                         <option value="windows8.1">windows8.1</option>
@@ -56,17 +56,17 @@
                             <div class="form-group">
                                 <label for="fechaCompra">Fecha Compra o donacion</label>
                                 <input type="date" class="form-control" id="fechaCompra" name="compFechaCompra"
-                                    placeholder="Almacenamiento">
+                                    placeholder="Almacenamiento" required>
                             </div>
                             <div class="form-group">
                                 <label for="costo">Costo</label>
                                 <input type="text" class="form-control" id="costo" name="compCosto"
-                                    placeholder="Costo Real o apróximado">
+                                    placeholder="Costo Real o apróximado" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
-                                    <select name="tipocuenta" id="tipocuenta">
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta"  required>
                                             <option value="valor"></option>
                                     </select>
                             </div>

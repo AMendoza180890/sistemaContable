@@ -17,20 +17,33 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <h4>Propiedad:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadN" require>
+                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadN" required>
                             </div>
                             <div class="form-group">
                                 <h4>Area:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoAreaN" require>
+                                <input type="text" class="form-control input-lg" name="TerrenoAreaN" required>
                             </div>
                             <div class="form-group">
                                 <h4>FechaCompra:</h4>
-                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraN" require>
+                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraN" required>
                             </div>
                             <div class="form-group">
                                 <h4>Costo:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoCostoN" require>
+                                <input type="text" class="form-control input-lg" name="TerrenoCostoN" required>
                             </div>
+
+                            <div class="form-group">
+                                <h4>Numero Catastral:</h4>
+                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralN" id="TerrenoNumeroCatastralN" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tipocuenta">Tipocuenta</label>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta">
+                                            <option value="valor"></option>
+                                    </select>
+                            </div>
+                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

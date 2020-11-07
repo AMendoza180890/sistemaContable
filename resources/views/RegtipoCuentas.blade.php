@@ -16,12 +16,16 @@
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-group">
+                                <h4>Codigo Cuenta:</h4>
+                                <input type="text" class="form-control input-lg" name="CodigoCuentaN" required>
+                            </div>
+                            <div class="form-group">
                                 <h4>Descripción:</h4>
-                                <input type="text" class="form-control input-lg" name="activoDescripcionN" require>
+                                <input type="text" class="form-control input-lg" name="activoDescripcionN" required>
                             </div>
                             <div class="form-group">
                                 <h4>Vida Util:</h4>
-                                <input type="text" class="form-control input-lg" name="activoVidaUtilN" require>
+                                <input type="text" class="form-control input-lg" name="activoVidaUtilN" required>
                             </div>
                         </div>
                         <div class="modal-footer">

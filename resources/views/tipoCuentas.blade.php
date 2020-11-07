@@ -30,9 +30,9 @@
                 <thead>
                     <tr>
                         <th>N</th>
+                        <th>CodigoCuenta</th>
                         <th>Descripción</th>
                         <th>Vida útil</th>
-                        <th>Fecha Actualizado</th>
                         <th>Fecha Creado</th>
                         <th>Editar / Eliminar</th>
                     </tr>
@@ -41,9 +41,9 @@
                     @foreach ($ActivoFijoC as $ActivoFijo)
                         <tr>
                             <td>{{  $ActivoFijo->idActivofijo }}</th>
+                            <td>{{  $ActivoFijo->ActivoFijoCodigoDescripcion}}</td>
                             <td>{{  $ActivoFijo->descripcionActivoFjo }}</th>
                             <td>{{  $ActivoFijo->vidaUtilActivoFijo }}</th>
-                            <td>{{  $ActivoFijo->updated_at}}</td>
                             <td>{{  $ActivoFijo->created_at}}</td>
                             <td>
                                 <div class="btn-group">
@@ -64,9 +64,9 @@
                 <thead>
                     <tr>
                         <th>N</th>
+                        <th>CodigoCuenta</th>
                         <th>Descripción</th>
                         <th>Vida útil</th>
-                        <th>Fecha Actualizado</th>
                         <th>Fecha Creado</th>
                         <th>Recuperar</th>
                     </tr>
@@ -75,9 +75,9 @@
                     @foreach ($ActivoFijoCDeshabilitado as $ActivoFijo)
                         <tr>
                             <td>{{  $ActivoFijo->idActivofijo }}</th>
+                            <td>{{$ActivoFijo->ActivoFijoCodigoDescripcion}}</td>
                             <td>{{  $ActivoFijo->descripcionActivoFjo }}</th>
                             <td>{{  $ActivoFijo->vidaUtilActivoFijo }}</th>
-                            <td>{{  $ActivoFijo->updated_at}}</td>
                             <td>{{  $ActivoFijo->created_at}}</td>
                             <td><button type="button" class="btn btn-primary habilitarCuenta" descripcion="{{  $ActivoFijo->descripcionActivoFjo }}"" valor="{{  $ActivoFijo->idActivofijo }}" id="habilitarCuenta">Recuperar</button></td>
                         </tr>

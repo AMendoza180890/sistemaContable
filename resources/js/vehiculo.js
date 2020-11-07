@@ -1,4 +1,45 @@
 $(document).ready(function() {
+
+    $('#tipocuenta').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuenta').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuenta').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
+    $('#tipocuentaE').show(function() {
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: "catalogoTipocuenta",
+            success: function(data) {
+
+                $('#tipocuentaE').empty();
+                for (var i = 0; i < data.length; i++) {
+
+                    $('#tipocuentaE').append('<option value="' + data[i]['idActivofijo'] + '">' + data[i]['descripcionActivoFjo'] + '</option>');
+                }
+                //         console.log(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert(textStatus);
+            }
+        })
+    })
+
     $('.TB').on('click', '.editarVehiculo', function() {
         let codVehiculo = $(this).attr('valor');
 
@@ -10,7 +51,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(datosVehiculo) {
                 console.log(datosVehiculo)
-                $('#vehCodigoE').val(datosVehiculo["catVehiculoid"]);
+                $('#vehCodigoE').val(datosVehiculo["catVehiculoId"]);
                 $('#vehTipoE').val(datosVehiculo["catVehiculoTipo"]);
                 $('#vehModeloE').val(datosVehiculo["catVehiculoModelo"]);
                 $('#vehColorE').val(datosVehiculo["catVehiculoColor"]);
@@ -27,8 +68,10 @@ $(document).ready(function() {
                 $('#vehPropietarioE').val(datosVehiculo["catVehiculoPropietario"]);
                 $('#vehFechaE').val(datosVehiculo["catVehiculoFechaCompra"]);
                 $('#vehCostoE').val(datosVehiculo["catVehiculoCosto"]);
+                $('#catVehiculoPlacaE').val(datosVehiculo["catVehiculoPlaca"]);
+                $('#tipocuentaE').val(datosVehiculo["idActivofijo"]);
 
-                $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoid"]);
+                $('Form').attr('Action', 'actualizarVehiculo/' + datosVehiculo["catVehiculoId"]);
             }
         })
     })
@@ -71,5 +114,32 @@ $(document).ready(function() {
         } else {
             console.log('no se habilito el vehiculo ' + descVehiculoEliminar + ' fecha ' + Date.now().toString());
         }
-    })
+    });
+
+    //reporte 
+    $('.TB').on('click', '#RptVehiculo', function() {
+        let codVehiculo = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptVehiculoPDF/' + codVehiculo,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptVehiculoPDF/' + codVehiculo;
+            }
+        })
+    });
+
+    $('.TBDeshabilitado').on('click', '#RptVehiculoBaja', function() {
+        let codVehiculo = $(this).attr('valor');
+
+        $.ajax({
+            url: 'RptVehiculoBajasPDF/' + codVehiculo,
+            type: 'get',
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function() {
+                window.location = 'RptVehiculoBajasPDF/' + codVehiculo;
+            }
+        })
+    });
 })

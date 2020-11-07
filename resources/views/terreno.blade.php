@@ -39,9 +39,8 @@
                                 <th>Area</th>
                                 <th>Fecha de Compra</th>
                                 <th>Costo</th>
-                                <th>FechaActualizado</th>
                                 <th>FechaCreado</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +51,6 @@
                                     <td>{{ $terreno->catTerrenoArea }}</th>
                                     <td>{{ $terreno->catTerrenoFechaCompra }}</th>
                                     <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>{{ $terreno->created_at }}</td>
                                     <td>
                                         <div class="btn-group">
@@ -62,7 +60,9 @@
                                                 data-dismiss="modal">Deshabilitar</button>
                                             <button type="button" data-toggle="modal" data-target="#EditTerreno"
                                                 class="btn btn-primary editarTerrenos" valor="{{ $terreno->catTerrenoId }}"
-                                                id='mostrar'>Ver Detalle</a></button>
+                                                id='mostrar'>Ver Detalle</button>
+                                            <button type="button" class="btn btn-success editarTerrenos" valor="{{ $terreno->catTerrenoId }}"
+                                                id='ReporteTerreno'>Ver</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -80,9 +80,9 @@
                                 <th>Area</th>
                                 <th>Fecha de Compra</th>
                                 <th>Costo</th>
-                                <th>FechaActualizado</th>
-                                <th>FechaCreado</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Fecha Baja</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,14 +93,17 @@
                                     <td>{{ $terreno->catTerrenoArea }}</th>
                                     <td>{{ $terreno->catTerrenoFechaCompra }}</th>
                                     <td>{{ $terreno->catterrenoCosto }}</td>
-                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>{{ $terreno->created_at }}</td>
+                                    <td>{{ $terreno->updated_at }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary habilitarTerreno"
-                                            valor="{{ $terreno->catTerrenoId }}"
-                                            descripcion="{{ $terreno->catTerrenoPropietario }}"
-                                            data-dismiss="modal">Recuperar</button>
-
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary habilitarTerreno"
+                                                valor="{{ $terreno->catTerrenoId }}"
+                                                descripcion="{{ $terreno->catTerrenoPropietario }}"
+                                                data-dismiss="modal">Recuperar</button>
+                                            <button type="button" class="btn btn-success editarTerrenos" valor="{{ $terreno->catTerrenoId }}"
+                                                    id='ReporteTerrenoBaja'>Ver</button>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

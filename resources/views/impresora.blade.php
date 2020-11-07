@@ -40,7 +40,7 @@
                                 <th>Descripcion</th>
                                 <th>FechaIngreso</th>
                                 <th>Costo</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,6 +63,8 @@
                                                 class="btn btn-primary editarImpresora"
                                                 valor="{{ $impresoras->catImpresorasId }}" id="editarImpresora">Ver
                                                 Detalle</button>
+                                            <button type="button" class="btn btn-success editarImpresora"
+                                                valor="{{ $impresoras->catImpresorasId }}" id="ReporteImpresora">Ver</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -82,7 +84,8 @@
                                 <th>Descripcion</th>
                                 <th>FechaIngreso</th>
                                 <th>Costo</th>
-                                <th>Editar / Eliminar</th>
+                                <th>Fecha Baja</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,12 +98,16 @@
                                     <td>{{ $impresoras->catImpresoraDescripcion }}</td>
                                     <td>{{ $impresoras->catImpresoraFechaIngreso }}</td>
                                     <td>{{ $impresoras->catImpresoraCosto }}</td>
+                                    <td>{{ $impresoras->updated_at}}</td>
                                     <td>
-
-                                        <button type="button" class="btn btn-primary habilitarImpresora"
-                                            valor="{{ $impresoras->catImpresorasId }}"
-                                            descripcion="{{ $impresoras->catImpresorasMarca }}"
-                                            data-dismiss="modal">Recuperar</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary habilitarImpresora"
+                                                valor="{{ $impresoras->catImpresorasId }}"
+                                                descripcion="{{ $impresoras->catImpresorasMarca }}"
+                                                data-dismiss="modal">Recuperar</button>
+                                             <button type="button" class="btn btn-success"
+                                                valor="{{ $impresoras->catImpresorasId }}" id="ReporteImpresoraBaja">Ver</button>
+                                        </div>
 
                                     </td>
                                 </tr>

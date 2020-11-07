@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-10-2020 a las 05:13:57
+-- Tiempo de generación: 19-10-2020 a las 05:58:34
 -- Versión del servidor: 10.4.13-MariaDB
 -- Versión de PHP: 7.4.8
 
@@ -21,6 +21,303 @@ SET time_zone = "+00:00";
 -- Base de datos: `bdsistemacontable`
 --
 
+DELIMITER $$
+--
+-- Procedimientos
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SPgenerarReporteFecha` (`fecha` DATE)  BEGIN
+SELECT  `bdsistemacontable`.`cattipocuentaactivofijo`.`descripcionActivoFjo` AS `CATEGORIA`,
+        `bdsistemacontable`.`catelectrodomesticos`.`CatElectDescripcion` AS `DETALLE_ACTIVO`,
+        `bdsistemacontable`.`catelectrodomesticos`.`CatElectFechaIngreso` AS `FECHA_RECIBIDA`,
+        `bdsistemacontable`.`catelectrodomesticos`.`CatElectCosto` AS `COSTO`,
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `VIDA_UTIL`,
+        `calculoMes`(
+            fecha,
+            `bdsistemacontable`.`catelectrodomesticos`.`CatElectFechaIngreso`
+        ) AS `MESES`,
+        `depreciacionMensual`(
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `bdsistemacontable`.`catelectrodomesticos`.`CatElectCosto`
+        ) AS `depreciacionMensual`,
+        `depreciacionAcumulativa`(
+            `calculoMes`(
+                fecha,
+                `bdsistemacontable`.`catelectrodomesticos`.`CatElectFechaIngreso`
+            ),
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `depreciacionMensual`(
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `bdsistemacontable`.`catelectrodomesticos`.`CatElectCosto`
+            )
+        ) AS `depreciacionAcumulada`,
+        `saldoEnLibro`(
+            `bdsistemacontable`.`catelectrodomesticos`.`CatElectCosto`,
+            `depreciacionAcumulativa`(
+                `calculoMes`(
+                    fecha,
+                    `bdsistemacontable`.`catelectrodomesticos`.`CatElectFechaIngreso`
+                ),
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `depreciacionMensual`(
+                    `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                    `bdsistemacontable`.`catelectrodomesticos`.`CatElectCosto`
+                )
+            )
+        ) AS `saldoEnLibro`
+    FROM
+        (
+            `bdsistemacontable`.`catelectrodomesticos`
+        JOIN `bdsistemacontable`.`cattipocuentaactivofijo`
+        )
+    WHERE
+        (`bdsistemacontable`.`catelectrodomesticos`.`idActivofijo` = `bdsistemacontable`.`cattipocuentaactivofijo`.`idActivofijo` AND `bdsistemacontable`.`catelectrodomesticos`.`CatElectEstado` <> 2)
+    UNION ALL
+SELECT
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,
+    `bdsistemacontable`.`catequipocomputo`.`catEquipoMarca` AS `CatEquipoMarca`,
+    `bdsistemacontable`.`catequipocomputo`.`catEquipoFechaCompra` AS `CatequipoFechaCompra`,
+    `bdsistemacontable`.`catequipocomputo`.`catEquipoCostoEquipo` AS `catEquipoCostoEquipo`,
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,
+    `calculoMes`(
+        fecha,
+        `bdsistemacontable`.`catequipocomputo`.`catEquipoFechaCompra`
+    ) AS `MESES`,
+    `depreciacionMensual`(
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `bdsistemacontable`.`catequipocomputo`.`catEquipoCostoEquipo`
+    ) AS `depreciacionMensual`,
+    `depreciacionAcumulativa`(
+        `calculoMes`(
+            fecha,
+            `bdsistemacontable`.`catequipocomputo`.`catEquipoFechaCompra`
+        ),
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `depreciacionMensual`(
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `bdsistemacontable`.`catequipocomputo`.`catEquipoCostoEquipo`
+        )
+    ) AS `depreciacionAcumulada`,
+    `saldoEnLibro`(
+        `bdsistemacontable`.`catequipocomputo`.`catEquipoCostoEquipo`,
+        `depreciacionAcumulativa`(
+            `calculoMes`(
+                fecha,
+                `bdsistemacontable`.`catequipocomputo`.`catEquipoFechaCompra`
+            ),
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `depreciacionMensual`(
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `bdsistemacontable`.`catequipocomputo`.`catEquipoCostoEquipo`
+            )
+        )
+    ) AS `saldoEnLibro`
+FROM
+    (
+        `bdsistemacontable`.`catequipocomputo`
+    JOIN `bdsistemacontable`.`cattipocuentaactivofijo`
+    )
+WHERE
+    (`bdsistemacontable`.`catequipocomputo`.`idActivofijo` = `bdsistemacontable`.`cattipocuentaactivofijo`.`idActivofijo` AND `bdsistemacontable`.`catequipocomputo`.`CatEquipoEstado` <> 2)
+UNION ALL
+SELECT
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,
+    `bdsistemacontable`.`catimpresoras`.`catImpresorasMarca` AS `catImpresorasMarca`,
+    `bdsistemacontable`.`catimpresoras`.`catImpresoraFechaIngreso` AS `catImpresoraFechaIngreso`,
+    `bdsistemacontable`.`catimpresoras`.`catImpresoraCosto` AS `catimpresoraCosto`,
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,
+    `calculoMes`(
+        fecha,
+        `bdsistemacontable`.`catimpresoras`.`catImpresoraFechaIngreso`
+    ) AS `MESES`,
+    `depreciacionMensual`(
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `bdsistemacontable`.`catimpresoras`.`catImpresoraCosto`
+    ) AS `depreciacionMensual`,
+    `depreciacionAcumulativa`(
+        `calculoMes`(
+            fecha,
+            `bdsistemacontable`.`catimpresoras`.`catImpresoraFechaIngreso`
+        ),
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `depreciacionMensual`(
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `bdsistemacontable`.`catimpresoras`.`catImpresoraCosto`
+        )
+    ) AS `depreciacionAcumulada`,
+    `saldoEnLibro`(
+        `bdsistemacontable`.`catimpresoras`.`catImpresoraCosto`,
+        `depreciacionAcumulativa`(
+            `calculoMes`(
+                fecha,
+                `bdsistemacontable`.`catimpresoras`.`catImpresoraFechaIngreso`
+            ),
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `depreciacionMensual`(
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `bdsistemacontable`.`catimpresoras`.`catImpresoraCosto`
+            )
+        )
+    ) AS `saldoEnLibro`
+FROM
+    (
+        `bdsistemacontable`.`catimpresoras`
+    JOIN `bdsistemacontable`.`cattipocuentaactivofijo`
+    )
+WHERE
+    (`bdsistemacontable`.`catimpresoras`.`idActivofijo` = `bdsistemacontable`.`cattipocuentaactivofijo`.`idActivofijo` AND `bdsistemacontable`.`catimpresoras`.`CatImpresoraEstado` <> 2)
+UNION ALL
+SELECT
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,
+    `bdsistemacontable`.`catvehiculo`.`catVehiculoModelo` AS `catvehiculoModelo`,
+    `bdsistemacontable`.`catvehiculo`.`catVehiculoFechaCompra` AS `catvehiculoFechaCompra`,
+    `bdsistemacontable`.`catvehiculo`.`catVehiculoCosto` AS `catVehiculoCosto`,
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,
+    `calculoMes`(
+        fecha,
+        `bdsistemacontable`.`catvehiculo`.`catVehiculoFechaCompra`
+    ) AS `MESES`,
+    `depreciacionMensual`(
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `bdsistemacontable`.`catvehiculo`.`catVehiculoCosto`
+    ) AS `depreciacionMensual`,
+    `depreciacionAcumulativa`(
+        `calculoMes`(
+            fecha,
+            `bdsistemacontable`.`catvehiculo`.`catVehiculoFechaCompra`
+        ),
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `depreciacionMensual`(
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `bdsistemacontable`.`catvehiculo`.`catVehiculoCosto`
+        )
+    ) AS `depreciacionAcumulada`,
+    `saldoEnLibro`(
+        `bdsistemacontable`.`catvehiculo`.`catVehiculoCosto`,
+        `depreciacionAcumulativa`(
+            `calculoMes`(
+                fecha,
+                `bdsistemacontable`.`catvehiculo`.`catVehiculoFechaCompra`
+            ),
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `depreciacionMensual`(
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `bdsistemacontable`.`catvehiculo`.`catVehiculoCosto`
+            )
+        )
+    ) AS `saldoEnLibro`
+FROM
+    (
+        `bdsistemacontable`.`catvehiculo`
+    JOIN `bdsistemacontable`.`cattipocuentaactivofijo`
+    )
+WHERE
+    (`bdsistemacontable`.`catvehiculo`.`idActivofijo` = `bdsistemacontable`.`cattipocuentaactivofijo`.`idActivofijo` AND `bdsistemacontable`.`catvehiculo`.`catVehiculoEstado` <> 2)
+UNION ALL
+SELECT
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,
+    `bdsistemacontable`.`catterreno`.`catTerrenoPropietario` AS `catTerrenoPropietario`,
+    `bdsistemacontable`.`catterreno`.`catTerrenoFechaCompra` AS `catterrenoFechaCompra`,
+    `bdsistemacontable`.`catterreno`.`catterrenoCosto` AS `catterrenoCosto`,
+    `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,
+    `calculoMes`(
+        fecha,
+        `bdsistemacontable`.`catterreno`.`catTerrenoFechaCompra`
+    ) AS `MESES`,
+    `depreciacionMensual`(
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `bdsistemacontable`.`catterreno`.`catterrenoCosto`
+    ) AS `depreciacionMensual`,
+    `depreciacionAcumulativa`(
+        `calculoMes`(
+            fecha,
+            `bdsistemacontable`.`catterreno`.`catTerrenoFechaCompra`
+        ),
+        `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+        `depreciacionMensual`(
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `bdsistemacontable`.`catterreno`.`catterrenoCosto`
+        )
+    ) AS `depreciacionAcumulada`,
+    `saldoEnLibro`(
+        `bdsistemacontable`.`catterreno`.`catterrenoCosto`,
+        `depreciacionAcumulativa`(
+            `calculoMes`(
+                fecha,
+                `bdsistemacontable`.`catterreno`.`catTerrenoFechaCompra`
+            ),
+            `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+            `depreciacionMensual`(
+                `bdsistemacontable`.`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,
+                `bdsistemacontable`.`catterreno`.`catterrenoCosto`
+            )
+        )
+    ) AS `saldoEnLibro`
+FROM
+    (
+        `bdsistemacontable`.`catterreno`
+    JOIN `bdsistemacontable`.`cattipocuentaactivofijo`
+    )
+WHERE
+    (`bdsistemacontable`.`catterreno`.`idActivofijo` = `bdsistemacontable`.`cattipocuentaactivofijo`.`idActivofijo` AND `bdsistemacontable`.`catterreno`.`CatTerrenoEstado` <> 2) ;
+END$$
+
+--
+-- Funciones
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `calculoMes` (`fechaReporte` DATE, `fechaAdquisicion` DATE) RETURNS INT(11) BEGIN
+	DECLARE anioAMes INT;
+	DECLARE numeroMes INT; 
+
+	SET anioAMes = 0;
+	SET numeroMes = 0;
+    
+    SET anioAMes = (YEAR(fechaReporte) - YEAR(fechaAdquisicion)) * 12;
+    SET numeroMes = (AnioAMes - MONTH(fechaAdquisicion)) + MONTH(fechaReporte);
+    
+    IF(numeroMes = 0)THEN 
+    RETURN 0;
+    ELSE
+    RETURN numeroMes;
+    END IF;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `depreciacionAcumulativa` (`mes` INT, `vidaUtil` INT, `depreciacionMensual` DECIMAL(30,2)) RETURNS DECIMAL(30,2) BEGIN
+	DECLARE depreciacionAcumulada DECIMAL(30,2);
+    
+    IF(vidaUtil >= mes) THEN
+    	SET depreciacionAcumulada = depreciacionMensual * mes;
+        RETURN depreciacionAcumulada;
+    ELSE
+    	RETURN 0;
+    END IF;
+    
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `depreciacionMensual` (`vidaUtil` INT, `Costo` DECIMAL(30,2)) RETURNS DECIMAL(30,2) BEGIN
+	DECLARE depMensual DECIMAL(30,2);
+    
+    SET depMensual = 0;
+    
+	IF (vidaUtil = 0) THEN
+    	RETURN 0;
+    ELSE
+    	SET depMensual = (Costo / vidaUtil);
+        RETURN depMensual;
+    END IF;
+    
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `saldoEnLibro` (`costo` DECIMAL(30,2), `depreciacionAcumulada` DECIMAL(30,2)) RETURNS DECIMAL(30,2) BEGIN
+	DECLARE saldo DECIMAL(30,2);
+    
+    SET saldo = costo - depreciacionAcumulada;
+    
+    return saldo;
+    
+END$$
+
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -35,6 +332,7 @@ CREATE TABLE `catelectrodomesticos` (
   `CatElectFechaIngreso` date NOT NULL,
   `CatElectCosto` int(11) DEFAULT NULL,
   `CatElectEstado` int(11) NOT NULL,
+  `idActivofijo` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -43,8 +341,8 @@ CREATE TABLE `catelectrodomesticos` (
 -- Volcado de datos para la tabla `catelectrodomesticos`
 --
 
-INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `CatElectEstado`, `updated_at`, `created_at`) VALUES
-(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, 0, '2020-09-06', '2020-09-06');
+INSERT INTO `catelectrodomesticos` (`CatElectId`, `CatElectMarca`, `CatElectModelo`, `CatElectDescripcion`, `CatElectFechaIngreso`, `CatElectCosto`, `CatElectEstado`, `idActivofijo`, `updated_at`, `created_at`) VALUES
+(1, 'Sony', 'Lavadora', 'Lavadora de ropa, color blanca.', '2020-05-13', 300, 1, 1, '2020-10-03', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -64,6 +362,7 @@ CREATE TABLE `catequipocomputo` (
   `catEquipoFechaCompra` date NOT NULL,
   `catEquipoCostoEquipo` float NOT NULL,
   `CatEquipoEstado` int(11) NOT NULL,
+  `idActivofijo` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -72,10 +371,29 @@ CREATE TABLE `catequipocomputo` (
 -- Volcado de datos para la tabla `catequipocomputo`
 --
 
-INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `CatEquipoEstado`, `updated_at`, `created_at`) VALUES
-(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 0, 0, NULL, NULL),
-(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'WINDOWS 10 Pro', '0000-00-00', 250.5, 0, NULL, NULL),
-(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, 0, '2020-09-06', '2020-09-06');
+INSERT INTO `catequipocomputo` (`catEquipoCompId`, `catEquipoModelo`, `catEquipoNumeroSerie`, `catEquipoMarca`, `catEquipoTamanioAlmacenamiento`, `TipoMemoriaRAM`, `catEquipoCantidadRAM`, `catEquipoTipoSO`, `catEquipoFechaCompra`, `catEquipoCostoEquipo`, `CatEquipoEstado`, `idActivofijo`, `updated_at`, `created_at`) VALUES
+(1, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'windows10', '2020-10-06', 4500, 1, 3, '2020-10-19', NULL),
+(2, '20EV002JUS', '001002003004005', 'LENOVO', '250Gb, SSD', 'DDR4', '16Gb', 'windows10', '2020-10-08', 250.5, 1, 3, '2020-10-08', NULL),
+(4, 'inspiron', 'MY1235678', 'HP', '250Gb', 'DDR4', '8Gb', 'windows10', '2020-06-10', 230, 1, 3, '2020-10-03', '2020-09-06');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `catestado`
+--
+
+CREATE TABLE `catestado` (
+  `id` int(11) NOT NULL,
+  `catEstadoDescripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `catestado`
+--
+
+INSERT INTO `catestado` (`id`, `catEstadoDescripcion`) VALUES
+(1, 'Activo'),
+(2, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -92,6 +410,7 @@ CREATE TABLE `catimpresoras` (
   `catImpresoraFechaIngreso` date NOT NULL,
   `catImpresoraCosto` int(11) DEFAULT NULL,
   `CatImpresoraEstado` int(11) NOT NULL,
+  `idActivofijo` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -100,9 +419,9 @@ CREATE TABLE `catimpresoras` (
 -- Volcado de datos para la tabla `catimpresoras`
 --
 
-INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `CatImpresoraEstado`, `updated_at`, `created_at`) VALUES
-(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', NULL, 0, NULL, NULL),
-(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, 0, '2020-09-06', '2020-09-06');
+INSERT INTO `catimpresoras` (`catImpresorasId`, `catImpresorasMarca`, `catImpresoraModelo`, `catImpresoraTipoToner`, `catImpresoraDescripcion`, `catImpresoraFechaIngreso`, `catImpresoraCosto`, `CatImpresoraEstado`, `idActivofijo`, `updated_at`, `created_at`) VALUES
+(1, 'Canon', 'MF4770N', '3500BN001', 'NEGRO, MULTIFUNCIONAL, CON ACCESO A RED LAN CABLE E INALAMBRICO', '2019-10-16', 350, 1, 1, '2020-10-08', NULL),
+(2, 'Epson', 'MYL12345678', '128', 'Color negro, conectado por red inalambrica', '2020-06-09', 250, 1, 5, '2020-10-09', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -117,6 +436,8 @@ CREATE TABLE `catterreno` (
   `catTerrenoFechaCompra` date NOT NULL,
   `catterrenoCosto` int(11) DEFAULT NULL,
   `CatTerrenoEstado` int(11) NOT NULL,
+  `catTerrenoNumeroCatastral` text NOT NULL,
+  `idActivofijo` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -125,10 +446,11 @@ CREATE TABLE `catterreno` (
 -- Volcado de datos para la tabla `catterreno`
 --
 
-INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `CatTerrenoEstado`, `updated_at`, `created_at`) VALUES
-(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, 0, '2020-09-05', '2020-09-05'),
-(3, 'Tesoros de Dios', '100mts Cuadrados', '2019-09-18', 1500, 0, '2020-09-05', '2020-09-05'),
-(4, 'Tesoros de Dios', '100 mts Cuadrados', '2020-05-14', 500, 0, '2020-09-22', '2020-09-22');
+INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoArea`, `catTerrenoFechaCompra`, `catterrenoCosto`, `CatTerrenoEstado`, `catTerrenoNumeroCatastral`, `idActivofijo`, `updated_at`, `created_at`) VALUES
+(2, 'Tesoros de Dios', '200mts Cuadrados', '2020-01-22', 2000, 1, '', 1, '2020-10-11', '2020-09-05'),
+(3, 'Casa Bradley', '100mts Cuadrados', '2019-09-18', 1500, 1, '', 1, '2020-10-06', '2020-09-05'),
+(4, 'Tesoros de Dios', '100 mts Cuadrados', '2020-05-14', 500, 1, '', 1, '2020-10-11', '2020-09-22'),
+(5, 'Tesoros de Dios', '300 mts Cuadrados', '2020-10-03', 500, 1, '', 1, '2020-10-04', '2020-10-04');
 
 -- --------------------------------------------------------
 
@@ -138,6 +460,7 @@ INSERT INTO `catterreno` (`catTerrenoId`, `catTerrenoPropietario`, `catTerrenoAr
 
 CREATE TABLE `cattipocuentaactivofijo` (
   `idActivofijo` int(11) NOT NULL,
+  `ActivoFijoCodigoDescripcion` text NOT NULL,
   `descripcionActivoFjo` text NOT NULL,
   `vidaUtilActivoFijo` int(11) NOT NULL,
   `CatTipoCuentaActivoEstado` int(11) NOT NULL,
@@ -149,10 +472,14 @@ CREATE TABLE `cattipocuentaactivofijo` (
 -- Volcado de datos para la tabla `cattipocuentaactivofijo`
 --
 
-INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `CatTipoCuentaActivoEstado`, `updated_at`, `created_at`) VALUES
-(6, 'Tecnologia', 60, 0, '2020-10-01', '2020-09-22'),
-(16, 'Electrodomesticos', 60, 0, '2020-10-01', '2020-09-28'),
-(17, 'Terreno', 120, 0, '2020-10-01', '2020-10-01');
+INSERT INTO `cattipocuentaactivofijo` (`idActivofijo`, `ActivoFijoCodigoDescripcion`, `descripcionActivoFjo`, `vidaUtilActivoFijo`, `CatTipoCuentaActivoEstado`, `updated_at`, `created_at`) VALUES
+(1, '121100', 'Terreno', 0, 1, '2020-10-06', '2020-09-22'),
+(2, '121200', 'Instalaciones', 120, 1, '2020-10-06', '2020-09-28'),
+(3, '121300', 'Equipo Computo', 24, 1, '2020-10-06', '2020-10-01'),
+(4, '121400', 'Mobiliario y Equipo de oficina', 60, 1, '2020-10-06', '2020-10-06'),
+(5, '121500', 'Vehiculos', 60, 1, '2020-10-06', '2020-10-06'),
+(6, '121600', 'Otros Activos', 0, 1, '2020-10-06', '2020-10-06'),
+(7, '121700', 'Mobiliario y Equipo Docentes', 60, 1, '2020-10-06', '2020-10-06');
 
 -- --------------------------------------------------------
 
@@ -178,6 +505,8 @@ CREATE TABLE `catvehiculo` (
   `catVehiculoFechaCompra` date NOT NULL,
   `catVehiculoCosto` text NOT NULL,
   `catVehiculoEstado` int(11) NOT NULL,
+  `catVehiculoPlaca` text NOT NULL,
+  `idActivofijo` int(11) NOT NULL,
   `updated_at` date DEFAULT NULL,
   `created_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -186,8 +515,8 @@ CREATE TABLE `catvehiculo` (
 -- Volcado de datos para la tabla `catvehiculo`
 --
 
-INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `catVehiculoEstado`, `updated_at`, `created_at`) VALUES
-(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', 0, '2020-09-06', '2020-09-06');
+INSERT INTO `catvehiculo` (`catVehiculoId`, `catVehiculoTipo`, `catVehiculoModelo`, `catVehiculoColor`, `catVehiculoMotor`, `catVehiculoChasis`, `catVehiculoVIM`, `catVehiculoCantPasajeros`, `catVehiculoCombustible`, `catVehiculoUso`, `catVehiculoAnio`, `catVehiculoCilindro`, `catVehiculoServicio`, `catVehiculoPropietario`, `catVehiculoFechaCompra`, `catVehiculoCosto`, `catVehiculoEstado`, `catVehiculoPlaca`, `idActivofijo`, `updated_at`, `created_at`) VALUES
+(1, 'Bus', 'Coaster', 'Blanco', 'CUMIN', 'BLANCO', '456789', 12, 'Diésel', 'PRIVADO', '2010', '8', 'PARA ESTUDIANTES Y FAMILIAS', 'TESOROS DE DIOS', '2019-12-10', '2500', 1, '', 5, '2020-10-06', '2020-09-06');
 
 -- --------------------------------------------------------
 
@@ -239,6 +568,60 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('tecnologia@tesorosdedios.org', '$2y$10$1lG2aYPVKgQ9YCYGDhTFWObNTQEknfVybO5//XbY5xGP/aRDbxQEq', '2020-10-03 22:32:31');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `rptconsolidadocategoriaactivofijo`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `rptconsolidadocategoriaactivofijo` (
+`CATEGORIA` longtext
+,`DETALLE_ACTIVO` longtext
+,`COSTO` double
+,`DEPRECIACIONTOTALMENSUAL` decimal(52,2)
+,`DEPRECIACIONTOTALACUMULADA` decimal(52,2)
+,`SALDOTOTALLIBRO` decimal(52,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `rptdetalleactivo_estadoactivo`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `rptdetalleactivo_estadoactivo` (
+`CATEGORIA` mediumtext
+,`DETALLE_ACTIVO` mediumtext
+,`FECHA_RECIBIDA` date
+,`COSTO` mediumtext
+,`VIDA_UTIL` int(11)
+,`MESES` int(11)
+,`depreciacionMensual` decimal(30,2)
+,`depreciacionAcumulada` decimal(30,2)
+,`saldoEnLibro` decimal(30,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `rptdetallecategoriaactiofijo`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `rptdetallecategoriaactiofijo` (
+`CATEGORIA` mediumtext
+,`COSTO` double
+,`DEPRECIACIONTOTALMENSUAL` decimal(52,2)
+,`DEPRECIACIONTOTALACUMULADA` decimal(52,2)
+,`SALDOTOTALLIBRO` decimal(52,2)
+);
+
 -- --------------------------------------------------------
 
 --
@@ -252,6 +635,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,8 +644,37 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Allan', 'tecnologia@tesorosdedios.org', NULL, '$2y$10$t/P8vLpce1DTK48NQ/8yxe8flJIE1fpUFRwODoJwW8Kh80Kms/49G', '5GRr17HFqYwTOGx6Xd7lltfHNYzbR00V7kCZmFyoQFVmolvf6Sz1RP0o4d97', '2020-08-17 04:52:20', '2020-08-17 04:52:20');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Allan', 'tecnologia@tesorosdedios.org', NULL, '$2y$10$t/P8vLpce1DTK48NQ/8yxe8flJIE1fpUFRwODoJwW8Kh80Kms/49G', 'RgHFTzjNIROVLg5rj3SknxTy6FY2MSHsHwAbthppXzdn1hdj3EcJdLHwggkX', 1, '2020-08-17 04:52:20', '2020-08-17 04:52:20'),
+(2, 'Wendy', 'wendy@tesorosdedios.org', NULL, '$2y$10$gLBNTIuZi0djmGP2CG2SZeW8K/mA7cktnamh3sh.G1dU3plRQlEKO', NULL, 1, '2020-10-03 06:00:00', '2020-10-05 03:41:17'),
+(3, 'Bernarda Salgado', 'administrador@tesorosdedios.org', NULL, '$2y$10$QFURSzi.XMdPhYp7dnHKG.4yHVy9Wq04H.YDD0tJBGrmoPpbaTvVe', NULL, 2, '2020-10-11 06:00:00', '2020-10-12 02:30:34');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `rptconsolidadocategoriaactivofijo`
+--
+DROP TABLE IF EXISTS `rptconsolidadocategoriaactivofijo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rptconsolidadocategoriaactivofijo`  AS  select `activo`.`CATEGORIA` AS `CATEGORIA`,`activo`.`DETALLE_ACTIVO` AS `DETALLE_ACTIVO`,sum(`activo`.`COSTO`) AS `COSTO`,sum(`activo`.`depreciacionMensual`) AS `DEPRECIACIONTOTALMENSUAL`,sum(`activo`.`depreciacionAcumulada`) AS `DEPRECIACIONTOTALACUMULADA`,sum(`activo`.`saldoEnLibro`) AS `SALDOTOTALLIBRO` from (select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `CATEGORIA`,`catelectrodomesticos`.`CatElectDescripcion` AS `DETALLE_ACTIVO`,`catelectrodomesticos`.`CatElectFechaIngreso` AS `FECHA_RECIBIDA`,`catelectrodomesticos`.`CatElectCosto` AS `COSTO`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `VIDA_UTIL`,`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catelectrodomesticos`.`CatElectCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`))) AS `saldoEnLibro` from (`catelectrodomesticos` join `cattipocuentaactivofijo`) where `catelectrodomesticos`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catelectrodomesticos`.`CatElectEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catequipocomputo`.`catEquipoMarca` AS `CatEquipoMarca`,`catequipocomputo`.`catEquipoFechaCompra` AS `CatequipoFechaCompra`,`catequipocomputo`.`catEquipoCostoEquipo` AS `catEquipoCostoEquipo`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catequipocomputo`.`catEquipoCostoEquipo`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`))) AS `saldoEnLibro` from (`catequipocomputo` join `cattipocuentaactivofijo`) where `catequipocomputo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catequipocomputo`.`CatEquipoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catimpresoras`.`catImpresorasMarca` AS `catImpresorasMarca`,`catimpresoras`.`catImpresoraFechaIngreso` AS `catImpresoraFechaIngreso`,`catimpresoras`.`catImpresoraCosto` AS `catimpresoraCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catimpresoras`.`catImpresoraCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`))) AS `saldoEnLibro` from (`catimpresoras` join `cattipocuentaactivofijo`) where `catimpresoras`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catimpresoras`.`CatImpresoraEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catvehiculo`.`catVehiculoModelo` AS `catvehiculoModelo`,`catvehiculo`.`catVehiculoFechaCompra` AS `catvehiculoFechaCompra`,`catvehiculo`.`catVehiculoCosto` AS `catVehiculoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catvehiculo`.`catVehiculoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`))) AS `saldoEnLibro` from (`catvehiculo` join `cattipocuentaactivofijo`) where `catvehiculo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catvehiculo`.`catVehiculoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catterreno`.`catTerrenoPropietario` AS `catTerrenoPropietario`,`catterreno`.`catTerrenoFechaCompra` AS `catterrenoFechaCompra`,`catterreno`.`catterrenoCosto` AS `catterrenoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catterreno`.`catterrenoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`))) AS `saldoEnLibro` from (`catterreno` join `cattipocuentaactivofijo`) where `catterreno`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catterreno`.`CatTerrenoEstado` <> 2) `activo` group by `activo`.`CATEGORIA`,`activo`.`DETALLE_ACTIVO` with rollup ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `rptdetalleactivo_estadoactivo`
+--
+DROP TABLE IF EXISTS `rptdetalleactivo_estadoactivo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rptdetalleactivo_estadoactivo`  AS  select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `CATEGORIA`,`catelectrodomesticos`.`CatElectDescripcion` AS `DETALLE_ACTIVO`,`catelectrodomesticos`.`CatElectFechaIngreso` AS `FECHA_RECIBIDA`,`catelectrodomesticos`.`CatElectCosto` AS `COSTO`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `VIDA_UTIL`,`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catelectrodomesticos`.`CatElectCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`))) AS `saldoEnLibro` from (`catelectrodomesticos` join `cattipocuentaactivofijo`) where `catelectrodomesticos`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catelectrodomesticos`.`CatElectEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catequipocomputo`.`catEquipoMarca` AS `CatEquipoMarca`,`catequipocomputo`.`catEquipoFechaCompra` AS `CatequipoFechaCompra`,`catequipocomputo`.`catEquipoCostoEquipo` AS `catEquipoCostoEquipo`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catequipocomputo`.`catEquipoCostoEquipo`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`))) AS `saldoEnLibro` from (`catequipocomputo` join `cattipocuentaactivofijo`) where `catequipocomputo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catequipocomputo`.`CatEquipoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catimpresoras`.`catImpresorasMarca` AS `catImpresorasMarca`,`catimpresoras`.`catImpresoraFechaIngreso` AS `catImpresoraFechaIngreso`,`catimpresoras`.`catImpresoraCosto` AS `catimpresoraCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catimpresoras`.`catImpresoraCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`))) AS `saldoEnLibro` from (`catimpresoras` join `cattipocuentaactivofijo`) where `catimpresoras`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catimpresoras`.`CatImpresoraEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catvehiculo`.`catVehiculoModelo` AS `catvehiculoModelo`,`catvehiculo`.`catVehiculoFechaCompra` AS `catvehiculoFechaCompra`,`catvehiculo`.`catVehiculoCosto` AS `catVehiculoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catvehiculo`.`catVehiculoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`))) AS `saldoEnLibro` from (`catvehiculo` join `cattipocuentaactivofijo`) where `catvehiculo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catvehiculo`.`catVehiculoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catterreno`.`catTerrenoPropietario` AS `catTerrenoPropietario`,`catterreno`.`catTerrenoFechaCompra` AS `catterrenoFechaCompra`,`catterreno`.`catterrenoCosto` AS `catterrenoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catterreno`.`catterrenoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`))) AS `saldoEnLibro` from (`catterreno` join `cattipocuentaactivofijo`) where `catterreno`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catterreno`.`CatTerrenoEstado` <> 2 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `rptdetallecategoriaactiofijo`
+--
+DROP TABLE IF EXISTS `rptdetallecategoriaactiofijo`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `rptdetallecategoriaactiofijo`  AS  select `activo`.`CATEGORIA` AS `CATEGORIA`,sum(`activo`.`COSTO`) AS `COSTO`,sum(`activo`.`depreciacionMensual`) AS `DEPRECIACIONTOTALMENSUAL`,sum(`activo`.`depreciacionAcumulada`) AS `DEPRECIACIONTOTALACUMULADA`,sum(`activo`.`saldoEnLibro`) AS `SALDOTOTALLIBRO` from (select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `CATEGORIA`,`catelectrodomesticos`.`CatElectDescripcion` AS `DETALLE_ACTIVO`,`catelectrodomesticos`.`CatElectFechaIngreso` AS `FECHA_RECIBIDA`,`catelectrodomesticos`.`CatElectCosto` AS `COSTO`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `VIDA_UTIL`,`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catelectrodomesticos`.`CatElectCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catelectrodomesticos`.`CatElectFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catelectrodomesticos`.`CatElectCosto`))) AS `saldoEnLibro` from (`catelectrodomesticos` join `cattipocuentaactivofijo`) where `catelectrodomesticos`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catelectrodomesticos`.`CatElectEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catequipocomputo`.`catEquipoMarca` AS `CatEquipoMarca`,`catequipocomputo`.`catEquipoFechaCompra` AS `CatequipoFechaCompra`,`catequipocomputo`.`catEquipoCostoEquipo` AS `catEquipoCostoEquipo`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catequipocomputo`.`catEquipoCostoEquipo`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catequipocomputo`.`catEquipoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catequipocomputo`.`catEquipoCostoEquipo`))) AS `saldoEnLibro` from (`catequipocomputo` join `cattipocuentaactivofijo`) where `catequipocomputo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catequipocomputo`.`CatEquipoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catimpresoras`.`catImpresorasMarca` AS `catImpresorasMarca`,`catimpresoras`.`catImpresoraFechaIngreso` AS `catImpresoraFechaIngreso`,`catimpresoras`.`catImpresoraCosto` AS `catimpresoraCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catimpresoras`.`catImpresoraCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catimpresoras`.`catImpresoraFechaIngreso`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catimpresoras`.`catImpresoraCosto`))) AS `saldoEnLibro` from (`catimpresoras` join `cattipocuentaactivofijo`) where `catimpresoras`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catimpresoras`.`CatImpresoraEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catvehiculo`.`catVehiculoModelo` AS `catvehiculoModelo`,`catvehiculo`.`catVehiculoFechaCompra` AS `catvehiculoFechaCompra`,`catvehiculo`.`catVehiculoCosto` AS `catVehiculoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catvehiculo`.`catVehiculoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catvehiculo`.`catVehiculoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catvehiculo`.`catVehiculoCosto`))) AS `saldoEnLibro` from (`catvehiculo` join `cattipocuentaactivofijo`) where `catvehiculo`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catvehiculo`.`catVehiculoEstado` <> 2 union all select `cattipocuentaactivofijo`.`descripcionActivoFjo` AS `descripcionActivoFjo`,`catterreno`.`catTerrenoPropietario` AS `catTerrenoPropietario`,`catterreno`.`catTerrenoFechaCompra` AS `catterrenoFechaCompra`,`catterreno`.`catterrenoCosto` AS `catterrenoCosto`,`cattipocuentaactivofijo`.`vidaUtilActivoFijo` AS `vidaUtilActivoFijo`,`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`) AS `MESES`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`) AS `depreciacionMensual`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`)) AS `depreciacionAcumulada`,`saldoEnLibro`(`catterreno`.`catterrenoCosto`,`depreciacionAcumulativa`(`calculoMes`(curdate(),`catterreno`.`catTerrenoFechaCompra`),`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`depreciacionMensual`(`cattipocuentaactivofijo`.`vidaUtilActivoFijo`,`catterreno`.`catterrenoCosto`))) AS `saldoEnLibro` from (`catterreno` join `cattipocuentaactivofijo`) where `catterreno`.`idActivofijo` = `cattipocuentaactivofijo`.`idActivofijo` and `catterreno`.`CatTerrenoEstado` <> 2) `activo` group by `activo`.`CATEGORIA` ;
 
 --
 -- Índices para tablas volcadas
@@ -271,37 +684,54 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Indices de la tabla `catelectrodomesticos`
 --
 ALTER TABLE `catelectrodomesticos`
-  ADD PRIMARY KEY (`CatElectId`);
+  ADD PRIMARY KEY (`CatElectId`),
+  ADD KEY `CatElectEstado` (`CatElectEstado`),
+  ADD KEY `idActivofijo` (`idActivofijo`);
 
 --
 -- Indices de la tabla `catequipocomputo`
 --
 ALTER TABLE `catequipocomputo`
-  ADD PRIMARY KEY (`catEquipoCompId`);
+  ADD PRIMARY KEY (`catEquipoCompId`),
+  ADD KEY `CatEquipoEstado` (`CatEquipoEstado`),
+  ADD KEY `idActivofijo` (`idActivofijo`);
+
+--
+-- Indices de la tabla `catestado`
+--
+ALTER TABLE `catestado`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `catimpresoras`
 --
 ALTER TABLE `catimpresoras`
-  ADD PRIMARY KEY (`catImpresorasId`);
+  ADD PRIMARY KEY (`catImpresorasId`),
+  ADD KEY `CatImpresoraEstado` (`CatImpresoraEstado`),
+  ADD KEY `idActivofijo` (`idActivofijo`);
 
 --
 -- Indices de la tabla `catterreno`
 --
 ALTER TABLE `catterreno`
-  ADD PRIMARY KEY (`catTerrenoId`);
+  ADD PRIMARY KEY (`catTerrenoId`),
+  ADD KEY `CatTerrenoEstado` (`CatTerrenoEstado`),
+  ADD KEY `idActivofijo` (`idActivofijo`);
 
 --
 -- Indices de la tabla `cattipocuentaactivofijo`
 --
 ALTER TABLE `cattipocuentaactivofijo`
-  ADD PRIMARY KEY (`idActivofijo`);
+  ADD PRIMARY KEY (`idActivofijo`),
+  ADD KEY `CatTipoCuentaActivoEstado` (`CatTipoCuentaActivoEstado`);
 
 --
 -- Indices de la tabla `catvehiculo`
 --
 ALTER TABLE `catvehiculo`
-  ADD PRIMARY KEY (`catVehiculoId`);
+  ADD PRIMARY KEY (`catVehiculoId`),
+  ADD KEY `catVehiculoEstado` (`catVehiculoEstado`),
+  ADD KEY `idActivofijo` (`idActivofijo`);
 
 --
 -- Indices de la tabla `failed_jobs`
@@ -326,7 +756,8 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD UNIQUE KEY `users_email_unique` (`email`),
+  ADD KEY `estado` (`estado`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -345,6 +776,12 @@ ALTER TABLE `catequipocomputo`
   MODIFY `catEquipoCompId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT de la tabla `catestado`
+--
+ALTER TABLE `catestado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `catimpresoras`
 --
 ALTER TABLE `catimpresoras`
@@ -354,13 +791,13 @@ ALTER TABLE `catimpresoras`
 -- AUTO_INCREMENT de la tabla `catterreno`
 --
 ALTER TABLE `catterreno`
-  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `catTerrenoId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cattipocuentaactivofijo`
 --
 ALTER TABLE `cattipocuentaactivofijo`
-  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idActivofijo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `catvehiculo`
@@ -384,7 +821,58 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `catelectrodomesticos`
+--
+ALTER TABLE `catelectrodomesticos`
+  ADD CONSTRAINT `catelectrodomesticos_ibfk_1` FOREIGN KEY (`CatElectEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catelectrodomesticos_ibfk_2` FOREIGN KEY (`idActivofijo`) REFERENCES `cattipocuentaactivofijo` (`idActivofijo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catequipocomputo`
+--
+ALTER TABLE `catequipocomputo`
+  ADD CONSTRAINT `catequipocomputo_ibfk_1` FOREIGN KEY (`CatEquipoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catequipocomputo_ibfk_2` FOREIGN KEY (`idActivofijo`) REFERENCES `cattipocuentaactivofijo` (`idActivofijo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catimpresoras`
+--
+ALTER TABLE `catimpresoras`
+  ADD CONSTRAINT `catimpresoras_ibfk_1` FOREIGN KEY (`CatImpresoraEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catimpresoras_ibfk_2` FOREIGN KEY (`idActivofijo`) REFERENCES `cattipocuentaactivofijo` (`idActivofijo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catterreno`
+--
+ALTER TABLE `catterreno`
+  ADD CONSTRAINT `catterreno_ibfk_1` FOREIGN KEY (`CatTerrenoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catterreno_ibfk_2` FOREIGN KEY (`idActivofijo`) REFERENCES `cattipocuentaactivofijo` (`idActivofijo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `cattipocuentaactivofijo`
+--
+ALTER TABLE `cattipocuentaactivofijo`
+  ADD CONSTRAINT `cattipocuentaactivofijo_ibfk_1` FOREIGN KEY (`CatTipoCuentaActivoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `catvehiculo`
+--
+ALTER TABLE `catvehiculo`
+  ADD CONSTRAINT `catvehiculo_ibfk_1` FOREIGN KEY (`catVehiculoEstado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `catvehiculo_ibfk_2` FOREIGN KEY (`idActivofijo`) REFERENCES `cattipocuentaactivofijo` (`idActivofijo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`estado`) REFERENCES `catestado` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

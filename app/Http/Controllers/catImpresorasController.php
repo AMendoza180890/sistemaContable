@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catImpresorasModel;
 use FFI\Exception;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
+
 
 class catImpresorasController extends Controller
 {
@@ -56,6 +60,7 @@ class catImpresorasController extends Controller
             $impresoras->catImpresoraFechaIngreso = $request->impFecha;
             $impresoras->catImpresoraCosto = $request->impCosto;
             $impresoras->catImpresoraDescripcion = $request->impDescripcion;
+            $impresoras->idActivofijo=$request->tipocuenta;
             $impresoras->CatImpresoraEstado = 1;
 
             $impresoras->save();
@@ -76,7 +81,14 @@ class catImpresorasController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $findImpresora = catImpresorasModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptImpresora',compact('findImpresora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }
     }
 
     /**
@@ -105,16 +117,19 @@ class catImpresorasController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id);
+            $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id)->first();
+
             $actualizarImpresora->catImpresorasMarca = $request->inputMarcaE;
             $actualizarImpresora->catImpresoraModelo = $request->inputModeloE;
             $actualizarImpresora->catImpresoraTipoToner = $request->inputTonnerE;
             $actualizarImpresora->catImpresoraDescripcion = $request->impDescripcionE;
             $actualizarImpresora->catImpresoraFechaIngreso = $request->impfechaCompraE;
             $actualizarImpresora->catImpresoraCosto = $request->impcostoE;
+            $actualizarImpresora->idActivofijo = $request->tipocuentaE;
             $actualizarImpresora->CatImpresoraEstado = 1;
             
             $actualizarImpresora->save();
+            return redirect()->route('impresora.all')->with('mensaje exitoso','Se actualizo correctamente la impresora');
         } catch (exception $ex) {
             return 'Error - '.$ex->getMessage();
         }
@@ -154,6 +169,18 @@ class catImpresorasController extends Controller
             return redirect()->route('impresora.all')->with('mensaje exitoso', 'Se habilito correctamente la impresora seleccionada');
         } catch (exception $ex) {
             return "Error - " . $ex->getMessage();
+        }
+    }
+    
+    public function showBajas($id)
+    {
+        try {
+            $findImpresora = catImpresorasModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptImpresoraBaja', compact('findImpresora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -' . $ex->getMessage();
         }
     }
 }

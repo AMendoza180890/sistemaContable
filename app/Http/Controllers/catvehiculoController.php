@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\catvehiculoModel;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Auth\Events\Verified;
+use SebastianBergmann\Environment\Console;
 
 class catvehiculoController extends Controller
 {
@@ -55,8 +58,7 @@ class catvehiculoController extends Controller
                 'vehPropietario'=>'required',
                 'vehFecha' => 'required',
                 'vehCosto' => 'required',
-
-                
+                'catVehiculoPlacaN'=>'required',
             ]);
             
             $vehiculos = new catvehiculoModel();
@@ -76,6 +78,8 @@ class catvehiculoController extends Controller
             $vehiculos->catVehiculoPropietario = $request->vehPropietario;
             $vehiculos->catVehiculoFechaCompra = $request->vehFecha;
             $vehiculos->catVehiculoCosto = $request->vehCosto;
+            $vehiculos->catVehiculoPlaca = $request->catVehiculoPlacaN;
+            $vehiculos->idActivofijo = $request->tipocuenta;
             $vehiculos->catVehiculoEstado = 1;
 
             $vehiculos->save();
@@ -96,7 +100,14 @@ class catvehiculoController extends Controller
      */
     public function show($id)
     {
-        
+        try {
+            $obtenerVehiculos = catvehiculoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptVehiculo',compact('obtenerVehiculos'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -'.$ex->getMessage();
+        }   
     }
 
     /**
@@ -126,7 +137,7 @@ class catvehiculoController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $actualizarVehiculo = catvehiculoModel::where('catVehiculoId', '=', $id);
+            $actualizarVehiculo = catvehiculoModel::where('catVehiculoId', '=', $id)->first();
     
             $actualizarVehiculo->catVehiculoTipo  = $request->vehTipoE;
             $actualizarVehiculo->catVehiculoModelo = $request->vehModeloE;
@@ -143,9 +154,14 @@ class catvehiculoController extends Controller
             $actualizarVehiculo->catVehiculoPropietario = $request->vehPropietarioE;
             $actualizarVehiculo->catVehiculoFechaCompra = $request->vehFechaE;
             $actualizarVehiculo->catVehiculoCosto = $request->vehCostoE;
+            //Agregar Objeto donde se obtendra la planca en el front-end
+            $actualizarVehiculo->catVehiculoPlaca = $request->catVehiculoPlacaE;
+            $actualizarVehiculo->idActivofijo = $request->tipocuentaE;
             $actualizarVehiculo->catVehiculoEstado = 1;
     
             $actualizarVehiculo->save();
+
+            return redirect()->route('vehiculo.all')->with('mensaje exitoso','Se actualizo vehiculo correctamente');
             
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
@@ -186,5 +202,17 @@ class catvehiculoController extends Controller
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
         }
+    }
+
+    public function showBajas($id)
+    {
+        try {
+            $obtenerVehiculos = catvehiculoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf->loadview('RptVehiculoBaja', compact('obtenerVehiculos'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error -' . $ex->getMessage();
+        }   
     }
 }

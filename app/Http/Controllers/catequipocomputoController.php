@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\catequipocomputoModel;
+use App;
 use FFI\Exception;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use App\catequipocomputoModel;
+use Illuminate\Auth\Events\Verified;
 use SebastianBergmann\Environment\Console;
 
 class catequipocomputoController extends Controller
@@ -64,6 +65,7 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoTipoSO      = $request->compTipoSO;
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
+               $Computadoras->idActivofijo = $request->tipocuenta;
                $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
@@ -84,7 +86,14 @@ class catequipocomputoController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf ->loadview('RptComputadora',compact('findComputadora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error = '.$ex->getMessage();
+        }
     }
 
     /**
@@ -124,9 +133,11 @@ class catequipocomputoController extends Controller
             $actualizarComputadora->catEquipoTipoSO = $request->compTipoSOE;
             $actualizarComputadora->catEquipoFechaCompra = $request->compFechaCompraE;
             $actualizarComputadora->catEquipoCostoEquipo = $request->compCostoE;
+            $actualizarComputadora->idActivofijo = $request->tipocuentaE;
             $actualizarComputadora->CatEquipoEstado = 1;
 
             $actualizarComputadora->save();
+            return redirect()->route('computadora.all')->with('mensaje exito', 'Se actualizo correctamente el equipo de computo');
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
         }
@@ -164,6 +175,18 @@ class catequipocomputoController extends Controller
             return redirect()->route('computadora.all')->with('mensaje exito','Se activo correctamente el equipo de computo');
         } catch (exception $ex) {
             return 'Error -'.$ex->getMessage();
+        }
+    }
+
+    public function showBajas($id)
+    {
+        try {
+            $findComputadora = catequipocomputoModel::find($id);
+            $pdf = App::make('dompdf.wrapper');
+            $pdf ->loadview('RptComputadoraBaja',compact('findComputadora'));
+            return $pdf->stream();
+        } catch (exception $ex) {
+            return 'Error = '.$ex->getMessage();
         }
     }
 }
