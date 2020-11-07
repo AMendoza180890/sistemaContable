@@ -19,8 +19,8 @@
 
 @section('content')
     <nav class="nav">
-        <a class="nav-link" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
-        <a class="nav-link active" href="{{route('RptBajas.show')}}">Reporte de Baja</a>
+        <a class="nav-link btn-success" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
+        <a class="nav-link btn-danger" href="{{route('RptBajas.show')}}">Reporte de Baja</a>
     </nav>
 
     <div class="card">
