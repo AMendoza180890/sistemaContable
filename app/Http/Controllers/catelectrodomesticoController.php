@@ -80,7 +80,7 @@ class catelectrodomesticoController extends Controller
         try {
             $findElectrodomestico = catelectrodomesticoModel::find($id);
             $pdf = App::make('dompdf.wrapper');
-            $pdf->loadHTML('RptElectrodomestico',compact('findElectrodomestico'));
+            $pdf->loadview('RptElectrodomestico',compact('findElectrodomestico'));
             return $pdf->stream();
         } catch (Exception $ex) {
             return 'Error -'.$ex->getMessage();
@@ -97,9 +97,7 @@ class catelectrodomesticoController extends Controller
     {
         try {
             $findElectrodomestico = catelectrodomesticoModel::find($id);
-            $pdf = App::make('dompdf.wrapper');
-            $pdf->loadview('RptElectrodomestico',compact('findElectrodomestico'));
-            return $pdf->stream();
+            return $findElectrodomestico;
         } catch (exception $ex) {
             return "Error - ".$ex->getMessage();
         }

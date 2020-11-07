@@ -20,8 +20,8 @@
 @section('content')
 
 <nav class="nav">
-    <a class="nav-link active" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
-    <a class="nav-link" href="{{ route('rptConsolidado.show')}}">Reporte con Totales</a>
+    <a class="nav-link btn-success" href="{{route('RptCuenta.all')}}">Reporte General Activo</a>
+    <a class="nav-link btn-primary" href="{{ route('rptConsolidado.show')}}">Reporte con Totales</a>
 </nav>
 
     <div class="card">

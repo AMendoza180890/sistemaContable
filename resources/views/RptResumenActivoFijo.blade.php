@@ -17,7 +17,7 @@
         <br>
         <div class="card-body">
             <h4>Total por categorias</h4>
-            <table class="table" id="Reporte">
+            <table class="table table-sm" id="Reporte">
                 <thead>
                     <tr>
                         <th>CATEGORIA</th>
@@ -43,7 +43,7 @@
 
         <div class="card-body">
             <h4>Lista de Activos dados de baja en el mes</h4>
-            <table class="table" id="Reporte">
+            <table class="table table-sm" id="Reporte">
                 <thead>
                     <tr>
                         <th>CATEGORIA</th>
@@ -67,7 +67,7 @@
 
         <div class="card-body">
             <h4>Lista de Activos Nuevos en el mes</h4>
-            <table class="table" id="Reporte">
+            <table class="table table-sm" id="Reporte">
                 <thead>
                     <tr>
                         <th>CATEGORIA</th>
