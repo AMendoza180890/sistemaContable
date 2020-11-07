@@ -287,7 +287,7 @@ return [
                         'icon' => 'far fa-fw  fa fa-print',
                     ],
                     [
-                        'text' => 'Electrodomestico',
+                        'text' => 'Mobiliario Y Equipos',
                         'url'  => '/electrodomesticos',
                         'icon' => 'far fa-fw  fa fa-tty',
                     ],
