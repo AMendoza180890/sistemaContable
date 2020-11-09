@@ -10,7 +10,7 @@
 @section('title', 'TipoCuentas')
 
 @section('content_header')
-    <h1>Mobiliario y Equipos</h1>
+    <h1>Catalogo de Mobiliario y Equipos</h1>
 @stop
 
 @section('content')
