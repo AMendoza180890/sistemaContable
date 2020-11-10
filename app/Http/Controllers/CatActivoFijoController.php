@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Symfony\Component\Console\Input\Input;
 use FFI\Exception;
 use PHPUnit\Framework\Constraint\Count;
-
 use function GuzzleHttp\Promise\exception_for;
 
 class CatActivoFijoController extends Controller

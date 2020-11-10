@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use SebastianBergmann\Environment\Console;
 
-
 class catImpresorasController extends Controller
 {
     /**
@@ -144,7 +143,6 @@ class catImpresorasController extends Controller
     public function destroy($id)
     {
         try {
-
             $eliminarImpresora = catImpresorasModel::where('catImpresorasId','=',$id)->first();
 
             $eliminarImpresora->CatImpresoraEstado = 2;
