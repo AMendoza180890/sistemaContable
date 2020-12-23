@@ -153,7 +153,6 @@ class catequipocomputoController extends Controller
     {
         try {
             $DesactivarComputadora = catequipocomputoModel::where('catEquipoCompId','=',$id)->first();
-
             $DesactivarComputadora->CatEquipoEstado = 2;
 
             $DesactivarComputadora->save();
@@ -167,7 +166,6 @@ class catequipocomputoController extends Controller
     public function recover($id){
         try {
             $habilitarComputadora = catequipocomputoModel::where('catEquipoCompId', '=',$id)->first();
-
             $habilitarComputadora->CatEquipoEstado = 1;
 
             $habilitarComputadora->save();
