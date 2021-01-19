@@ -242,7 +242,7 @@ return [
         ],
         ['header' => 'ACTIVOS'],
             [
-                'text'=>'Activo Fijo',
+                'text'=>'ACTIVO FIJO',
                 'icon'=>'',
                 'submenu'=>[
                     [
@@ -302,6 +302,28 @@ return [
                         'icon' => 'far fa-fw  fa fa-map',
                     ],
                 ],
+            ],
+            ['header'=> 'OTROS ARTICULOS'],
+            [
+                'text'=>'MISELANEOS',
+                'icon'=>'',
+                'submenu'=>[
+                    [
+                        'text' => 'Articulo',
+                        'url' => '/miselaneos/articulos',
+                        'icon' => 'far fa-fw fa fa-article'
+                    ],
+                    [
+                        'text'    => 'Entradas',
+                        'url'     => '/miselaneos/entradas',
+                        'icon'    => 'far fa-fw fa fa-article'
+                    ],
+                    [
+                        'text'    =>  'Salidas',
+                        'url'     =>  '/miselaneos/salidas',
+                        'icon'    => 'far fa-fw fa fa-article'
+                    ]
+                ]
             ],
             ['header' => 'CUENTA'],
             //  [

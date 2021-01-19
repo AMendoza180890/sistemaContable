@@ -105,6 +105,9 @@ Route::get('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoContro
 Route::post('/RptConsolidadoActivoFijo', 'rptConsolidadoCategoriaActivoFijoController@show')->name('rptConsolidado.show');
 /*Fin de Estado ActivoFijo */
 
+/*Rutas de Miselaneos*/
+Route::get('/miselaneos/articulos', 'catmiselaneosArticulosController@index')->name('miselaneosArticulos.all');
+
 /*Parte del sistema AdminLTE No tocar*/
  Auth::routes();
  Route::get('/home', 'HomeController@index')->name('home');
