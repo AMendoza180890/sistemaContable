@@ -17,24 +17,24 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <h4>Propiedad:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadN" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadN" >
                             </div>
                             <div class="form-group">
                                 <h4>Area:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoAreaN" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoAreaN" >
                             </div>
                             <div class="form-group">
                                 <h4>FechaCompra:</h4>
-                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraN" required>
+                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraN" >
                             </div>
                             <div class="form-group">
                                 <h4>Costo:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoCostoN" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoCostoN" >
                             </div>
 
                             <div class="form-group">
                                 <h4>Numero Catastral:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralN" id="TerrenoNumeroCatastralN" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralN" id="TerrenoNumeroCatastralN" >
                             </div>
 
                             <div class="form-group">

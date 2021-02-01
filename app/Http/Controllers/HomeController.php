@@ -6,6 +6,7 @@ use App;
 use App\rptdetalleCategoriaActivoFijo;
 use Illuminate\Http\Request;
 use FFI\Exception;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,8 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            $detalleCategoria = rptdetalleCategoriaActivoFijo::all();
+            //$detalleCategoria = rptdetalleCategoriaActivoFijo::all();
+            $detalleCategoria = DB::select('call SPrptdetallecategoriaactivofijoSinParametro()');
             $rptBajasClass = new rptbajasController();
             $rptAltaClass = new rptaltaController();
             $rptBajasMesActual = $rptBajasClass->show();

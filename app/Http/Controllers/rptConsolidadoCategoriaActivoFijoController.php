@@ -16,7 +16,8 @@ class rptConsolidadoCategoriaActivoFijoController extends Controller
     public function index()
     {
         try {
-            $consolidadoActivo = rptConsolidadoCategoriaActivoFijoModel::all();
+            //$consolidadoActivo = rptConsolidadoCategoriaActivoFijoModel::all();
+            $consolidadoActivo = DB::select('CALL SPrptconsolidadocategoriaactivofijo()');
             return view('RptConsolidadoActivoFijo',compact('consolidadoActivo'));
         } catch (exception $ex) {
             return 'error - '.$ex->getMessage();

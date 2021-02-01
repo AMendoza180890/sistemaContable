@@ -16,34 +16,34 @@
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="electmarca">Marca</label>
-                                    <input type="text" class="form-control" name="electmarca" id="electmarca" placeholder="ej. GE, Sony, etc." required>
+                                    <input type="text" class="form-control" name="electmarca" id="electmarca" placeholder="ej. GE, Sony, etc." >
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="electmodelo">Modelo</label>
-                                    <input type="text" class="form-control" name="electmodelo" id="electmodelo" placeholder="modelo del electro." required>
+                                    <input type="text" class="form-control" name="electmodelo" id="electmodelo" placeholder="modelo del electro." >
                                 </div>
                             </div>
                             
                             <div class="form-group">
                                 <label for="electFecha">Fecha</label>
                                 <input type="date" class="form-control" id="electFecha" name="electFecha"
-                                    placeholder="Fecha compra o donacion" required>
+                                    placeholder="Fecha compra o donacion" >
                             </div>
                             
                             <div class="form-group">
                                 <label for="electcosto">Costo</label>
                                 <input type="text" class="form-control" id="electcosto" name="electcosto"
-                                    placeholder="Costo Real o apróximado" required>
+                                    placeholder="Costo Real o apróximado" >
                             </div>
                             
                             <div class="form-group">
                                 <label for="electdescripcion">Descripción</label>
-                                <textarea class="form-control" id="electdescripcion" name="electdescripcion" rows="3" required></textarea>
+                                <textarea class="form-control" id="electdescripcion" name="electdescripcion" rows="3" ></textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
-                                    <select class="form-control"name="tipocuenta" id="tipocuenta" required>
+                                    <select class="form-control"name="tipocuenta" id="tipocuenta" >
                                             <option value="valor"></option>
                                     </select>
                             </div>

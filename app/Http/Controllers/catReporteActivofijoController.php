@@ -18,7 +18,10 @@ class catReporteActivofijoController extends Controller
     public function index()
     {
         try {
-            $listaGralReporte = catReporteActivofijoModel::all();
+            $listaGralReporte = DB::select('CALL SPrptdetalleactivo_estadoactivo()');
+            //$listaGralReporte = catReporteActivofijoModel::all();
+            // var_dump($listaGralReporte);
+            // die;
             return view('RptActivoFijo',compact('listaGralReporte'));
         } catch (exception $ex) {
             return 'ERROR -'.$ex->getMessage();

@@ -18,25 +18,25 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <h4>Propiedad:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadE" id="TerrenoPropiedadE" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoPropiedadE" id="TerrenoPropiedadE" >
                                 <input type="hidden" name="codigoTerrenoE" id="codigoTerrenoE">
                             </div>
                             <div class="form-group">
                                 <h4>Area:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoAreaE" id="TerrenoAreaE" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoAreaE" id="TerrenoAreaE" >
                             </div>
                             <div class="form-group">
                                 <h4>FechaCompra:</h4>
-                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraE" id="TerrenofechaCompraE" required>
+                                <input type="date" class="form-control input-lg" name="TerrenofechaCompraE" id="TerrenofechaCompraE" >
                             </div>
                             <div class="form-group">
                                 <h4>Costo:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoCostoE" id="TerrenoCostoE" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoCostoE" id="TerrenoCostoE" >
                             </div>
 
                             <div class="form-group">
                                 <h4>Numero Catastral:</h4>
-                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralE" id="TerrenoNumeroCatastralE" required>
+                                <input type="text" class="form-control input-lg" name="TerrenoNumeroCatastralE" id="TerrenoNumeroCatastralE" >
                             </div>
 
                             <div class="form-group">

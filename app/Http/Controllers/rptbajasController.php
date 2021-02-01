@@ -17,7 +17,8 @@ class rptbajasController extends Controller
     public function index()
     {
         try {
-            $listaGralReporte = rptbajasModel::all();
+            //$listaGralReporte = rptbajasModel::all();
+            $listaGralReporte = DB::select('call SPrptdetalleactivo_estadobajas');
             return view('RptBajas',compact('listaGralReporte'));
         } catch (exception $ex) {
             return 'Error - '.$ex->getMessage();

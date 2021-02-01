@@ -2,7 +2,7 @@
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
-
+    # Para evitar que bot busquen en el servidor
     RewriteEngine On
 
     # Handle Authorization Header
@@ -18,4 +18,12 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+    
+    #bloquear o permitir busquedas a archivos en el servidor
+    #Order deny,allow
+        #Deny from all
+        #<Files ~ “.(xml|css|js|jpeg|png|gif|pdf|zip|rar)$”>
+        #allow from all
+        #</Files>
+
 </IfModule>
