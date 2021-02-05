@@ -13,6 +13,10 @@
                     @csrf
                     <div class="modal-body">
                         <div class="box-body">
+                            <div class="form-group">
+                                <label for="inputImpCode">Codigo</label>
+                                <input type="text" class="form-control" name="ImpCode" id="inputImpCode" placeholder="TDD0000" >
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputMarca">Marca</label>
@@ -46,10 +50,21 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="inputImpTipoEquipo">Tipo Equipo</label>
+                                <input type="text" class="form-control" name="ImpTipoEquipo" id="inputImpTipoEquipo" placeholder="Ej. Impresora, Camara, Laptop, etc." >
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
                                     <select class="form-control"name="tipocuenta" id="tipocuenta">
                                             <option value="valor"></option>
                                     </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputImpObservacion">Observaciones</label>
+                                <textarea class="form-control" name="ImpObservacion" id="inputImpObservacion" rows="3"></textarea>
+                                {{-- <input type="text" class="form-control" name="ImpTipoEquipo" id="inputImpTipoEquipo" placeholder="Ej. Impresora, Camara, Laptop, etc." > --}}
                             </div>
 
                         </div>

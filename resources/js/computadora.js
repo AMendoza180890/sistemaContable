@@ -51,6 +51,7 @@ $(document).ready(function() {
             cache: false,
             dataType: "json",
             success: function(datoComputadora) {
+                $("#inputCodeE").val(datoComputadora["catEquipoComputoCodigo"]);
                 $("#compIdE").val(datoComputadora["catEquipoCompId"]);
                 $("#cantTotalRamE").val(datoComputadora["catEquipoCantidadRAM"]);
                 $("#compCostoE").val(datoComputadora["catEquipoCostoEquipo"]);
@@ -61,7 +62,9 @@ $(document).ready(function() {
                 $("#inputAlmacenamientoE").val(datoComputadora["catEquipoTamanioAlmacenamiento"]);
                 $("#compTipoSOE").val(datoComputadora["catEquipoTipoSO"]);
                 $("#InputTipoMemoriaE").val(datoComputadora["TipoMemoriaRAM"]);
+                $("#inputTipoEquipoE").val(datoComputadora["catEquipoComputoTipoEquipo"]);
                 $("#tipocuentaE").val(datoComputadora["idActivofijo"])
+                $("#inputCompObservacionesE").val(datoComputadora["catEquipoComputoObservaciones"]);
 
                 $('Form').attr('Action', 'actualizarComputadora/' + datoComputadora["catEquipoCompId"]);
             }

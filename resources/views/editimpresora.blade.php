@@ -14,6 +14,10 @@
                     @method('put')
                     <div class="modal-body">
                         <div class="box-body">
+                            <div class="form-group">
+                                <label for="ImpCodeE">Codigo</label>
+                                <input type="text" class="form-control" name="ImpCodeE" id="ImpCodeE" placeholder="TDD0000" >
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputMarcaE">Marca</label>
@@ -48,10 +52,21 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="ImpTipoEquipoE">Tipo Equipo</label>
+                                <input type="text" class="form-control" name="ImpTipoEquipoE" id="ImpTipoEquipoE" placeholder="Ej. Impresora, Camara, Laptop, etc." >
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuentaE">Tipocuenta</label>
                                     <select class="form-control"name="tipocuentaE" id="tipocuentaE" >
                                             <option value="valor"></option>
                                     </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputImpObservacionE">Observaciones</label>
+                                <textarea class="form-control" name="inputImpObservacionE" id="inputImpObservacionE" rows="3"></textarea>
+                                {{-- <input type="text" class="form-control" name="ImpTipoEquipo" id="inputImpTipoEquipo" placeholder="Ej. Impresora, Camara, Laptop, etc." > --}}
                             </div>
                             
                         </div>

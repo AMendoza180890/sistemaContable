@@ -56,6 +56,8 @@ class catequipocomputoController extends Controller
             ]);
     
                $Computadoras = new catequipocomputoModel();
+
+               $Computadoras->catEquipoComputoCodigo = $request->compCode;
                $Computadoras->catEquipoModelo      = $request->compModelo;
                $Computadoras->catEquipoNumeroSerie = $request->compSerie;
                $Computadoras->catEquipoMarca       = $request->compMarca;
@@ -66,6 +68,8 @@ class catequipocomputoController extends Controller
                $Computadoras->catEquipoFechaCompra = $request->compFechaCompra;
                $Computadoras->catEquipoCostoEquipo = $request->compCosto;
                $Computadoras->idActivofijo = $request->tipocuenta;
+               $Computadoras->catEquipoComputoTipoEquipo = $request->compTipoEquipo;
+               $Computadoras->catEquipoComputoObservaciones = $request->compObservaciones;
                $Computadoras->CatEquipoEstado = 1;
 
               $Computadoras->save();
@@ -124,6 +128,7 @@ class catequipocomputoController extends Controller
         try {
             $actualizarComputadora = catequipocomputoModel::where('catEquipoCompId', '=', $id)->first();
             
+            $actualizarComputadora->catEquipoComputoCodigo = $request->compCodeE;
             $actualizarComputadora->catEquipoModelo = $request->inputModeloE;
             $actualizarComputadora->catEquipoNumeroSerie = $request->inputSerieE;
             $actualizarComputadora->catEquipoMarca = $request->inputMarcaE;
@@ -134,6 +139,8 @@ class catequipocomputoController extends Controller
             $actualizarComputadora->catEquipoFechaCompra = $request->compFechaCompraE;
             $actualizarComputadora->catEquipoCostoEquipo = $request->compCostoE;
             $actualizarComputadora->idActivofijo = $request->tipocuentaE;
+            $actualizarComputadora->catEquipoComputoTipoEquipo = $request->compTipoEquipoE;
+            $actualizarComputadora->catEquipoComputoObservaciones = $request->compObservacionesE;
             $actualizarComputadora->CatEquipoEstado = 1;
 
             $actualizarComputadora->save();

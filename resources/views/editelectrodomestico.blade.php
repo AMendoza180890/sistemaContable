@@ -14,6 +14,10 @@
                     @method('put')
                     <div class="modal-body">
                         <div class="box-body">
+                            <div class="form-group">
+                                <label for="electCodeE">Codigo</label>
+                                <input type="text" class="form-control" name="electCodeE" id="electCodeE" placeholder="TDD0000" >
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="electmarcaE">Marca</label>
@@ -44,11 +48,23 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="electtipoEquipoE">Tipo Equipo</label>
+                                <input type="text" class="form-control" id="electtipoEquipoE" name="electtipoEquipoE"
+                                    placeholder="Ej. Laptop, PC, Camara, Etc." >
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuentaE">Tipocuenta</label>
                                     <select class="form-control"name="tipocuentaE" id="tipocuentaE" >
                                             <option value="valor"></option>
                                     </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="electObservacionE">Observacion</label>
+                                <textarea class="form-control" id="electObservacionE" name="electObservacionE" rows="3" ></textarea>
+                            </div>
+
 
                         </div>
                         <div class="modal-footer">

@@ -14,6 +14,10 @@
                     <div class="modal-body">
                         <div class="box-body">
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label for="inputCode">Codigo</label>
+                                    <input type="text" class="form-control" name="compCode" id="inputCode" placeholder="TDD0000" >
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputModelo">Modelo</label>
                                     <input type="text" class="form-control" name="compModelo" id="inputModelo" placeholder="ej. inspiron, Thinkpad, etc." >
@@ -63,12 +67,20 @@
                                 <input type="text" class="form-control" id="costo" name="compCosto"
                                     placeholder="Costo Real o apróximado" >
                             </div>
-
+                            <div class="form-group">
+                                <label for="inputTipoEquipo">Tipo Equipo</label>
+                                <input type="text" class="form-control" name="compTipoEquipo" id="inputTipoEquipo" placeholder="Ej. laptop, pc, datashow, etc." >
+                            </div>
                             <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
                                     <select class="form-control"name="tipocuenta" id="tipocuenta"  >
                                             <option value="valor"></option>
                                     </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputCompObservaciones">Observaciones</label>
+                                <textarea class="form-control" name="compObservaciones" id="inputCompObservaciones" rows="3"></textarea>
+                                {{-- <input type="text" class="form-control" name="compTipoEquipo" id="inputTipoEquipo" placeholder="Ej. laptop, pc, datashow, etc." > --}}
                             </div>
                             
                         </div>

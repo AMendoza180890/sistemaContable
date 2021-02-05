@@ -30,6 +30,7 @@ $(document).ready(function() {
             cache: false,
             dataType: "json",
             success: function(datoImpresora) {
+                $("#ImpCodeE").val(datoImpresora["catImpresoraCodigo"]);
                 $("#codImpresoraE").val(datoImpresora["catImpresorasId"]);
                 $("#impcostoE").val(datoImpresora["catImpresoraCosto"]);
                 $("#impDescripcionE").val(datoImpresora["catImpresoraDescripcion"]);
@@ -37,7 +38,9 @@ $(document).ready(function() {
                 $("#inputModeloE").val(datoImpresora["catImpresoraModelo"]);
                 $("#inputMarcaE").val(datoImpresora["catImpresorasMarca"]);
                 $("#inputTonnerE").val(datoImpresora["catImpresoraTipoToner"]);
+                $("#ImpTipoEquipoE").val(datoImpresora["catImpresoraTipoEquipo"]);
                 $("#tipocuentaE").val(datoImpresora["idActivofijo"])
+                $("#inputImpObservacionE").val(datoImpresora["catImpresoraObservaciones"]);
 
                 $('Form').attr('Action', 'actualizarImpresora/' + datoImpresora["catImpresorasId"]);
             }

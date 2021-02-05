@@ -13,6 +13,10 @@
                     @csrf
                     <div class="modal-body">
                         <div class="box-body">
+                            <div class="form-group col-md-6">
+                                <label for="electCode">Codigo</label>
+                                <input type="text" class="form-control" name="electCode" id="electCode" placeholder="TDD0000" >
+                            </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="electmarca">Marca</label>
@@ -42,10 +46,21 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="electtipoEquipo">Tipo Equipo</label>
+                                <input type="text" class="form-control" id="electtipoEquipo" name="electtipoEquipo"
+                                    placeholder="Ej. Laptop, Lavadora, Camara, Etc." >
+                            </div>
+
+                            <div class="form-group">
                                 <label for="tipocuenta">Tipocuenta</label>
                                     <select class="form-control"name="tipocuenta" id="tipocuenta" >
                                             <option value="valor"></option>
                                     </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="electObservacion">Observacion</label>
+                                <textarea class="form-control" id="electObservacion" name="electObservacion" rows="3" ></textarea>
                             </div>
 
                         </div>

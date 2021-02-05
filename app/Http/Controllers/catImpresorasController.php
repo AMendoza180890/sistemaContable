@@ -52,7 +52,8 @@ class catImpresorasController extends Controller
             ]);
 
             $impresoras = new catImpresorasModel();
-
+            
+            $impresoras->catImpresoraCodigo = $request->ImpCode;
             $impresoras->catImpresorasMarca = $request->impMarca;
             $impresoras->catImpresoraModelo = $request->impModelo;
             $impresoras->catImpresoraTipoToner = $request->TipoTonner;
@@ -60,6 +61,8 @@ class catImpresorasController extends Controller
             $impresoras->catImpresoraCosto = $request->impCosto;
             $impresoras->catImpresoraDescripcion = $request->impDescripcion;
             $impresoras->idActivofijo=$request->tipocuenta;
+            $impresoras->catImpresoraTipoEquipo = $request->ImpTipoEquipo;
+            $impresoras->catImpresoraObservaciones = $request->ImpObservacion;
             $impresoras->CatImpresoraEstado = 1;
 
             $impresoras->save();
@@ -118,6 +121,7 @@ class catImpresorasController extends Controller
         try {
             $actualizarImpresora = catImpresorasModel::where('catImpresorasId', '=', $id)->first();
 
+            $actualizarImpresora->catImpresoraCodigo = $request->ImpCodeE;
             $actualizarImpresora->catImpresorasMarca = $request->inputMarcaE;
             $actualizarImpresora->catImpresoraModelo = $request->inputModeloE;
             $actualizarImpresora->catImpresoraTipoToner = $request->inputTonnerE;
@@ -125,9 +129,12 @@ class catImpresorasController extends Controller
             $actualizarImpresora->catImpresoraFechaIngreso = $request->impfechaCompraE;
             $actualizarImpresora->catImpresoraCosto = $request->impcostoE;
             $actualizarImpresora->idActivofijo = $request->tipocuentaE;
+            $actualizarImpresora->catImpresoraTipoEquipo = $request->ImpTipoEquipoE;
+            $actualizarImpresora->catImpresoraObservaciones = $request->inputImpObservacionE;
             $actualizarImpresora->CatImpresoraEstado = 1;
             
             $actualizarImpresora->save();
+            
             return redirect()->route('impresora.all')->with('mensaje exitoso','Se actualizo correctamente la impresora');
         } catch (exception $ex) {
             return 'Error - '.$ex->getMessage();

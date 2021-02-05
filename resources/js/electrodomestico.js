@@ -50,13 +50,16 @@ $(document).ready(function() {
             cache: false,
             dataType: "json",
             success: function(datoElectrodomestico) {
+                $("#electCodeE").val(datoElectrodomestico["catElectCodigo"]);
                 $("#idElectE").val(datoElectrodomestico["CatElectId"]);
                 $("#electdescripcionE").val(datoElectrodomestico["CatElectDescripcion"]);
                 $("#electFechaE").val(datoElectrodomestico["CatElectFechaIngreso"]);
                 $("#electmarcaE").val(datoElectrodomestico["CatElectMarca"]);
                 $("#electmodeloE").val(datoElectrodomestico["CatElectModelo"]);
                 $("#electcostoE").val(datoElectrodomestico["CatElectCosto"]);
+                $("#electtipoEquipoE").val(datoElectrodomestico["catElectTipoEquipo"]);
                 $("#tipocuentaE").val(datoElectrodomestico["idActivofijo"]);
+                $("#electObservacionE").val(datoElectrodomestico["catElectObservaciones"]);
 
                 $('Form').attr('Action', 'actualizarElectrodomestico/' + datoElectrodomestico["CatElectId"]);
             }

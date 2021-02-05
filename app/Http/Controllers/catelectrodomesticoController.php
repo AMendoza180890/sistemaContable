@@ -51,13 +51,16 @@ class catelectrodomesticoController extends Controller
             ]);
 
             $electrodomestico = new catelectrodomesticoModel();
-
+            
+            $electrodomestico->catElectCodigo = $request->electCode;
             $electrodomestico->CatElectMarca = $request->electmarca;
             $electrodomestico->CatElectModelo = $request->electmodelo;
             $electrodomestico->CatElectFechaIngreso = $request->electFecha;
             $electrodomestico->CatElectCosto = $request->electcosto;
             $electrodomestico->CatElectDescripcion = $request->electdescripcion;
             $electrodomestico->idActivofijo = $request->tipocuentaE;
+            $electrodomestico->catElectTipoEquipo = $request->electtipoEquipo;
+            $electrodomestico->catElectObservaciones = $request->electObservacion;
             $electrodomestico->CatElectEstado = 1;
 
             $electrodomestico->save();
@@ -115,12 +118,15 @@ class catelectrodomesticoController extends Controller
         try {
             $actualizarElectrodomestico = catelectrodomesticoModel::where('CatElectId','=',$id)->first();
 
+            $actualizarElectrodomestico->catElectCodigo = $request->electCodeE;
             $actualizarElectrodomestico->CatElectMarca = $request->electmarcaE;
             $actualizarElectrodomestico->CatElectModelo = $request->electmodeloE;
             $actualizarElectrodomestico->CatElectDescripcion = $request->electdescripcionE;
             $actualizarElectrodomestico->CatElectFechaIngreso = $request->electFechaE;
             $actualizarElectrodomestico->CatElectCosto = $request->electcostoE;
             $actualizarElectrodomestico->idActivofijo = $request->tipocuentaE;
+            $actualizarElectrodomestico->catElectTipoEquipo = $request->electtipoEquipoE;
+            $actualizarElectrodomestico->catElectObservaciones = $request->electObservacionE;
             $actualizarElectrodomestico->CatElectEstado = 1;
 
             $actualizarElectrodomestico->save();
