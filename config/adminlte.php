@@ -267,6 +267,30 @@ return [
                                     'icon' => 'far fa-fw fa-list-alt',
                                     'label-color' => 'success',
                                 ],
+                                [
+                                    'text' => 'Reporte Equipo Computo',
+                                    'url'  => '/rptEquipoComputo',
+                                    'icon' => 'far fa-fw fa fa-desktop',
+                                    'label-color' => 'success',
+                                ],
+                                [
+                                    'text' => 'Reporte Equipo & Mobiliario',
+                                    'url'  => '/rptElectrodomesticos',
+                                    'icon' => 'far fa-fw fa fa-desktop',
+                                    'label-color' => 'success',
+                                ],
+                                [
+                                    'text' => 'Reporte Vehiculo',
+                                    'url'  => '/rptvehiculoConsolidado',
+                                    'icon' => 'far fa-fw fa fa-desktop',
+                                    'label-color' => 'success',
+                                ],
+                                [
+                                    'text' => 'Reporte Terreno',
+                                    'url'  => '/rptTerrenoConsolidado',
+                                    'icon' => 'far fa-fw fa fa-desktop',
+                                    'label-color' => 'success',
+                                ],
                             ],
                     ],
                     [

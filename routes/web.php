@@ -98,6 +98,10 @@ Route::post("/generarReporteAcumulativo", "catReporteActivofijoController@show")
 Route::get("/RptBajas","rptbajasController@index")->name("RptBajas.all");
 Route::post("/RptBajas","rptbajasController@show")->name("RptBajas.show");
 Route::get("/RptResumen","HomeController@rptResumen")->name("rptResumenActivo.rptResumen");
+Route::get("/rptEquipoComputo","rptEquipoComputoController@index")->name("rptEquipoComputo.all");
+Route::get("/rptElectrodomesticos","rptElectrodomesticoController@index")->name("rptElectrodomesticos.all");
+Route::get("/rptvehiculoConsolidado","rptVehiculoController@index")->name("rptVehiculoConsolidado.all");
+Route::get("/rptTerrenoConsolidado","rptTerrenoController@index")->name("rptTerrenoConsolidado.all");
 /*Fin de Reportes */
 
 /*Rutas Estado ActivoFijo*/
